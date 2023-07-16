@@ -5,7 +5,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Offer from './pages/Offer';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
-import Layout from './components/Layout/Layout';
+import Index from './components/Layout';
 import {appRoute} from './const';
 import PrivateRoute from './components/PrivateRoute';
 import Favorites from './pages/Favorites';
@@ -17,7 +17,7 @@ interface AppProps {
 function App({placeCardsData}: AppProps):ReactNode {
   return (
     <BrowserRouter>
-      <Layout >
+      <Index >
         <Routes>
           <Route index path={appRoute.root} element={<Main placeCardsData={placeCardsData}/>}/>
           <Route path={appRoute.offer} element={<Offer />} />
@@ -27,7 +27,7 @@ function App({placeCardsData}: AppProps):ReactNode {
           </Route>
           <Route path='*' element={<NotFound />} />
         </Routes>
-      </Layout>
+      </Index>
     </BrowserRouter>
   );
 }
