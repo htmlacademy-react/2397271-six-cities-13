@@ -1,11 +1,14 @@
 import React, {ReactNode} from 'react';
-import Header from './components/Header/Header';
 import Main from './pages/Main';
 import {PlaceCardProps} from './components/PlaceCard/PlaceCardProps';
-// import Offer from './pages/Offer';
-// import Login from './pages/Login';
-// import Favorites from './pages/Favorites';
-// import Footer from './components/Footer/Footer';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Offer from './pages/Offer';
+import Login from './pages/Login';
+import NotFound from './pages/NotFound';
+import Index from './components/Layout';
+import {appRoute} from './const';
+import PrivateRoute from './components/PrivateRoute';
+import Favorites from './pages/Favorites';
 
 interface AppProps {
   placeCardsData: PlaceCardProps[];
@@ -13,14 +16,19 @@ interface AppProps {
 
 function App({placeCardsData}: AppProps):ReactNode {
   return (
-    <div className='page page--gray page--main'>
-      <Header />
-      <Main placeCardsData={placeCardsData}/>
-      {/*<Offer />*/}
-      {/*<Login />*/}
-      {/*<Favorites />*/}
-      {/*<Footer />*/}
-    </div>
+    <BrowserRouter>
+      <Index >
+        <Routes>
+          <Route index path={appRoute.root} element={<Main placeCardsData={placeCardsData}/>}/>
+          <Route path={appRoute.offer} element={<Offer />} />
+          <Route path={appRoute.login} element={<Login />} />
+          <Route element={<PrivateRoute />}>
+            <Route path={appRoute.favorites} element={<Favorites />} />
+          </Route>
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </Index>
+    </BrowserRouter>
   );
 }
 
