@@ -1,4 +1,4 @@
-export type PlaceCardProps = {
+export type OfferDataProps = {
   id: string;
   premium?: boolean;
   price: number;

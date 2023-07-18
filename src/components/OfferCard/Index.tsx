@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
-import {PlaceCardProps} from './PlaceCardProps';
+import {OfferDataProps} from './OfferDataProps';
 
-function PlaceCard({img, title, type, rate, price, premium}:PlaceCardProps):ReactNode {
+function OfferCard({img, title, type, rate, price, premium}:OfferDataProps):ReactNode {
   return (
     <article className="cities__card place-card">
       {premium &&
@@ -41,4 +41,4 @@ function PlaceCard({img, title, type, rate, price, premium}:PlaceCardProps):Reac
   );
 }
 
-export default PlaceCard;
+export default OfferCard;

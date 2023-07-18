@@ -1,12 +1,12 @@
 import React, {ReactNode} from 'react';
-import PlaceCard from '../components/PlaceCard';
-import {PlaceCardProps} from '../components/PlaceCard/PlaceCardProps';
+import OfferCard from '../components/OfferCard';
+import {OfferDataProps} from '../components/OfferCard/OfferDataProps';
 
 interface MainProps {
-  placeCardsData: PlaceCardProps[];
+  offerData: OfferDataProps[];
 }
 
-function Main({placeCardsData}:MainProps):ReactNode {
+function Main({offerData}:MainProps):ReactNode {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -67,8 +67,8 @@ function Main({placeCardsData}:MainProps):ReactNode {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {placeCardsData.map((card): ReactNode =>
-                (<PlaceCard key={card.id} id={card.id} premium={card.premium} price={card.price} rate={card.rate} title={card.title} type={card.type} img={card.img} />)
+              {offerData.map((card): ReactNode =>
+                (<OfferCard key={card.id} id={card.id} premium={card.premium} price={card.price} rate={card.rate} title={card.title} type={card.type} img={card.img} />)
               )}
             </div>
           </section>
