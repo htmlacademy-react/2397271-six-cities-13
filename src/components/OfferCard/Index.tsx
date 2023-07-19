@@ -11,7 +11,7 @@ interface OfferCardProps {
 }
 
 function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNode {
-  const getCardLink = () => appRoute.offer.slice(0, appRoute.offer.indexOf(':id')) + card.id;
+  const getCardLink = () => appRoute.offer.path.slice(0, appRoute.offer.path.indexOf(':id')) + card.id;
 
   return (
     <article className={

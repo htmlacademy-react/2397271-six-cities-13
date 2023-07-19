@@ -19,11 +19,11 @@ function App({offerData}: AppProps):ReactNode {
     <BrowserRouter>
       <Index >
         <Routes>
-          <Route index path={appRoute.root} element={<Main offerData={offerData}/>}/>
-          <Route path={appRoute.offer} element={<Offer />} />
-          <Route path={appRoute.login} element={<Login />} />
+          <Route index path={appRoute.root.path} element={<Main offerData={offerData}/>}/>
+          <Route path={appRoute.offer.path} element={<Offer />} />
+          <Route path={appRoute.login.path} element={<Login />} />
           <Route element={<PrivateRoute />}>
-            <Route path={appRoute.favorites} element={<Favorites offerData={offerData}/>} />
+            <Route path={appRoute.favorites.path} element={<Favorites offerData={offerData}/>} />
           </Route>
           <Route path='*' element={<NotFound />} />
         </Routes>

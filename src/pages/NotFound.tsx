@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {appRoute} from '../const';
 
 function NotFound() {
   return (
@@ -8,7 +9,7 @@ function NotFound() {
         <h1 className="visually-hidden">Not found</h1>
         <div className="favorites__status-wrapper">
           <b className="favorites__status">Page not found</b>
-          <Link className="favorites__status-description" to='/'>To main page</Link>
+          <Link className="favorites__status-description" to={appRoute.root.path}>To main page</Link>
         </div>
       </section>
     </div>
