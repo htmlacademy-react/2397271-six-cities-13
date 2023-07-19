@@ -23,7 +23,7 @@ function App({offerData}: AppProps):ReactNode {
           <Route path={appRoute.offer} element={<Offer />} />
           <Route path={appRoute.login} element={<Login />} />
           <Route element={<PrivateRoute />}>
-            <Route path={appRoute.favorites} element={<Favorites />} />
+            <Route path={appRoute.favorites} element={<Favorites offerData={offerData}/>} />
           </Route>
           <Route path='*' element={<NotFound />} />
         </Routes>

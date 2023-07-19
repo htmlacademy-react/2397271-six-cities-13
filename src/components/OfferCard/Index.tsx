@@ -1,22 +1,52 @@
 import React, {ReactNode} from 'react';
 import {OfferDataProps} from './OfferDataProps';
+import * as classNames from 'classnames';
+import {Link} from 'react-router-dom';
+import {appRoute} from '../../const';
 
-function OfferCard({img, title, type, rate, price, premium}:OfferDataProps):ReactNode {
+interface OfferCardProps {
+  card: OfferDataProps;
+  className?: string;
+  onMouseEnter?: (card:OfferDataProps) => void;
+}
+
+function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNode {
+  const getCardLink = () => appRoute.offer.slice(0, appRoute.offer.indexOf(':id')) + card.id;
+
   return (
-    <article className="cities__card place-card">
-      {premium &&
+    <article className={
+      classNames({
+        [`${className}__card`]: className,
+        'place-card': true,
+      })
+    }
+    onMouseEnter={() => onMouseEnter && onMouseEnter(card)}
+    >
+      {card.isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src={`img/${img}`} width="260" height="200" alt="Place image"/>
-        </a>
+      <div className={
+        classNames({
+          [`${className}__image-wrapper`]: className,
+          'place-card__image-wrapper': true,
+        })
+      }
+      >
+        <Link to={getCardLink()}>
+          <img className="place-card__image" src={`${card.previewImage}`} width="260" height="200" alt="Place image"/>
+        </Link>
       </div>
-      <div className="place-card__info">
+      <div className={
+        classNames({
+          [`${className}__card-info`]: className,
+          'place-card__info': true,
+        })
+      }
+      >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€{price}</b>
+            <b className="place-card__price-value">€{card.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -28,14 +58,14 @@ function OfferCard({img, title, type, rate, price, premium}:OfferDataProps):Reac
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rate * 20 }%`}}></span>
+            <span style={{width: `${card.rating * 20 }%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={getCardLink()}>{card.title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{card.type}</p>
       </div>
     </article>
   );

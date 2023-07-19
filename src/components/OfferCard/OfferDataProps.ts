@@ -1,9 +1,22 @@
 export type OfferDataProps = {
   id: string;
-  premium?: boolean;
-  price: number;
-  rate: number;
   title: string;
   type: string;
-  img: string;
+  price: number;
+  previewImage: string;
+  city: {
+    name: string;
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+  };
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
 }

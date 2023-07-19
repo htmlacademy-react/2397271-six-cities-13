@@ -3,7 +3,7 @@ import {Navigate, Outlet} from 'react-router-dom';
 import {appRoute} from '../../const';
 
 function PrivateRoute():ReactNode {
-  const hasAccess = false;
+  const hasAccess = true;
 
   return hasAccess ? <Outlet /> : <Navigate to={appRoute.login} />;
 }
