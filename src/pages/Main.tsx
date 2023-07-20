@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {OfferDataProps} from '../components/OfferCard/OfferDataProps';
+import {OfferDataProps} from '../components/OfferCard/OfferCardProps';
 import OfferFilter from '../components/OfferFilter';
 import OfferList from '../components/OfferList';
 

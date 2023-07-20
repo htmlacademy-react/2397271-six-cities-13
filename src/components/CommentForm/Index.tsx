@@ -11,6 +11,8 @@ function CommentForm():ReactNode {
       onSubmit={(event) => event.preventDefault()}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
+      {/* TODO вынести в компонент RatingInput*/}
+      {/* TODO вынести массив в константы или утилсы*/}
       <div className="reviews__rating-form form__rating">
         {
           [5, 4, 3, 2, 1].map((star) => (

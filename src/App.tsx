@@ -1,33 +1,34 @@
 import React, {ReactNode} from 'react';
 import Main from './pages/Main';
-import {OfferDataProps} from './components/OfferCard/OfferDataProps';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Offer from './pages/Offer';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
-import Index from './components/Layout';
+import Layout from './components/Layout';
 import {appRoute} from './const';
 import PrivateRoute from './components/PrivateRoute';
 import Favorites from './pages/Favorites';
+import {OfferPreviewProps, OfferProps} from './types/offerProps';
 
 interface AppProps {
-  offerData: OfferDataProps[];
+  offerList: OfferPreviewProps[];
+  offer: OfferProps;
 }
 
-function App({offerData}: AppProps):ReactNode {
+function App({offerList, offer}: AppProps):ReactNode {
   return (
     <BrowserRouter>
-      <Index >
+      <Layout >
         <Routes>
-          <Route index path={appRoute.root.path} element={<Main offerData={offerData}/>}/>
-          <Route path={appRoute.offer.path} element={<Offer />} />
+          <Route index path={appRoute.root.path} element={<Main offerList={offerList}/>}/>
+          <Route path={appRoute.offer.path} element={<Offer offer={offer}/>} />
           <Route path={appRoute.login.path} element={<Login />} />
           <Route element={<PrivateRoute />}>
-            <Route path={appRoute.favorites.path} element={<Favorites offerData={offerData}/>} />
+            <Route path={appRoute.favorites.path} element={<Favorites offerList={offerList} />} />
           </Route>
           <Route path='*' element={<NotFound />} />
         </Routes>
-      </Index>
+      </Layout>
     </BrowserRouter>
   );
 }

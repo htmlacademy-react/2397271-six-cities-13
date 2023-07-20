@@ -1,14 +1,14 @@
 import React from 'react';
-import {OfferDataProps} from '../components/OfferCard/OfferDataProps';
 import {cities} from '../const';
 import OfferCard from '../components/OfferCard';
+import {OfferPreviewProps} from '../types/offerProps';
 
 interface FavoritesProps {
-  offerData: OfferDataProps[];
+  offerList: OfferPreviewProps[];
 }
 
 interface FavoriteItemProps {
-  sortedCards: OfferDataProps[];
+  sortedCards: OfferPreviewProps[];
   city: typeof cities[number];
 }
 
@@ -30,8 +30,8 @@ function FavoriteItem({sortedCards, city}:FavoriteItemProps) {
 }
 
 
-function Favorites({offerData}:FavoritesProps) {
-  const sortOfferByCity = (city) => offerData.filter((offer) => offer.city.name === city);
+function Favorites({offerList}:FavoritesProps) {
+  const sortOfferByCity = (city) => offerList.filter((item) => item.city.name === city);
 
   return (
     <main className="page__main page__main--favorites">

@@ -1,19 +1,19 @@
 import React, {ReactNode, useState} from 'react';
-import {OfferDataProps} from '../OfferCard/OfferDataProps';
 import OfferCard from '../OfferCard';
+import {OfferPreviewProps} from '../../types/offerProps';
 
 interface OfferListProps {
-  offerData: OfferDataProps[];
+  offerList: OfferPreviewProps[];
   className?: string;
 }
 
-function OfferList({offerData, className}:OfferListProps):ReactNode {
+function OfferList({offerList, className}:OfferListProps):ReactNode {
   const [activeCard, setActiveCard] = useState({});
   window.activeCard = activeCard;
 
   return (
     <>
-      {offerData.map((card): ReactNode =>
+      {offerList.map((card): ReactNode =>
         (<OfferCard key={card.id} card={card} className={className} onMouseEnter={setActiveCard}/>)
       )}
     </>

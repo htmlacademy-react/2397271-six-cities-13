@@ -1,17 +1,11 @@
 import React, {ReactNode} from 'react';
-import {OfferDataProps} from './OfferDataProps';
+import {OfferCardProps} from './OfferCardProps';
 import * as classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import {appRoute} from '../../const';
 
-interface OfferCardProps {
-  card: OfferDataProps;
-  className?: string;
-  onMouseEnter?: (card:OfferDataProps) => void;
-}
-
 function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNode {
-  const getCardLink = () => appRoute.offer.path.slice(0, appRoute.offer.path.indexOf(':id')) + card.id;
+  const getCardPath = () => appRoute.offer.path.slice(0, appRoute.offer.path.indexOf(':id')) + card.id;
 
   return (
     <article className={
@@ -33,7 +27,7 @@ function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNod
         })
       }
       >
-        <Link to={getCardLink()}>
+        <Link to={getCardPath()}>
           <img className="place-card__image" src={`${card.previewImage}`} width="260" height="200" alt="Place image"/>
         </Link>
       </div>
@@ -63,7 +57,7 @@ function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNod
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={getCardLink()}>{card.title}</Link>
+          <Link to={getCardPath()}>{card.title}</Link>
         </h2>
         <p className="place-card__type">{card.type}</p>
       </div>

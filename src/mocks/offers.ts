@@ -1,6 +1,6 @@
-import {OfferDataProps} from '../components/OfferCard/OfferDataProps';
+import {OfferPreviewProps} from '../types/offerProps';
 
-export const OfferData:OfferDataProps[] = [
+export const offerList:OfferPreviewProps[] = [
   {
     id: 'e4d1588c-9372-4d2c-a08b-caaf23f668e6',
     title: 'The house among olive ',
