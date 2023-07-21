@@ -18,17 +18,15 @@ interface AppProps {
 function App({offerList, offer}: AppProps): ReactNode {
   return (
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route index path={appRoute.root.path} element={<Main offerList={offerList}/>}/>
-          <Route path={appRoute.offer.path} element={<Offer offer={offer}/>}/>
-          <Route path={appRoute.login.path} element={<Login/>}/>
-          <Route element={<PrivateRoute/>}>
-            <Route path={appRoute.favorites.path} element={<Favorites offerList={offerList}/>}/>
-          </Route>
-          <Route path='*' element={<NotFound/>}/>
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route index path={appRoute.root.path} element={<Main offerList={offerList}/>}/>
+        <Route path={appRoute.offer.path} element={<Offer offer={offer}/>}/>
+        <Route path={appRoute.login.path} element={<Login/>}/>
+        <Route element={<PrivateRoute/>}>
+          <Route path={appRoute.favorites.path} element={<Favorites offerList={offerList}/>}/>
+        </Route>
+        <Route path='*' element={<NotFound/>}/>
+      </Routes>
     </BrowserRouter>
   );
 }
