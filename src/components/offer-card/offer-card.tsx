@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import * as classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {appRoute} from '../../const';
+import {AppRoute} from '../../const';
 import {OfferPreviewProps} from '../../types/offer-props';
 
 export interface OfferCardProps {
@@ -11,7 +11,7 @@ export interface OfferCardProps {
 }
 
 function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNode {
-  const getCardPath = () => appRoute.offer.path.slice(0, appRoute.offer.path.indexOf(':id')) + card.id;
+  const getCardPath = () => AppRoute.offer.slice(0, AppRoute.offer.indexOf(':id')) + card.id;
 
   return (
     <article className={

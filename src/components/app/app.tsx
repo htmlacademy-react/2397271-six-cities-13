@@ -5,7 +5,7 @@ import Offer from '../../pages/offer';
 import Login from '../../pages/login';
 import NotFound from '../../pages/not-found';
 import Layout from './../layout/layout';
-import {appRoute} from './../../const';
+import {AppRoute} from './../../const';
 import PrivateRoute from './../private-route/private-route';
 import Favorites from '../../pages/favorites';
 import {OfferPreviewProps, OfferProps} from '../../types/offer-props';
@@ -19,11 +19,11 @@ function App({offerList, offer}: AppProps): ReactNode {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index path={appRoute.root.path} element={<Main offerList={offerList}/>}/>
-        <Route path={appRoute.offer.path} element={<Offer offer={offer}/>}/>
-        <Route path={appRoute.login.path} element={<Login/>}/>
+        <Route index path={AppRoute.root} element={<Main offerList={offerList}/>}/>
+        <Route path={AppRoute.offer} element={<Offer offer={offer}/>}/>
+        <Route path={AppRoute.login} element={<Login/>}/>
         <Route element={<PrivateRoute/>}>
-          <Route path={appRoute.favorites.path} element={<Favorites offerList={offerList}/>}/>
+          <Route path={AppRoute.favorites} element={<Favorites offerList={offerList}/>}/>
         </Route>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
