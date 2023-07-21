@@ -4,7 +4,6 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Offer from '../../pages/offer';
 import Login from '../../pages/login';
 import NotFound from '../../pages/not-found';
-import Layout from './../layout/layout';
 import {AppRoute} from './../../const';
 import PrivateRoute from './../private-route/private-route';
 import Favorites from '../../pages/favorites';

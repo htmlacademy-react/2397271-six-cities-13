@@ -1,5 +1,5 @@
 import React from 'react';
-import {cities} from '../const';
+import {Cities} from '../const';
 import OfferCard from '../components/offer-card/offer-card';
 import {OfferPreviewProps} from '../types/offer-props';
 import Header from '../components/header/header';
@@ -11,7 +11,7 @@ interface FavoritesProps {
 
 interface FavoriteItemProps {
   sortedCards: OfferPreviewProps[];
-  city: typeof cities[number];
+  city: typeof Cities[number];
 }
 
 function FavoriteItem({sortedCards, city}:FavoriteItemProps) {
@@ -44,7 +44,7 @@ function Favorites({offerList}:FavoritesProps) {
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {
-                cities.map((city) => {
+                Cities.map((city) => {
                   const sortedCards = sortOfferByCity(city);
                   if (sortedCards.length) {
                     return <FavoriteItem key={city} sortedCards={sortedCards} city={city}/>;

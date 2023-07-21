@@ -5,7 +5,7 @@ export enum AppRoute {
   favorites = '/favorites',
 }
 
-export const cities = [
+export const Cities = [
   'Paris',
   'Cologne',
   'Brussels',
