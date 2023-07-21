@@ -1,4 +1,5 @@
 import React, {ReactNode, useState} from 'react';
+import {RatingTitles} from '../../const';
 
 
 function CommentForm():ReactNode {
@@ -11,21 +12,19 @@ function CommentForm():ReactNode {
       onSubmit={(event) => event.preventDefault()}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      {/* TODO вынести в компонент RatingInput*/}
-      {/* TODO вынести массив в константы или утилсы*/}
       <div className="reviews__rating-form form__rating">
         {
-          [5, 4, 3, 2, 1].map((star) => (
+          RatingTitles.map((star, index) => (
             <React.Fragment key={star}>
               <input className="form__rating-input visually-hidden"
                 name="rating"
-                id={`${star}-stars`}
+                id={`${index}-stars`}
                 type="radio"
-                value={star}
-                onChange={(event) => setComment({...comment, rating: event.target.value})}
+                value={index}
+                onChange={(event) => setComment((prevComment) => ({...prevComment, rating: event.target.value}))}
               >
               </input>
-              <label htmlFor={`${star}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
+              <label htmlFor={`${index}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
                 <svg className="form__star-image" width="37" height="33">
                   <use xlinkHref="#icon-star"></use>
                 </svg>

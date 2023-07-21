@@ -13,3 +13,12 @@ export const Cities = [
   'Hamburg',
   'Dusseldorf'
 ] as const;
+
+export const RatingTitles = [
+  'perfect',
+  'good',
+  'not bad',
+  'badly',
+  'terribly'
+] as const;
+
