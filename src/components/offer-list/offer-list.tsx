@@ -1,6 +1,6 @@
 import React, {ReactNode, useState} from 'react';
-import OfferCard from '../OfferCard';
-import {OfferPreviewProps} from '../../types/offerProps';
+import OfferCard from '../offer-card/offer-card';
+import {OfferPreviewProps} from '../../types/offer-props';
 
 interface OfferListProps {
   offerList: OfferPreviewProps[];

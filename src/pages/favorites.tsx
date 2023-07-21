@@ -1,7 +1,7 @@
 import React from 'react';
 import {cities} from '../const';
-import OfferCard from '../components/OfferCard';
-import {OfferPreviewProps} from '../types/offerProps';
+import OfferCard from '../components/offer-card/offer-card';
+import {OfferPreviewProps} from '../types/offer-props';
 
 interface FavoritesProps {
   offerList: OfferPreviewProps[];

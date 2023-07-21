@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
-import CommentForm from '../components/CommentForm';
-import {OfferProps} from '../types/offerProps';
+import CommentForm from '../components/comment-form/comment-form';
+import {OfferProps} from '../types/offer-props';
 
 interface OfferPageProps {
   offer: OfferProps;

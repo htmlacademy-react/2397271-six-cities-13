@@ -1,4 +1,4 @@
-import {OfferPreviewProps} from '../types/offerProps';
+import {OfferPreviewProps} from '../types/offer-props';
 
 export const offerList:OfferPreviewProps[] = [
   {
