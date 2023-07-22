@@ -22,3 +22,4 @@ export const RatingTitles = [
   'terribly'
 ] as const;
 
+export const RATING_MULTIPLIER = 20 as const;

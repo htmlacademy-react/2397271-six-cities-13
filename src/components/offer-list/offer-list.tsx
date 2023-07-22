@@ -14,7 +14,7 @@ function OfferList({offerList, className}:OfferListProps):ReactNode {
   return (
     <>
       {offerList.map((card): ReactNode =>
-        (<OfferCard key={card.id} card={card} className={className} onMouseEnter={setActiveCard}/>)
+        (<OfferCard key={card.id} card={card} className={className ? className : ''} onMouseEnter={setActiveCard}/>)
       )}
     </>
   );
