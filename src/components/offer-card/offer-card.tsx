@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import * as classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewProps} from '../../types/offer-props';
 
 export interface OfferCardProps {
@@ -34,7 +34,7 @@ function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNod
       }
       >
         <Link to={getCardPath()}>
-          <img className="place-card__image" src={`${card.previewImage}`} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={card.previewImage} width="260" height="200" alt="Place image"/>
         </Link>
       </div>
       <div className={
@@ -58,7 +58,7 @@ function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNod
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${card.rating * 20 }%`}}></span>
+            <span style={{width: `${card.rating * RATING_MULTIPLIER }%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
