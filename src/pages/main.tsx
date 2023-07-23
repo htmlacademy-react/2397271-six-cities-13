@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {ReactNode, useState} from 'react';
 import OfferFilter from '../components/offer-filter/offer-filter';
 import OfferList from '../components/offer-list/offer-list';
 import Map from '../components/map/map';
