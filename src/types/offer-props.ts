@@ -1,22 +1,13 @@
+import {CityProps, LocationProps} from './location';
+
 export interface OfferPreviewProps {
   id: string;
   title: string;
   type: string;
   price: number;
   previewImage: string;
-  city: {
-    name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-  };
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
+  city: CityProps;
+  location: LocationProps;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
