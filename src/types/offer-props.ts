@@ -16,12 +16,21 @@ export interface OfferPreviewProps {
 export interface OfferProps extends Omit<OfferPreviewProps, 'previewImage'> {
   images: string[];
   goods: string[];
-  host: {
-    isPro: boolean;
-    name: string;
-    avatarUrl: string;
-  };
+  host: UserProps;
   bedrooms: number;
   maxAdults: number;
 }
 
+export interface UserProps {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
+
+export interface CommentProps {
+  id: string;
+  comment: string;
+  date: string;
+  rating: number;
+  user: UserProps;
+}

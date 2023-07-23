@@ -4,12 +4,12 @@ import {CityProps} from '../../types/location';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
-import {OfferPreviewProps} from '../../types/offer-props';
+import {OfferPreviewProps, OfferProps} from '../../types/offer-props';
 
 interface MapProps {
   city: CityProps;
-  offerList: OfferPreviewProps[];
-  activeOffer: OfferPreviewProps | null;
+  offerList: (OfferPreviewProps | OfferProps)[];
+  activeOffer: OfferPreviewProps | OfferProps | null;
 }
 
 const defaultCustomIcon = new Icon({

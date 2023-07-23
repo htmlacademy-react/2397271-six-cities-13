@@ -7,19 +7,20 @@ import NotFound from '../../pages/not-found';
 import {AppRoute} from './../../const';
 import PrivateRoute from './../private-route/private-route';
 import Favorites from '../../pages/favorites';
-import {OfferPreviewProps, OfferProps} from '../../types/offer-props';
+import {CommentProps, OfferPreviewProps, OfferProps} from '../../types/offer-props';
 
 interface AppProps {
   offerList: OfferPreviewProps[];
   offer: OfferProps;
+  comments: CommentProps[];
 }
 
-function App({offerList, offer}: AppProps): ReactNode {
+function App({offerList, offer, comments}: AppProps): ReactNode {
   return (
     <BrowserRouter>
       <Routes>
         <Route index path={AppRoute.root} element={<Main offerList={offerList}/>}/>
-        <Route path={AppRoute.offer} element={<Offer offer={offer}/>}/>
+        <Route path={AppRoute.offer} element={<Offer offer={offer} comments={comments} nearbyOfferList={offerList}/>}/>
         <Route path={AppRoute.login} element={<Login/>}/>
         <Route element={<PrivateRoute/>}>
           <Route path={AppRoute.favorites} element={<Favorites offerList={offerList}/>}/>
