@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {ReactNode, useState} from 'react';
 import OfferFilter from '../components/offer-filter/offer-filter';
 import OfferList from '../components/offer-list/offer-list';
 import Map from '../components/map/map';
@@ -13,6 +13,7 @@ interface MainProps {
 function Main({offerList}:MainProps):ReactNode {
   const [currentCity, setCurrentCity] = useState<typeof Cities[number]>(Cities[0]);
   const [activeOffer, setActiveOffer] = useState<OfferPreviewProps | null>(null);
+  window.currentCity = currentCity;
 
   return (
     <div className='page page--gray page--main'>
