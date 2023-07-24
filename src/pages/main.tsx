@@ -36,8 +36,7 @@ function Main({offerList}:MainProps):ReactNode {
                   handleMouseEnter={(offer:OfferPreviewProps) => {
                     setActiveOffer(offer);
                   }}
-                >
-                </OfferList>
+                />
               </div>
             </section>
             <div className="cities__right-section">
