@@ -1,10 +1,10 @@
-import {OfferPreviewProps} from '../../types/offer-props';
+import {OfferPreviewType} from '../../types/offer';
 import {Cities} from '../../const';
 import OfferCard from '../offer-card/offer-card';
 import React from 'react';
 
 interface FavoriteItemProps {
-  sortedCards: OfferPreviewProps[];
+  sortedCards: OfferPreviewType[];
   city: typeof Cities[number];
 }
 

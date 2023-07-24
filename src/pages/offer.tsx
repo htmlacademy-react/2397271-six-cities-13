@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import CommentForm from '../components/comment-form/comment-form';
-import {CommentProps, OfferPreviewProps, OfferProps} from '../types/offer-props';
+import {CommentType, OfferPreviewType, OfferType} from '../types/offer';
 import Header from '../components/header/header';
 import ReviewList from '../components/review-list/review-list';
 import OfferList from '../components/offer-list/offer-list';
@@ -8,9 +8,9 @@ import {NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
 import Map from '../components/map/map';
 
 interface OfferPageProps {
-  offer: OfferProps;
-  comments: CommentProps[];
-  nearbyOfferList: OfferPreviewProps[];
+  offer: OfferType;
+  comments: CommentType[];
+  nearbyOfferList: OfferPreviewType[];
 }
 
 function Offer({offer, comments, nearbyOfferList}:OfferPageProps):ReactNode {

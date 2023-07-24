@@ -1,10 +1,10 @@
 import React from 'react';
-import {CommentProps} from '../../types/offer-props';
+import {CommentType} from '../../types/offer';
 import {RATING_MULTIPLIER} from '../../const';
 import * as dayjs from 'dayjs';
 
 interface ReviewItemProps {
-  comment: CommentProps;
+  comment: CommentType;
 }
 
 function ReviewItem({comment}:ReviewItemProps) {

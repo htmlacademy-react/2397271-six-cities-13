@@ -1,36 +1,36 @@
-import {CityProps, LocationProps} from './location';
+import {CityType, LocationType} from './location';
 
-export interface OfferPreviewProps {
+export interface OfferPreviewType {
   id: string;
   title: string;
   type: string;
   price: number;
   previewImage: string;
-  city: CityProps;
-  location: LocationProps;
+  city: CityType;
+  location: LocationType;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
 }
 
-export interface OfferProps extends Omit<OfferPreviewProps, 'previewImage'> {
+export interface OfferType extends Omit<OfferPreviewType, 'previewImage'> {
   images: string[];
   goods: string[];
-  host: UserProps;
+  host: UserType;
   bedrooms: number;
   maxAdults: number;
 }
 
-export interface UserProps {
+export interface UserType {
   name: string;
   avatarUrl: string;
   isPro: boolean;
 }
 
-export interface CommentProps {
+export interface CommentType {
   id: string;
   comment: string;
   date: string;
   rating: number;
-  user: UserProps;
+  user: UserType;
 }

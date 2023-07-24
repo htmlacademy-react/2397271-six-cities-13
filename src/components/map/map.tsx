@@ -1,15 +1,15 @@
 import React, {ReactNode, useEffect, useRef} from 'react';
 import useMap from '../../hooks/use-map';
-import {CityProps} from '../../types/location';
+import {CityType} from '../../types/location';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
-import {OfferPreviewProps, OfferProps} from '../../types/offer-props';
+import {OfferPreviewType, OfferType} from '../../types/offer';
 
 interface MapProps {
-  city: CityProps;
-  offerList: (OfferPreviewProps | OfferProps)[];
-  activeOffer: OfferPreviewProps | OfferProps | null;
+  city: CityType;
+  offerList: (OfferPreviewType | OfferType)[];
+  activeOffer: OfferPreviewType | OfferType | null;
 }
 
 const defaultCustomIcon = new Icon({
@@ -37,19 +37,13 @@ function Map({city, offerList, activeOffer}:MapProps):ReactNode {
           lng: offer.location.longitude
         });
 
-        if (activeOffer) {
-          marker
-            .setIcon(
-              offer.id === activeOffer.id
-                ? currentCustomIcon
-                : defaultCustomIcon
-            )
-            .addTo(markerLayer);
-        } else {
-          marker
-            .setIcon(defaultCustomIcon)
-            .addTo(markerLayer);
-        }
+        marker
+          .setIcon(
+            activeOffer && offer.id === activeOffer.id
+              ? currentCustomIcon
+              : defaultCustomIcon
+          )
+          .addTo(markerLayer);
       });
 
       return () => {

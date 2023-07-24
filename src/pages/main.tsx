@@ -2,18 +2,18 @@ import React, {ReactNode, useState} from 'react';
 import OfferFilter from '../components/offer-filter/offer-filter';
 import OfferList from '../components/offer-list/offer-list';
 import Map from '../components/map/map';
-import {OfferPreviewProps} from '../types/offer-props';
+import {OfferPreviewType} from '../types/offer';
 import Header from '../components/header/header';
 import {Cities} from '../const';
 import CityFilter from '../components/city-filter/city-filter';
 
 interface MainProps {
-  offerList: OfferPreviewProps[];
+  offerList: OfferPreviewType[];
 }
 
 function Main({offerList}:MainProps):ReactNode {
   const [currentCity, setCurrentCity] = useState<typeof Cities[number]>(Cities[0]);
-  const [activeOffer, setActiveOffer] = useState<OfferPreviewProps | null>(null);
+  const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);
 
   return (
     <div className='page page--gray page--main'>
@@ -33,7 +33,7 @@ function Main({offerList}:MainProps):ReactNode {
                 <OfferList
                   offerList={offerList}
                   className='cities'
-                  handleMouseEnter={(offer:OfferPreviewProps) => {
+                  handleMouseEnter={(offer:OfferPreviewType) => {
                     setActiveOffer(offer);
                   }}
                 />

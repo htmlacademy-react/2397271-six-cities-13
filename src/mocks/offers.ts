@@ -1,6 +1,6 @@
-import {OfferPreviewProps} from '../types/offer-props';
+import {OfferPreviewType} from '../types/offer';
 
-export const offerList:OfferPreviewProps[] = [
+export const offerList:OfferPreviewType[] = [
   {
     id: 'e4d1588c-9372-4d2c-a08b-caaf23f668e6',
     title: 'The house among olive ',

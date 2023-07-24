@@ -1,13 +1,13 @@
 
-export interface LocationProps {
+export interface LocationType {
   latitude: number;
   longitude: number;
   zoom: number;
 }
 
-export interface CityProps {
+export interface CityType {
   name: string;
-  location: LocationProps;
+  location: LocationType;
 }
 
-export type MarkerProps = Omit<CityProps, 'location:zoom'>;
+export type MarkerProps = Omit<CityType, 'location:zoom'>;

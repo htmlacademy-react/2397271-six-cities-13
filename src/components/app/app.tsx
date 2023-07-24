@@ -7,12 +7,12 @@ import NotFound from '../../pages/not-found';
 import {AppRoute} from './../../const';
 import PrivateRoute from './../private-route/private-route';
 import Favorites from '../../pages/favorites';
-import {CommentProps, OfferPreviewProps, OfferProps} from '../../types/offer-props';
+import {CommentType, OfferPreviewType, OfferType} from '../../types/offer';
 
 interface AppProps {
-  offerList: OfferPreviewProps[];
-  offer: OfferProps;
-  comments: CommentProps[];
+  offerList: OfferPreviewType[];
+  offer: OfferType;
+  comments: CommentType[];
 }
 
 function App({offerList, offer, comments}: AppProps): ReactNode {

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReviewItem from '../review-item/review-item';
-import {CommentProps} from '../../types/offer-props';
+import {CommentType} from '../../types/offer';
 
 interface ReviewListProps {
-  comments: CommentProps[];
+  comments: CommentType[];
 }
 
 function ReviewList({comments}:ReviewListProps) {

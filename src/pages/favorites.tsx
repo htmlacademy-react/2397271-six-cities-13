@@ -1,12 +1,12 @@
 import React from 'react';
 import {Cities} from '../const';
-import {OfferPreviewProps} from '../types/offer-props';
+import {OfferPreviewType} from '../types/offer';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
 import FavoriteItem from '../components/favorite-item/favorite-item';
 
 interface FavoritesProps {
-  offerList: OfferPreviewProps[];
+  offerList: OfferPreviewType[];
 }
 
 function Favorites({offerList}:FavoritesProps) {
