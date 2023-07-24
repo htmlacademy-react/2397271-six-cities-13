@@ -2,12 +2,12 @@ import React, {ReactNode} from 'react';
 import * as classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import {AppRoute, RATING_MULTIPLIER} from '../../const';
-import {OfferPreviewProps} from '../../types/offer-props';
+import {OfferPreviewType} from '../../types/offer';
 
 export interface OfferCardProps {
-  card: OfferPreviewProps;
+  card: OfferPreviewType;
   className?: string;
-  onMouseEnter?: (card:OfferPreviewProps) => void;
+  onMouseEnter?: (card:OfferPreviewType) => void;
 }
 
 function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNode {
