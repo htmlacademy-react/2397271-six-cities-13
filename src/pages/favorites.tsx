@@ -1,36 +1,13 @@
 import React from 'react';
 import {Cities} from '../const';
-import OfferCard from '../components/offer-card/offer-card';
 import {OfferPreviewProps} from '../types/offer-props';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
+import FavoriteItem from '../components/favorite-item/favorite-item';
 
 interface FavoritesProps {
   offerList: OfferPreviewProps[];
 }
-
-interface FavoriteItemProps {
-  sortedCards: OfferPreviewProps[];
-  city: typeof Cities[number];
-}
-
-function FavoriteItem({sortedCards, city}:FavoriteItemProps) {
-  return (
-    <li className="favorites__locations-items">
-      <div className="favorites__locations locations locations--current">
-        <div className="locations__item">
-          <a className="locations__item-link" href="#">
-            <span>{city}</span>
-          </a>
-        </div>
-      </div>
-      <div className="favorites__places">
-        {sortedCards.map((card) => <OfferCard card={card} key={card.id} className='favorites'/>)}
-      </div>
-    </li>
-  );
-}
-
 
 function Favorites({offerList}:FavoritesProps) {
   const sortOfferByCity = (city) => offerList.filter((item) => item.city.name === city);

@@ -1,8 +1,12 @@
-import React, {ReactNode, useState} from 'react';
-
+import React, {ChangeEvent, ReactNode, useState} from 'react';
+import RatingStars from '../rating-stars/rating-stars';
 
 function CommentForm():ReactNode {
-  const [comment, setComment] = useState({rating: 0, review: ''});
+  const [comment, setComment] = useState({rating: '0', review: ''});
+
+  const handleRatingChange = (event:ChangeEvent<HTMLInputElement>):void => {
+    setComment((prevComment) => ({...prevComment, rating: event.target.value}));
+  };
 
   return (
     <form className="reviews__form form"
@@ -11,28 +15,8 @@ function CommentForm():ReactNode {
       onSubmit={(event) => event.preventDefault()}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      {/* TODO вынести в компонент RatingInput*/}
-      {/* TODO вынести массив в константы или утилсы*/}
       <div className="reviews__rating-form form__rating">
-        {
-          [5, 4, 3, 2, 1].map((star) => (
-            <React.Fragment key={star}>
-              <input className="form__rating-input visually-hidden"
-                name="rating"
-                id={`${star}-stars`}
-                type="radio"
-                value={star}
-                onChange={(event) => setComment({...comment, rating: event.target.value})}
-              >
-              </input>
-              <label htmlFor={`${star}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
-                <svg className="form__star-image" width="37" height="33">
-                  <use xlinkHref="#icon-star"></use>
-                </svg>
-              </label>
-            </React.Fragment>
-          ))
-        }
+        <RatingStars handleRatingChange={handleRatingChange} />
       </div>
       <textarea
         className="reviews__textarea form__textarea"
