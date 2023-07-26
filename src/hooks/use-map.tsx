@@ -38,7 +38,7 @@ function useMap(
       },
       city.location.zoom);
     }
-  }, [mapRef, city]);
+  }, [mapRef, city, map]);
 
   return map;
 }

@@ -11,12 +11,11 @@ function CityFilter() {
 
   useEffect(() => {
     dispatch(filterOfferList({offers: offersList, city: currentCity}));
-  }, []);
+  }, [currentCity, offersList, dispatch]);
 
   const handleCityClick = (event:React.MouseEvent<HTMLLinkElement>, city:typeof Cities[number]) => {
     event.preventDefault();
     dispatch(changeCity({city: city}));
-    dispatch(filterOfferList({offers: offersList, city: city}));
   };
 
   return (
