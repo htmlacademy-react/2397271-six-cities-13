@@ -4,15 +4,12 @@ import OfferList from '../components/offer-list/offer-list';
 import Map from '../components/map/map';
 import {OfferPreviewType} from '../types/offer';
 import Header from '../components/header/header';
-import {Cities} from '../const';
 import CityFilter from '../components/city-filter/city-filter';
+import {useAppSelector} from '../hooks';
 
-interface MainProps {
-  offerList: OfferPreviewType[];
-}
-
-function Main({offerList}:MainProps):ReactNode {
-  const [currentCity, setCurrentCity] = useState<typeof Cities[number]>(Cities[0]);
+function Main():ReactNode {
+  const currentCity = useAppSelector((state) => state.city);
+  const offerListSorted = useAppSelector((state) => state.offersSorted);
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);
 
   return (
@@ -21,17 +18,17 @@ function Main({offerList}:MainProps):ReactNode {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CityFilter currentCity={currentCity} setCurrentCity={setCurrentCity} />
+          <CityFilter />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offerList.length} places to stay in {currentCity}</b>
+              <b className="places__found">{offerListSorted.length} places to stay in {currentCity}</b>
               <OfferFilter />
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
-                  offerList={offerList}
+                  offerList={offerListSorted}
                   className='cities'
                   handleMouseEnter={(offer:OfferPreviewType) => {
                     setActiveOffer(offer);
@@ -41,7 +38,11 @@ function Main({offerList}:MainProps):ReactNode {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={offerList[0].city} offerList={offerList} activeOffer={activeOffer}/>
+                <Map
+                  city={offerListSorted[0].city}
+                  offerList={offerListSorted}
+                  activeOffer={activeOffer}
+                />
               </section>
             </div>
           </div>
