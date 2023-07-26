@@ -1,4 +1,5 @@
 import {CityType, LocationType} from './location';
+import {OfferSortList} from '../const';
 
 export interface OfferPreviewType {
   id: string;
@@ -20,6 +21,8 @@ export interface OfferType extends Omit<OfferPreviewType, 'previewImage'> {
   bedrooms: number;
   maxAdults: number;
 }
+
+export type OfferSortType = typeof OfferSortList[number];
 
 export interface UserType {
   name: string;

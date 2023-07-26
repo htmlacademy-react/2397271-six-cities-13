@@ -1,3 +1,5 @@
+import {OfferSortType} from './types/offer';
+
 export enum AppRoute {
   root = '/',
   offer = '/offer/:id',
@@ -23,6 +25,10 @@ export const RatingTitles = [
   'badly',
   'terribly'
 ] as const;
+
+export const OfferSortList = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'] as const;
+
+export const DEFAULT_OFFER_SORT:OfferSortType = 'Popular';
 
 export const RATING_MULTIPLIER = 20 as const;
 
