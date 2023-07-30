@@ -8,6 +8,8 @@ import {AppRoute} from './../../const';
 import PrivateRoute from './../private-route/private-route';
 import Favorites from '../../pages/favorites';
 import {CommentType, OfferPreviewType, OfferType} from '../../types/offer';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface AppProps {
   offerList: OfferPreviewType[];
@@ -17,17 +19,22 @@ interface AppProps {
 
 function App({offerList, offer, comments}: AppProps): ReactNode {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index path={AppRoute.root} element={<Main offerList={offerList}/>}/>
-        <Route path={AppRoute.offer} element={<Offer offer={offer} comments={comments} nearbyOfferList={offerList}/>}/>
-        <Route path={AppRoute.login} element={<Login/>}/>
-        <Route element={<PrivateRoute/>}>
-          <Route path={AppRoute.favorites} element={<Favorites offerList={offerList}/>}/>
-        </Route>
-        <Route path='*' element={<NotFound/>}/>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route index path={AppRoute.root} element={<Main offerList={offerList}/>}/>
+          <Route path={AppRoute.offer} element={<Offer offer={offer} comments={comments} nearbyOfferList={offerList}/>}/>
+          <Route path={AppRoute.login} element={<Login/>}/>
+          <Route element={<PrivateRoute/>}>
+            <Route path={AppRoute.favorites} element={<Favorites offerList={offerList}/>}/>
+          </Route>
+          <Route path='*' element={<NotFound/>}/>
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer
+        autoClose={3000}
+      />
+    </>
   );
 }
 

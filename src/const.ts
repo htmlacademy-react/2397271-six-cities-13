@@ -41,3 +41,14 @@ export const URL_MARKER_CURRENT =
 export const NEARBY_OFFERS_COUNT = 3;
 
 export const MAP_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+
+export enum CommentTextLength {
+  min = 50,
+  max = 300,
+}
+
+export enum CommentErrors {
+  tooLongText = `Max comment length is ${CommentTextLength.max}`,
+  tooShortText = `Min comment length is ${CommentTextLength.min}`,
+  emptyRating = 'Please select the rating ',
+}

@@ -37,3 +37,8 @@ export interface CommentType {
   rating: number;
   user: UserType;
 }
+
+export interface ReviewFormType {
+  rating: string;
+  comment: string;
+}
