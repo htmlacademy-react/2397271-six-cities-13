@@ -1,21 +1,17 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Cities} from '../../const';
 import * as classNames from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeCity, filterOfferList} from '../../store/action';
+import {changeCity} from '../../store/action';
+import {CityNameType} from '../../types/location';
 
 function CityFilter() {
   const dispatch = useAppDispatch();
-  const currentCity: typeof Cities[number] = useAppSelector((state) => state.city);
-  const offersList = useAppSelector((state) => state.offers);
+  const currentCity: CityNameType = useAppSelector((state) => state.city);
 
-  useEffect(() => {
-    dispatch(filterOfferList({offers: offersList, city: currentCity}));
-  }, [currentCity, offersList, dispatch]);
-
-  const handleCityClick = (event:React.MouseEvent<HTMLLinkElement>, city:typeof Cities[number]) => {
+  const handleCityClick = (event:React.MouseEvent<HTMLLinkElement>, city: CityNameType) => {
     event.preventDefault();
-    dispatch(changeCity({city: city}));
+    dispatch(changeCity({city}));
   };
 
   return (

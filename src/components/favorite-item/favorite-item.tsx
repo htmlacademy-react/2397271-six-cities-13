@@ -2,10 +2,11 @@ import {OfferPreviewType} from '../../types/offer';
 import {Cities} from '../../const';
 import OfferCard from '../offer-card/offer-card';
 import React from 'react';
+import {CityNameType} from '../../types/location';
 
 interface FavoriteItemProps {
   sortedCards: OfferPreviewType[];
-  city: typeof Cities[number];
+  city: CityNameType;
 }
 
 function FavoriteItem({sortedCards, city}:FavoriteItemProps) {

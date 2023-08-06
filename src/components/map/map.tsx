@@ -29,7 +29,9 @@ function Map({city, offerList, activeOffer}:MapProps):ReactNode {
   const map = useMap(mapRef, city);
 
   useEffect(() => {
-    if (map) {
+    let isMounted = true;
+
+    if (map && isMounted) {
       const markerLayer = layerGroup().addTo(map);
       offerList.forEach((offer) => {
         const marker = new Marker({
@@ -48,6 +50,10 @@ function Map({city, offerList, activeOffer}:MapProps):ReactNode {
 
       return () => {
         map.removeLayer(markerLayer);
+      };
+
+      return () => {
+        isMounted = false;
       };
     }
   }, [map, offerList, activeOffer]);

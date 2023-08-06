@@ -1,6 +1,6 @@
 import React from 'react';
 import {CommentType} from '../../types/offer';
-import {RATING_MULTIPLIER} from '../../const';
+import {RATING_MULTIPLIER, ReviewDateView} from '../../const';
 import * as dayjs from 'dayjs';
 
 interface ReviewItemProps {
@@ -26,8 +26,8 @@ function ReviewItem({comment}:ReviewItemProps) {
         <p className="reviews__text">{comment.comment}</p>
         <time
           className="reviews__time"
-          dateTime={dayjs(comment.date).format('YYYY-MM-DD')}
-        >{dayjs(comment.date).format('MMMM YYYY')}
+          dateTime={dayjs(comment.date).format(ReviewDateView.system)}
+        >{dayjs(comment.date).format(ReviewDateView.displayed)}
         </time>
 
       </div>

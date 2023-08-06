@@ -1,4 +1,5 @@
 import {CityType, LocationType} from './location';
+import {OfferSortList} from '../const';
 
 export interface OfferPreviewType {
   id: string;
@@ -21,6 +22,7 @@ export interface OfferType extends Omit<OfferPreviewType, 'previewImage'> {
   maxAdults: number;
 }
 
+
 export interface UserType {
   name: string;
   avatarUrl: string;
@@ -34,3 +36,6 @@ export interface CommentType {
   rating: number;
   user: UserType;
 }
+
+
+export type OfferSortType = keyof OfferSortList;
