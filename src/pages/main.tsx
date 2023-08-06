@@ -2,21 +2,17 @@ import React, {ReactNode, useState} from 'react';
 import OfferFilter from '../components/offer-filter/offer-filter';
 import OfferList from '../components/offer-list/offer-list';
 import Map from '../components/map/map';
-import {OfferPreviewType, OfferSortType} from '../types/offer';
+import {OfferPreviewType} from '../types/offer';
 import Header from '../components/header/header';
 import CityFilter from '../components/city-filter/city-filter';
 import {useAppSelector} from '../hooks';
-import {DEFAULT_OFFER_SORT, OfferSortList} from '../const';
-import {useOffers} from '../hooks/use-offers';
+import {useSelector} from 'react-redux';
 import {CityNameType} from '../types/location';
-
+import {selectOffersByCity, selectOffersBySortAndCity} from '../store/selectors/offers';
 
 function Main():ReactNode {
-  const currentCity = useAppSelector((state) => state.city);
-  const offerList = useAppSelector((state) => state.offers);
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);
-  const [filterSort, setFilterSort] = useState<OfferSortType>(DEFAULT_OFFER_SORT);
-  const sortedAndFilteredOffers = useOffers<OfferPreviewType[], CityNameType, OfferSortType>(offerList, currentCity, filterSort);
+  const currentCity: CityNameType = useAppSelector((state) => state.city);
 
   return (
     <div className='page page--gray page--main'>
@@ -30,15 +26,11 @@ function Main():ReactNode {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{sortedAndFilteredOffers.length} places to stay in {currentCity}</b>
-              <OfferFilter
-                activeSort={filterSort}
-                setSort={setFilterSort}
-                sortList={OfferSortList}
-              />
+              <b className="places__found">{useSelector(selectOffersByCity).length} places to stay in {currentCity}</b>
+              <OfferFilter />
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
-                  offerList={sortedAndFilteredOffers}
+                  offerList={useSelector(selectOffersBySortAndCity)}
                   className='cities'
                   handleMouseEnter={(offer:OfferPreviewType) => {
                     setActiveOffer(offer);
@@ -49,8 +41,8 @@ function Main():ReactNode {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  city={sortedAndFilteredOffers[0].city}
-                  offerList={sortedAndFilteredOffers}
+                  city={useSelector(selectOffersByCity)[0].city}
+                  offerList={useSelector(selectOffersByCity)}
                   activeOffer={activeOffer}
                 />
               </section>

@@ -1,21 +1,19 @@
 import React, {ReactNode, useState} from 'react';
-import {OfferSortType} from '../../types/offer';
 import * as classNames from 'classnames';
+import {changeOffersSort} from '../../store/action';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {State} from '../../types/root-state';
+import {OfferSortList} from '../../const';
 
-interface OfferFilterProps {
-  activeSort: OfferSortType;
-  setSort: (sort:OfferSortType) => void;
-  sortList: string[];
-}
-
-function OfferFilter({activeSort, setSort, sortList}:OfferFilterProps):ReactNode {
+function OfferFilter():ReactNode {
   const [isOpened, setIsOpened] = useState(false);
+  const dispatch = useAppDispatch();
+  const currentSort = useAppSelector((state: State) => state.sort);
 
-  const handleChangeClick = (sort:OfferSortType) => {
-    setSort(sort);
+  const handleChangeClick = (sort:OfferSortList) => {
+    dispatch(changeOffersSort({sort: sort}));
     setIsOpened(!isOpened);
   };
-  // TODO добавить закрытие по клику вне селекта
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -25,7 +23,7 @@ function OfferFilter({activeSort, setSort, sortList}:OfferFilterProps):ReactNode
         tabIndex="0"
         onClick={() => setIsOpened(!isOpened)}
       >
-        {activeSort}
+        {currentSort}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -34,13 +32,13 @@ function OfferFilter({activeSort, setSort, sortList}:OfferFilterProps):ReactNode
         'places__options places__options--custom',
         {'places__options--opened': isOpened})}
       >
-        {sortList.map((sort) =>
+        {Object.values(OfferSortList).map((sort:OfferSortList) =>
           (
             <li
               key={sort}
               className={classNames(
                 'places__option',
-                {'places__option--active': sort === activeSort}
+                {'places__option--active': sort === currentSort}
               )}
               tabIndex="0"
               onClick={() => handleChangeClick(sort)}

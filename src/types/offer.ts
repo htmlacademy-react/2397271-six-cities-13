@@ -22,7 +22,6 @@ export interface OfferType extends Omit<OfferPreviewType, 'previewImage'> {
   maxAdults: number;
 }
 
-export type OfferSortType = typeof OfferSortList[number];
 
 export interface UserType {
   name: string;
@@ -37,3 +36,6 @@ export interface CommentType {
   rating: number;
   user: UserType;
 }
+
+
+export type OfferSortType = keyof OfferSortList;
