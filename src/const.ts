@@ -14,6 +14,8 @@ export const Cities = [
   'Dusseldorf'
 ] as const;
 
+export const DEFAULT_CITY:typeof Cities[number] = 'Paris' as const;
+
 export const RatingTitles = [
   'perfect',
   'good',

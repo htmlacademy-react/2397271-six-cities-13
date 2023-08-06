@@ -19,7 +19,6 @@ function useMap(
         },
         zoom: city.location.zoom
       });
-
       const layer = new TileLayer(
         MAP_LAYER_URL,
         {
@@ -32,8 +31,14 @@ function useMap(
 
       setMap(instance);
       isRenderedRef.current = true;
+    } else if (map) {
+      map.setView({
+        lat: city.location.latitude,
+        lng: city.location.longitude
+      },
+      city.location.zoom);
     }
-  }, [mapRef, city]);
+  }, [mapRef, city, map]);
 
   return map;
 }
