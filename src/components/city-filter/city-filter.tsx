@@ -11,7 +11,7 @@ function CityFilter() {
 
   const handleCityClick = (event:React.MouseEvent<HTMLLinkElement>, city: CityNameType) => {
     event.preventDefault();
-    dispatch(changeCity({city: city}));
+    dispatch(changeCity({city}));
   };
 
   return (
