@@ -6,7 +6,6 @@ import {OfferPreviewType} from '../types/offer';
 import Header from '../components/header/header';
 import CityFilter from '../components/city-filter/city-filter';
 import {useAppSelector} from '../hooks';
-import {useSelector} from 'react-redux';
 import {CityNameType} from '../types/location';
 import {selectOffersByCity, selectOffersBySortAndCity} from '../store/selectors/offers';
 
@@ -26,11 +25,11 @@ function Main():ReactNode {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{useSelector(selectOffersByCity).length} places to stay in {currentCity}</b>
+              <b className="places__found">{useAppSelector(selectOffersByCity).length} places to stay in {currentCity}</b>
               <OfferFilter />
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
-                  offerList={useSelector(selectOffersBySortAndCity)}
+                  offerList={useAppSelector(selectOffersBySortAndCity)}
                   className='cities'
                   handleMouseEnter={(offer:OfferPreviewType) => {
                     setActiveOffer(offer);
@@ -41,8 +40,8 @@ function Main():ReactNode {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  city={useSelector(selectOffersByCity)[0].city}
-                  offerList={useSelector(selectOffersByCity)}
+                  city={useAppSelector(selectOffersByCity)[0].city}
+                  offerList={useAppSelector(selectOffersByCity)}
                   activeOffer={activeOffer}
                 />
               </section>
