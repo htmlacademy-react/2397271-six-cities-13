@@ -8,12 +8,18 @@ import CityFilter from '../components/city-filter/city-filter';
 import {useAppSelector} from '../hooks';
 import {CityNameType} from '../types/location';
 import {selectOffersByCity, selectOffersBySortAndCity} from '../store/selectors/offers';
+import Loader from '../components/loader/loader';
 
 function Main():ReactNode {
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);
   const currentCity: CityNameType = useAppSelector((state) => state.city);
+  const isOffersLoading: boolean = useAppSelector((state) => state.isOffersDataLoading);
   const selectedOffers = useAppSelector(selectOffersByCity);
   const selectedAndSortedOffers = useAppSelector(selectOffersBySortAndCity);
+
+  if (isOffersLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className='page page--gray page--main'>
@@ -25,7 +31,7 @@ function Main():ReactNode {
         </div>
         <div className="cities">
           {
-            !useAppSelector(selectOffersByCity).length
+            !selectedOffers.length
               ?
               <div className="cities__places-container cities__places-container--empty container">
                 <section className="cities__no-places">
