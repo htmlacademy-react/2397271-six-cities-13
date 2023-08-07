@@ -1,23 +1,23 @@
 import {DEFAULT_CITY, DEFAULT_OFFER_SORT} from '../../const';
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, changeOffersSort} from '../action';
-import {offerList} from '../../mocks/offers';
+import {changeCity, changeOffersSort, fetchOffers} from '../action';
 
 const initialState = {
   city: DEFAULT_CITY,
-  offers: offerList,
+  offers: [],
   sort: DEFAULT_OFFER_SORT,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
-      const {city} = action.payload;
-      state.city = city;
+      state.city = action.payload;
     })
     .addCase(changeOffersSort, (state, action) => {
-      const {sort} = action.payload;
-      state.sort = sort;
+      state.sort = action.payload;
+    })
+    .addCase(fetchOffers, (state, action) => {
+      state.offers = action.payload;
     });
 });
 
