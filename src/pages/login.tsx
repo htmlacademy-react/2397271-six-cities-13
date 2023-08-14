@@ -38,9 +38,9 @@ function Login() {
     return <Loader />;
   }
 
-  // if (authorizationStatus === AuthorizationStatus.Auth) {
-  //   return <Navigate to={AppRoute.root} />;
-  // }
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.root} />;
+  }
 
   return (
     <div className="page page--gray page--login">

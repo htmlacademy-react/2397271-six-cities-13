@@ -10,6 +10,8 @@ import Favorites from '../../pages/favorites';
 import {CommentType, OfferPreviewType, OfferType} from '../../types/offer';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 interface AppProps {
   offerList: OfferPreviewType[];
@@ -20,7 +22,7 @@ interface AppProps {
 function App({offerList, offer, comments}: AppProps): ReactNode {
   return (
     <>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route index path={AppRoute.root} element={<Main offerList={offerList}/>}/>
           <Route path={AppRoute.offer} element={<Offer offer={offer} comments={comments} nearbyOfferList={offerList}/>}/>
@@ -30,7 +32,7 @@ function App({offerList, offer, comments}: AppProps): ReactNode {
           </Route>
           <Route path='*' element={<NotFound/>}/>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
       <ToastContainer
         autoClose={3000}
       />

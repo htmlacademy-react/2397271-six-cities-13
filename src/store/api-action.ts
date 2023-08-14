@@ -1,9 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios, {AxiosError, AxiosInstance} from 'axios';
 import {AppDispatch, State} from '../types/root-state';
-import {APIRoute, AuthorizationStatus} from '../const';
+import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {OfferPreviewType} from '../types/offer';
-import {fetchOffers, requireAuthorization, setIsOffersLoading, setUserData} from './action';
+import {fetchOffers, redirectToRoute, requireAuthorization, setIsOffersLoading, setUserData} from './action';
 import {dropToken, saveToken} from '../services/token';
 import {AuthData, UserData} from '../types/user';
 
@@ -45,15 +45,14 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
   extra: AxiosInstance;
 }>(
   'user/login',
-  async ({email, password}, {extra: api}) => {
+  async ({email, password}, {extra: api, dispatch}) => {
     try {
       const { data } = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(data.token);
-      //  TODO добавить сюда редирект
+      dispatch(redirectToRoute(AppRoute.root));
       return data;
     } catch (error) {
       throw new Error (error);
-      return error;
     }
   },
 );
