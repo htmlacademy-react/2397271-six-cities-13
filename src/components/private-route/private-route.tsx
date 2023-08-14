@@ -1,11 +1,18 @@
 import React, {ReactNode} from 'react';
 import {Navigate, Outlet} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {useAppSelector} from '../../hooks';
+import Loader from '../loader/loader';
+import {selectAuthStatus} from '../../store/user-process/selectors';
 
 function PrivateRoute():ReactNode {
-  const hasAccess = true;
+  const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
 
-  return hasAccess ? <Outlet /> : <Navigate to={AppRoute.login} />;
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
+    return <Loader />;
+  }
+
+  return authorizationStatus === AuthorizationStatus.Auth ? <Outlet /> : <Navigate to={AppRoute.login} />;
 }
 
 export default PrivateRoute;
