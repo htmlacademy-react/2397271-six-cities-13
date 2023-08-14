@@ -1,19 +1,42 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import CommentForm from '../components/comment-form/comment-form';
 import {CommentType, OfferPreviewType, OfferType} from '../types/offer';
 import Header from '../components/header/header';
 import ReviewList from '../components/review-list/review-list';
 import OfferList from '../components/offer-list/offer-list';
-import {NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
+import {FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
 import Map from '../components/map/map';
+import {fetchOfferAction} from '../store/api-action';
+import {useAppDispatch, useAppSelector} from '../hooks';
+import {selectFetchOfferStatus, selectOfferData} from '../store/offers-data/selectors';
+import Loader from '../components/loader/loader';
+import NotFound from './not-found';
 
 interface OfferPageProps {
-  offer: OfferType;
   comments: CommentType[];
   nearbyOfferList: OfferPreviewType[];
 }
 
-function Offer({offer, comments, nearbyOfferList}:OfferPageProps):ReactNode {
+function Offer({comments, nearbyOfferList}:OfferPageProps):ReactNode {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOfferAction(id));
+  }, [id, dispatch]);
+
+  const fetchOfferStatus:FetchStatus = useAppSelector(selectFetchOfferStatus);
+  const offer:OfferType = useAppSelector(selectOfferData);
+
+  if (fetchOfferStatus === FetchStatus.Idle) {
+    return <Loader />;
+  }
+
+  if (fetchOfferStatus === FetchStatus.Error) {
+    return <NotFound />;
+  }
+
   return (
     <div className='page'>
       <Header />

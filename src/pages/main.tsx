@@ -9,12 +9,12 @@ import {useAppSelector} from '../hooks';
 import {CityNameType} from '../types/location';
 import Loader from '../components/loader/loader';
 import {
-  selectCity,
   selectFetchOffersStatus,
   selectOffersByCity,
   selectOffersBySortAndCity
 } from '../store/offers-data/selectors';
 import {FetchStatus} from '../const';
+import {selectCity} from '../store/app-process/selectors';
 
 function Main():ReactNode {
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);

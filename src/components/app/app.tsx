@@ -21,22 +21,20 @@ interface AppProps {
 
 function App({offerList, offer, comments}: AppProps): ReactNode {
   return (
-    <>
-      <HistoryRouter history={browserHistory}>
-        <Routes>
-          <Route index path={AppRoute.root} element={<Main offerList={offerList}/>}/>
-          <Route path={AppRoute.offer} element={<Offer offer={offer} comments={comments} nearbyOfferList={offerList}/>}/>
-          <Route path={AppRoute.login} element={<Login/>}/>
-          <Route element={<PrivateRoute/>}>
-            <Route path={AppRoute.favorites} element={<Favorites offerList={offerList}/>}/>
-          </Route>
-          <Route path='*' element={<NotFound/>}/>
-        </Routes>
-      </HistoryRouter>
+    <HistoryRouter history={browserHistory}>
+      <Routes>
+        <Route index path={AppRoute.root} element={<Main offerList={offerList}/>}/>
+        <Route path={AppRoute.offer} element={<Offer offer={offer} comments={comments} nearbyOfferList={offerList}/>}/>
+        <Route path={AppRoute.login} element={<Login/>}/>
+        <Route element={<PrivateRoute/>}>
+          <Route path={AppRoute.favorites} element={<Favorites offerList={offerList}/>}/>
+        </Route>
+        <Route path='*' element={<NotFound/>}/>
+      </Routes>
       <ToastContainer
         autoClose={3000}
       />
-    </>
+    </HistoryRouter>
   );
 }
 

@@ -1,4 +1,4 @@
-import {AuthorizationStatus, FetchStatus} from '../../const';
+import {AuthorizationStatus, FetchStatus, NameSpace} from '../../const';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {checkAuthAction, loginAction, logoutAction} from '../api-action';
 
@@ -25,7 +25,7 @@ const initialState = {
 };
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: NameSpace.User,
   initialState,
   reducers: {},
   extraReducers(builder) {

@@ -86,6 +86,7 @@ export enum FetchStatus {
 }
 
 export enum NameSpace {
+  App = 'APP',
   User = 'USER',
   Offers = 'OFFERS',
 }

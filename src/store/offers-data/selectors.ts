@@ -4,12 +4,14 @@ import {OfferPreviewType} from '../../types/offer';
 import {CityNameType} from '../../types/location';
 import {sortOffers} from '../../helpers/sort-offers';
 import {createSelector} from 'reselect';
+import {selectCity, selectSort} from '../app-process/selectors';
 
 
 export const selectOffersData = (state: State) => state[NameSpace.Offers].offers;
 export const selectFetchOffersStatus = (state: State) => state[NameSpace.Offers].fetchOffersStatus;
-export const selectCity = (state: State) => state[NameSpace.Offers].city;
-export const selectSort = (state: State) => state[NameSpace.Offers].sort;
+
+export const selectOfferData = (state: State) => state[NameSpace.Offers].offer;
+export const selectFetchOfferStatus = (state: State) => state[NameSpace.Offers].fetchOfferStatus;
 
 export const selectOffersByCity = createSelector(
   selectOffersData,

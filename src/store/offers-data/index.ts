@@ -1,13 +1,15 @@
-import {OfferPreviewType, OfferSortType} from '../../types/offer';
+import {OfferPreviewType, OfferSortType, OfferType} from '../../types/offer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchOffersAction} from '../api-action';
-import {DEFAULT_CITY, DEFAULT_OFFER_SORT, FetchStatus} from '../../const';
+import {fetchOfferAction, fetchOffersAction} from '../api-action';
+import {DEFAULT_CITY, DEFAULT_OFFER_SORT, FetchStatus, NameSpace} from '../../const';
 import {changeCity, changeOffersSort} from '../action';
 import {CityNameType} from '../../types/location';
 
 interface OffersState {
   offers: OfferPreviewType[];
   fetchOffersStatus: FetchStatus;
+  offer: OfferType;
+  fetchOfferStatus: FetchStatus;
   sort: OfferSortType;
   city: CityNameType;
 }
@@ -15,12 +17,14 @@ interface OffersState {
 const initialState = {
   offers: [],
   fetchOffersStatus: FetchStatus.Idle,
+  offer: null,
+  fetchOfferStatus: FetchStatus.Idle,
   sort: DEFAULT_OFFER_SORT,
   city: DEFAULT_CITY,
 };
 
 export const offersSlice = createSlice({
-  name: 'user',
+  name: NameSpace.Offers,
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -35,11 +39,15 @@ export const offersSlice = createSlice({
       .addCase(fetchOffersAction.rejected, (state) => {
         state.fetchOffersStatus = FetchStatus.Error;
       })
-      .addCase(changeCity, (state, action) => {
-        state.city = action.payload.city;
+      .addCase(fetchOfferAction.fulfilled, (state, action: PayloadAction<OfferType>) => {
+        state.offer = action.payload;
+        state.fetchOfferStatus = FetchStatus.Success;
       })
-      .addCase(changeOffersSort, (state, action) => {
-        state.sort = action.payload.sort;
+      .addCase(fetchOfferAction.pending, (state) => {
+        state.fetchOfferStatus = FetchStatus.Idle;
+      })
+      .addCase(fetchOfferAction.rejected, (state) => {
+        state.fetchOfferStatus = FetchStatus.Error;
       });
   }
 });
