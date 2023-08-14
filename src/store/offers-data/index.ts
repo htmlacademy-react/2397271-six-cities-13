@@ -2,7 +2,6 @@ import {OfferPreviewType, OfferSortType, OfferType} from '../../types/offer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {fetchOfferAction, fetchOffersAction} from '../api-action';
 import {DEFAULT_CITY, DEFAULT_OFFER_SORT, FetchStatus, NameSpace} from '../../const';
-import {changeCity, changeOffersSort} from '../action';
 import {CityNameType} from '../../types/location';
 
 interface OffersState {

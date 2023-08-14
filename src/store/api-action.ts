@@ -16,7 +16,6 @@ export const fetchOfferAction = createAsyncThunk<void, undefined, {
   async (offerId:string, { extra: api}) => {
     try {
       const {data} = await api.get<OfferType>(`${APIRoute.Offers}/${offerId}`);
-      console.log(data);
       return data;
     } catch (error) {
       throw new Error(error);
