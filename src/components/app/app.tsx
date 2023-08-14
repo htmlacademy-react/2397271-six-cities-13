@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import Main from '../../pages/main';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Offer from '../../pages/offer';
 import Login from '../../pages/login';
 import NotFound from '../../pages/not-found';

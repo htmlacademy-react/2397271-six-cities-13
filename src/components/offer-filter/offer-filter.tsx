@@ -2,7 +2,6 @@ import React, {ReactNode, useState} from 'react';
 import * as classNames from 'classnames';
 import {changeOffersSort} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {State} from '../../types/root-state';
 import {OfferSortList} from '../../const';
 import {selectSort} from '../../store/offers-data/selectors';
 
