@@ -1,5 +1,4 @@
 import {OfferPreviewType} from '../../types/offer';
-import {Cities} from '../../const';
 import OfferCard from '../offer-card/offer-card';
 import React from 'react';
 import {CityNameType} from '../../types/location';

@@ -52,3 +52,11 @@ export const ReviewDateView = {
   system: 'YYYY-MM-DD',
   displayed: 'MMMM YYYY',
 };
+
+export enum APIRoute {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout'
+}
