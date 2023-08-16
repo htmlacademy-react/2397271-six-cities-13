@@ -7,41 +7,47 @@ import ReviewList from '../components/review-list/review-list';
 import OfferList from '../components/offer-list/offer-list';
 import {AuthorizationStatus, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
 import Map from '../components/map/map';
-import {fetchOfferAction, fetchReviewsAction} from '../store/api-action';
+import {fetchOfferAction, fetchOffersNearbyAction, fetchReviewsAction} from '../store/api-action';
 import {useAppDispatch, useAppSelector} from '../hooks';
-import {selectFetchOfferStatus, selectOfferData} from '../store/offers-data/selectors';
+import {
+  selectFetchOffersNearbyStatus,
+  selectFetchOfferStatus,
+  selectOfferData,
+  selectOffersNearbyData
+} from '../store/offers-data/selectors';
 import Loader from '../components/loader/loader';
 import NotFound from './not-found';
 import {selectFetchReviewsStatus, selectReviewsData} from '../store/reviews-data/selectors';
 import {selectAuthStatus} from '../store/user-process/selectors';
 
-interface OfferPageProps {
-  nearbyOfferList: OfferPreviewType[];
-}
-
-function Offer({nearbyOfferList}:OfferPageProps):ReactNode {
+function Offer():ReactNode {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchOfferAction(id));
     dispatch(fetchReviewsAction(id));
+    dispatch(fetchOffersNearbyAction(id));
   }, [id, dispatch]);
 
-  const fetchOfferStatus:FetchStatus = useAppSelector(selectFetchOfferStatus);
   const offer:OfferType = useAppSelector(selectOfferData);
+  const fetchOfferStatus:FetchStatus = useAppSelector(selectFetchOfferStatus);
+  const offersNearby:OfferPreviewType[] = useAppSelector(selectOffersNearbyData);
+  const fetchOffersNearbyStatus:FetchStatus = useAppSelector(selectFetchOffersNearbyStatus);
   const fetchReviewsStatus:FetchStatus = useAppSelector(selectFetchReviewsStatus);
   const reviews:ReviewType[] = useAppSelector(selectReviewsData);
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
 
   if (fetchOfferStatus === FetchStatus.Idle
-  || fetchReviewsStatus === FetchStatus.Idle) {
+  || fetchReviewsStatus === FetchStatus.Idle
+  || fetchOffersNearbyStatus === FetchStatus.Idle) {
     return <Loader />;
   }
 
   if (fetchOfferStatus === FetchStatus.Error) {
     return <NotFound />;
   }
+
 
   return (
     <div className='page'>
@@ -122,7 +128,7 @@ function Offer({nearbyOfferList}:OfferPageProps):ReactNode {
           <section className="offer__map map">
             <Map
               city={offer.city}
-              offerList={[...nearbyOfferList.slice(0, NEARBY_OFFERS_COUNT), offer]}
+              offerList={[...offersNearby.slice(0, NEARBY_OFFERS_COUNT), offer]}
               activeOffer={offer}
             >
             </Map>
@@ -132,7 +138,7 @@ function Offer({nearbyOfferList}:OfferPageProps):ReactNode {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offerList={nearbyOfferList.slice(0, NEARBY_OFFERS_COUNT)} className={'near-places'} />
+              <OfferList offerList={offersNearby.slice(0, NEARBY_OFFERS_COUNT)} className={'near-places'} />
             </div>
           </section>
         </div>

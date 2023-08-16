@@ -10,6 +10,9 @@ import {selectCity, selectSort} from '../app-process/selectors';
 export const selectOffersData = (state: State) => state[NameSpace.Offers].offers;
 export const selectFetchOffersStatus = (state: State) => state[NameSpace.Offers].fetchOffersStatus;
 
+export const selectOffersNearbyData = (state: State) => state[NameSpace.Offers].offersNearby;
+export const selectFetchOffersNearbyStatus = (state: State) => state[NameSpace.Offers].fetchOffersNearbyStatus;
+
 export const selectOfferData = (state: State) => state[NameSpace.Offers].offer;
 export const selectFetchOfferStatus = (state: State) => state[NameSpace.Offers].fetchOfferStatus;
 

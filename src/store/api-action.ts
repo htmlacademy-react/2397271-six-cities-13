@@ -1,9 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {AppDispatch, State} from '../types/root-state';
-import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
+import {APIRoute, AppRoute} from '../const';
 import {OfferPreviewType, OfferType, ReviewType} from '../types/offer';
-import {redirectToRoute, requireAuthorization} from './action';
+import {redirectToRoute} from './action';
 import {dropToken, saveToken} from '../services/token';
 import {AuthData, UserData} from '../types/user';
 
@@ -32,6 +32,22 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   async (_arg, { extra: api}) => {
     try {
       const {data} = await api.get<OfferPreviewType[]>(APIRoute.Offers);
+      return data;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+);
+
+export const fetchOffersNearbyAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffersNearby',
+  async (offerId:string, { extra: api}) => {
+    try {
+      const {data} = await api.get<OfferPreviewType[]>(`${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`);
       return data;
     } catch (error) {
       throw new Error(error);
@@ -79,10 +95,13 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
-    await api.delete(APIRoute.Logout);
-    dropToken();
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+  async (_arg, { extra: api}) => {
+    try {
+      await api.delete(APIRoute.Logout);
+      dropToken();
+    } catch (e) {
+      throw new Error (e);
+    }
   },
 );
 

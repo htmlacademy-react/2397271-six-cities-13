@@ -2,9 +2,9 @@ import React from 'react';
 import {Cities} from '../../const';
 import * as classNames from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeCity} from '../../store/action';
 import {CityNameType} from '../../types/location';
 import {selectCity} from '../../store/app-process/selectors';
+import {changeCity} from '../../store/app-process';
 
 function CityFilter() {
   const dispatch = useAppDispatch();

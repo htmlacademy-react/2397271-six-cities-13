@@ -26,7 +26,7 @@ const validateReviewForm = ({comment, rating}:ReviewFormType) => {
     });
     state = false;
   }
-  if (rating === '0') {
+  if (rating === 0) {
     toast.error(CommentErrors.emptyRating, {
       position: toast.POSITION.BOTTOM_RIGHT
     });

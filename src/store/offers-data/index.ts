@@ -1,6 +1,6 @@
 import {OfferPreviewType, OfferSortType, OfferType} from '../../types/offer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchOfferAction, fetchOffersAction} from '../api-action';
+import {fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction} from '../api-action';
 import {DEFAULT_CITY, DEFAULT_OFFER_SORT, FetchStatus, NameSpace} from '../../const';
 import {CityNameType} from '../../types/location';
 
@@ -9,6 +9,8 @@ interface OffersState {
   fetchOffersStatus: FetchStatus;
   offer: OfferType;
   fetchOfferStatus: FetchStatus;
+  offersNearby: OfferPreviewType[];
+  fetchOffersNearbyStatus: FetchStatus;
   sort: OfferSortType;
   city: CityNameType;
 }
@@ -18,6 +20,8 @@ const initialState = {
   fetchOffersStatus: FetchStatus.Idle,
   offer: null,
   fetchOfferStatus: FetchStatus.Idle,
+  offersNearby: [],
+  fetchOffersNearbyStatus: FetchStatus.Idle,
   sort: DEFAULT_OFFER_SORT,
   city: DEFAULT_CITY,
 };
@@ -38,7 +42,7 @@ export const offersSlice = createSlice({
       .addCase(fetchOffersAction.rejected, (state) => {
         state.fetchOffersStatus = FetchStatus.Error;
       })
-      .addCase(fetchOfferAction.fulfilled, (state, action: PayloadAction<OfferType>) => {
+      .addCase(fetchOfferAction.fulfilled, (state, action: PayloadAction<OffersState>) => {
         state.offer = action.payload;
         state.fetchOfferStatus = FetchStatus.Success;
       })
@@ -47,6 +51,16 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchOfferAction.rejected, (state) => {
         state.fetchOfferStatus = FetchStatus.Error;
+      })
+      .addCase(fetchOffersNearbyAction.fulfilled, (state, action: PayloadAction<OffersState>) => {
+        state.offersNearby = action.payload;
+        state.fetchOffersNearbyStatus = FetchStatus.Success;
+      })
+      .addCase(fetchOffersNearbyAction.pending, (state) => {
+        state.fetchOffersNearbyStatus = FetchStatus.Idle;
+      })
+      .addCase(fetchOffersNearbyAction.rejected, (state) => {
+        state.fetchOffersNearbyStatus = FetchStatus.Error;
       });
   }
 });
