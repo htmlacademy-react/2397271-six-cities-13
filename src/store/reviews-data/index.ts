@@ -1,16 +1,18 @@
 import {ReviewType} from '../../types/offer';
 import {FetchStatus, NameSpace} from '../../const';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchReviewsAction} from '../api-action';
+import {fetchReviewsAction, sendReviewAction} from '../api-action';
 
 interface ReviewsState {
   reviews: ReviewType[];
-  fetchReviewsState: FetchStatus;
+  fetchReviewsStatus: FetchStatus;
+  sendReviewStatus: FetchStatus;
 }
 
 const initialState = {
   reviews: [],
   fetchReviewsStatus: FetchStatus.Idle,
+  sendReviewStatus: FetchStatus.Success,
 };
 
 export const reviewsSlice = createSlice({
@@ -28,6 +30,15 @@ export const reviewsSlice = createSlice({
       })
       .addCase(fetchReviewsAction.rejected, (state) => {
         state.fetchReviewsStatus = FetchStatus.Error;
+      })
+      .addCase(sendReviewAction.fulfilled, (state) => {
+        state.sendReviewStatus = FetchStatus.Success;
+      })
+      .addCase(sendReviewAction.pending, (state) => {
+        state.sendReviewStatus = FetchStatus.Idle;
+      })
+      .addCase(sendReviewAction.rejected, (state) => {
+        state.sendReviewStatus = FetchStatus.Error;
       });
   },
 });

@@ -1,10 +1,11 @@
-import React, {ChangeEvent, FormEvent, ReactNode, useState} from 'react';
+import React, {ChangeEvent, FormEvent, ReactNode, useEffect, useState} from 'react';
 import RatingStars from '../rating-stars/rating-stars';
 import {toast} from 'react-toastify';
 import {ReviewFormType} from '../../types/offer';
-import {CommentErrors, CommentTextLength} from '../../const';
-import {useAppDispatch} from '../../hooks';
+import {CommentErrors, CommentTextLength, FetchStatus} from '../../const';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendReviewAction} from '../../store/api-action';
+import {selectSendReviewStatus} from '../../store/reviews-data/selectors';
 
 
 interface ReviewFormProps {
@@ -38,7 +39,14 @@ const validateReviewForm = ({comment, rating}:ReviewFormType) => {
 
 function ReviewForm({id}: ReviewFormProps):ReactNode {
   const [review, setReview] = useState({rating: 0, comment: ''});
+  const fetchReviewStatus = useAppSelector(selectSendReviewStatus);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (fetchReviewStatus === FetchStatus.Success) {
+      setReview({rating: 0, comment: ''});
+    }
+  }, [fetchReviewStatus]);
 
   const handleRatingChange = (event:ChangeEvent<HTMLInputElement>):void => {
     setReview((prevReview) => ({...prevReview, rating: Number(event.target.value)}));
@@ -64,7 +72,10 @@ function ReviewForm({id}: ReviewFormProps):ReactNode {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        <RatingStars handleRatingChange={handleRatingChange} />
+        <RatingStars
+          handleRatingChange={handleRatingChange}
+          currentRating={review.rating}
+        />
       </div>
       <textarea
         className="reviews__textarea form__textarea"
@@ -73,6 +84,7 @@ function ReviewForm({id}: ReviewFormProps):ReactNode {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={(event) => handleReviewInput(event)}
         value={review.comment}
+        disabled={fetchReviewStatus === FetchStatus.Idle}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -80,7 +92,12 @@ function ReviewForm({id}: ReviewFormProps):ReactNode {
           <span className="reviews__star">rating</span> and describe your stay with at least
           <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit">Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={fetchReviewStatus === FetchStatus.Idle}
+        >{fetchReviewStatus === FetchStatus.Idle ? 'Loading...' : 'Submit'}
+        </button>
       </div>
     </form>
   );
