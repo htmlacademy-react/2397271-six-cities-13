@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {AppDispatch, State} from '../types/root-state';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
-import {OfferPreviewType, OfferType} from '../types/offer';
+import {OfferPreviewType, OfferType, ReviewType} from '../types/offer';
 import {redirectToRoute, requireAuthorization} from './action';
 import {dropToken, saveToken} from '../services/token';
 import {AuthData, UserData} from '../types/user';
@@ -39,7 +39,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   }
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuthAction = createAsyncThunk<void, UserData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -83,5 +83,37 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+  },
+);
+
+export const fetchReviewsAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'reviews/get',
+  async (offerId:string, {extra: api}) => {
+    try {
+      const {data} = await api.get<ReviewType[]>(`${APIRoute.Comments}/${offerId}`);
+      return data;
+    } catch (error) {
+      throw new Error (error);
+    }
+  },
+);
+
+export const sendReviewAction = createAsyncThunk<void, { offerId: string; comment: string; rating: number }, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'reviews/post',
+  async ({offerId, comment, rating}, {extra: api}) => {
+    try {
+      const {data} = await api.post<{ comment: string; rating: number }>(`${APIRoute.Comments}/${offerId}`, {comment, rating});
+      return data;
+    } catch (error) {
+      throw new Error (error);
+    }
   },
 );

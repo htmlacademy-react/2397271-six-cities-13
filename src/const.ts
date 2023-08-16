@@ -65,6 +65,8 @@ export const ReviewDateView = {
   displayed: 'MMMM YYYY',
 };
 
+export const MAX_REVIEW_AMOUNT = 10;
+
 export enum APIRoute {
   Offers = '/offers',
   Favorite = '/favorite',
@@ -89,6 +91,7 @@ export enum NameSpace {
   App = 'APP',
   User = 'USER',
   Offers = 'OFFERS',
+  Reviews = 'REVIEWS',
 }
 
 export enum ValidateErrors {

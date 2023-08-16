@@ -1,35 +1,41 @@
 import React, {ReactNode, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import CommentForm from '../components/comment-form/comment-form';
-import {CommentType, OfferPreviewType, OfferType} from '../types/offer';
+import {OfferPreviewType, OfferType, ReviewType} from '../types/offer';
 import Header from '../components/header/header';
 import ReviewList from '../components/review-list/review-list';
 import OfferList from '../components/offer-list/offer-list';
-import {FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
+import {AuthorizationStatus, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
 import Map from '../components/map/map';
-import {fetchOfferAction} from '../store/api-action';
+import {fetchOfferAction, fetchReviewsAction} from '../store/api-action';
 import {useAppDispatch, useAppSelector} from '../hooks';
 import {selectFetchOfferStatus, selectOfferData} from '../store/offers-data/selectors';
 import Loader from '../components/loader/loader';
 import NotFound from './not-found';
+import {selectFetchReviewsStatus, selectReviewsData} from '../store/reviews-data/selectors';
+import {selectAuthStatus} from '../store/user-process/selectors';
 
 interface OfferPageProps {
-  comments: CommentType[];
   nearbyOfferList: OfferPreviewType[];
 }
 
-function Offer({comments, nearbyOfferList}:OfferPageProps):ReactNode {
+function Offer({nearbyOfferList}:OfferPageProps):ReactNode {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchOfferAction(id));
+    dispatch(fetchReviewsAction(id));
   }, [id, dispatch]);
 
   const fetchOfferStatus:FetchStatus = useAppSelector(selectFetchOfferStatus);
   const offer:OfferType = useAppSelector(selectOfferData);
+  const fetchReviewsStatus:FetchStatus = useAppSelector(selectFetchReviewsStatus);
+  const reviews:ReviewType[] = useAppSelector(selectReviewsData);
+  const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
 
-  if (fetchOfferStatus === FetchStatus.Idle) {
+  if (fetchOfferStatus === FetchStatus.Idle
+  || fetchReviewsStatus === FetchStatus.Idle) {
     return <Loader />;
   }
 
@@ -106,9 +112,10 @@ function Offer({comments, nearbyOfferList}:OfferPageProps):ReactNode {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews · <span className="reviews__amount">1</span></h2>
-                <ReviewList comments={comments} />
-                <CommentForm />
+                <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewList reviews={reviews} />
+                {authorizationStatus === AuthorizationStatus.Auth &&
+                <CommentForm id={id}/>}
               </section>
             </div>
           </div>

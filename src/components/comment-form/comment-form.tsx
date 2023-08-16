@@ -3,7 +3,13 @@ import RatingStars from '../rating-stars/rating-stars';
 import {toast} from 'react-toastify';
 import {ReviewFormType} from '../../types/offer';
 import {CommentErrors, CommentTextLength} from '../../const';
+import {useAppDispatch} from '../../hooks';
+import {sendReviewAction} from '../../store/api-action';
 
+
+interface CommentFormProps {
+  id: string;
+}
 
 const validateReviewForm = ({comment, rating}:ReviewFormType) => {
   let state = true;
@@ -30,22 +36,23 @@ const validateReviewForm = ({comment, rating}:ReviewFormType) => {
   return state;
 };
 
-function CommentForm():ReactNode {
-  const [review, setReview] = useState({rating: '0', comment: ''});
+function CommentForm({id}: CommentFormProps):ReactNode {
+  const [review, setReview] = useState({rating: 0, comment: ''});
+  const dispatch = useAppDispatch();
 
   const handleRatingChange = (event:ChangeEvent<HTMLInputElement>):void => {
-    setReview((prevReview) => ({...prevReview, rating: event.target.value}));
+    setReview((prevReview) => ({...prevReview, rating: Number(event.target.value)}));
   };
 
   const handleReviewInput = (event:ChangeEvent<HTMLTextAreaElement>):void => {
-    setReview({...review, comment: event.target.value});
+    setReview((prevReview) => ({...prevReview, comment: event.target.value}));
   };
 
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>):void => {
     event.preventDefault();
 
-    if (!validateReviewForm(review)) {
-
+    if (validateReviewForm(review)) {
+      dispatch(sendReviewAction({offerId: id, comment: review.comment, rating: review.rating}));
     }
   };
 
@@ -65,7 +72,7 @@ function CommentForm():ReactNode {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={(event) => handleReviewInput(event)}
-        value={review.review}
+        value={review.comment}
       >
       </textarea>
       <div className="reviews__button-wrapper">

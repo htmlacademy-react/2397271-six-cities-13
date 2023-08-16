@@ -13,7 +13,7 @@ import Loader from '../components/loader/loader';
 function Login() {
   const [formState, setFormState] = useState({email: '', password: ''});
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
-  const fetchAuthStatus: boolean = useAppSelector(selectFetchAuthStatus);
+  const fetchAuthStatus:FetchStatus = useAppSelector(selectFetchAuthStatus);
 
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();

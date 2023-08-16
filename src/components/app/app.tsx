@@ -7,8 +7,7 @@ import NotFound from '../../pages/not-found';
 import {AppRoute} from './../../const';
 import PrivateRoute from './../private-route/private-route';
 import Favorites from '../../pages/favorites';
-import {CommentType, OfferPreviewType, OfferType} from '../../types/offer';
-import {ToastContainer} from 'react-toastify';
+import {ReviewType, OfferPreviewType, OfferType} from '../../types/offer';
 import 'react-toastify/dist/ReactToastify.css';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
@@ -16,7 +15,7 @@ import browserHistory from '../../browser-history';
 interface AppProps {
   offerList: OfferPreviewType[];
   offer: OfferType;
-  comments: CommentType[];
+  comments: ReviewType[];
 }
 
 function App({offerList, offer, comments}: AppProps): ReactNode {
@@ -31,9 +30,6 @@ function App({offerList, offer, comments}: AppProps): ReactNode {
         </Route>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
-      <ToastContainer
-        autoClose={3000}
-      />
     </HistoryRouter>
   );
 }
