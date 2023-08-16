@@ -1,12 +1,26 @@
-import {DEFAULT_CITY, DEFAULT_OFFER_SORT} from '../../const';
+import {AuthorizationStatus, DEFAULT_CITY, DEFAULT_OFFER_SORT} from '../../const';
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, changeOffersSort, fetchOffers, setIsOffersLoading} from '../action';
+import {
+  changeCity,
+  changeOffersSort,
+  fetchOffers,
+  requireAuthorization,
+  setIsOffersLoading,
+  setUserData
+} from '../action';
 
 const initialState = {
   city: DEFAULT_CITY,
   offers: [],
   sort: DEFAULT_OFFER_SORT,
   isOffersDataLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  userData: {
+    email: '',
+    isPro: false,
+    name: '',
+    avatarUrl: '',
+  }
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -22,6 +36,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setIsOffersLoading, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserData, (state, action) => {
+      state.userData = action.payload;
     });
 });
 
