@@ -79,10 +79,10 @@ function Offer():ReactNode {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: `${offer.rating * RATING_MULTIPLIER}%`}}></span>
+                  <span style={{width: `${Math.round(offer.rating) * RATING_MULTIPLIER}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">{offer.rating}</span>
+                <span className="offer__rating-value rating__value">{Math.round(offer.rating)}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">{offer.type}</li>

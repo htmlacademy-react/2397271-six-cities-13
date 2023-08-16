@@ -58,7 +58,7 @@ function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNod
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${card.rating * RATING_MULTIPLIER }%`}}></span>
+            <span style={{width: `${Math.round(card.rating) * RATING_MULTIPLIER }%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
