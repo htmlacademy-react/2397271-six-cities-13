@@ -7,7 +7,7 @@ import {useAppDispatch} from '../../hooks';
 import {sendReviewAction} from '../../store/api-action';
 
 
-interface CommentFormProps {
+interface ReviewFormProps {
   id: string;
 }
 
@@ -36,7 +36,7 @@ const validateReviewForm = ({comment, rating}:ReviewFormType) => {
   return state;
 };
 
-function CommentForm({id}: CommentFormProps):ReactNode {
+function ReviewForm({id}: ReviewFormProps):ReactNode {
   const [review, setReview] = useState({rating: 0, comment: ''});
   const dispatch = useAppDispatch();
 
@@ -86,4 +86,4 @@ function CommentForm({id}: CommentFormProps):ReactNode {
   );
 }
 
-export default CommentForm;
+export default ReviewForm;

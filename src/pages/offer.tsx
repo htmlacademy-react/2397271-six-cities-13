@@ -1,6 +1,6 @@
 import React, {ReactNode, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import CommentForm from '../components/comment-form/comment-form';
+import CommentForm from '../components/review-form/review-form';
 import {OfferPreviewType, OfferType, ReviewType} from '../types/offer';
 import Header from '../components/header/header';
 import ReviewList from '../components/review-list/review-list';
