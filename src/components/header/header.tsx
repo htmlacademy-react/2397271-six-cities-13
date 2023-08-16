@@ -4,8 +4,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {logoutAction} from '../../store/api-action';
 import {store} from '../../store';
 import {useAppSelector} from '../../hooks';
-import {UserData} from '../../types/user';
-import {selectAuthStatus, selectUserData} from '../../store/user-process/selectors';
+import {selectAuthStatus} from '../../store/user-process/selectors';
 import ProfileLink from '../profile-link/profile-link';
 
 function Header():ReactNode {
