@@ -2,17 +2,18 @@ import React, {useCallback, useState} from 'react';
 import OfferFilter from '../offer-filter/offer-filter';
 import OfferList from '../offer-list/offer-list';
 import Map from '../map/map';
-import {selectOffersByCity, selectOffersBySortAndCity} from '../../store/offers-data/selectors';
 import {useAppSelector} from '../../hooks';
 import {OfferPreviewType} from '../../types/offer';
 import {CityNameType} from '../../types/location';
 import {selectCity} from '../../store/app-process/selectors';
 
-function Cities() {
+interface CitiesProps {
+  selectedOffers: OfferPreviewType[];
+}
+
+function Cities({selectedOffers}:CitiesProps) {
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);
   const currentCity: CityNameType = useAppSelector(selectCity);
-  const selectedOffers = useAppSelector(selectOffersByCity);
-  const selectedAndSortedOffers = useAppSelector(selectOffersBySortAndCity);
 
   const handleActiveOffer = useCallback((offer:OfferPreviewType) => {
     setActiveOffer(offer);
@@ -40,7 +41,7 @@ function Cities() {
               <OfferFilter />
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
-                  offerList={selectedAndSortedOffers}
+                  offerList={selectedOffers}
                   className='cities'
                   handleMouseEnter={handleActiveOffer}
                 />
@@ -49,7 +50,7 @@ function Cities() {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  city={selectedAndSortedOffers[0].city}
+                  city={selectedOffers[0].city}
                   offerList={selectedOffers}
                   activeOffer={activeOffer}
                 />
