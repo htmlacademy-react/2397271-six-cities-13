@@ -1,7 +1,5 @@
 import {CityType, LocationType} from './location';
 import {OfferSortList} from '../const';
-import {AppDispatch, State} from './root-state';
-import {AxiosInstance} from 'axios';
 
 export interface OfferPreviewType {
   id: string;
