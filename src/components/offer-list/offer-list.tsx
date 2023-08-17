@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, {memo, ReactNode} from 'react';
 import OfferCard from '../offer-card/offer-card';
 import {OfferPreviewType} from '../../types/offer';
 
@@ -8,9 +8,11 @@ interface OfferListProps {
   handleMouseEnter?: (value: OfferPreviewType) => void;
 }
 
-function OfferList({offerList, className, handleMouseEnter}:OfferListProps):ReactNode {
-  return (
-    offerList.map((card): ReactNode =>
+const OfferList = memo(
+  (props:OfferListProps):ReactNode => {
+    const {offerList, className, handleMouseEnter} = props;
+
+    return offerList.map((card) =>
       (
         <OfferCard
           key={card.id}
@@ -20,8 +22,10 @@ function OfferList({offerList, className, handleMouseEnter}:OfferListProps):Reac
         >
         </OfferCard>
       )
-    )
-  );
-}
+    );
+  }
+);
+
+OfferList.displayName = 'OfferList';
 
 export default OfferList;
