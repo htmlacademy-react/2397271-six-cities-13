@@ -1,8 +1,11 @@
-import React, {ReactNode} from 'react';
+import React, {memo, ReactNode} from 'react';
 import * as classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {AppRoute, RATING_MULTIPLIER} from '../../const';
+import {AppRoute, FetchStatus, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {changeFavoritesAction} from '../../store/api-action';
+import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
 
 export interface OfferCardProps {
   card: OfferPreviewType;
@@ -10,8 +13,16 @@ export interface OfferCardProps {
   onMouseEnter?: (card:OfferPreviewType) => void;
 }
 
-function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNode {
+const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):ReactNode => {
+  const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
   const getCardPath = () => AppRoute.offer.slice(0, AppRoute.offer.indexOf(':id')) + card.id;
+  const dispatch = useAppDispatch();
+
+  const handleFavoriteClick = () => {
+    if (changeFavoritesStatus !== FetchStatus.Idle) {
+      dispatch(changeFavoritesAction({offerId: card.id, status: card.isFavorite ? 0 : 1}));
+    }
+  };
 
   return (
     <article className={
@@ -49,7 +60,13 @@ function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNod
             <b className="place-card__price-value">€{card.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            className={classNames('place-card__bookmark-button button', {
+              'place-card__bookmark-button--active': card.isFavorite
+            })}
+            type="button"
+            onClick={() => handleFavoriteClick()}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -69,6 +86,9 @@ function OfferCard({card, className = '', onMouseEnter}:OfferCardProps):ReactNod
       </div>
     </article>
   );
-}
+});
+
+OfferCard.displayName = 'OfferCard';
+
 
 export default OfferCard;

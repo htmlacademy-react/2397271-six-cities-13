@@ -22,8 +22,7 @@ function Main():ReactNode {
     <div className='page page--gray page--main'>
       <Header />
       <main className={
-        classNames({
-          'page__main page__main--index': true,
+        classNames('page__main page__main--index', {
           'page__main--index-empty': !selectedAndSortedOffers.length
         })
       }

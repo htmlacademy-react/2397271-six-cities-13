@@ -1,5 +1,7 @@
 import {CityType, LocationType} from './location';
 import {OfferSortList} from '../const';
+import {AppDispatch, State} from './root-state';
+import {AxiosInstance} from 'axios';
 
 export interface OfferPreviewType {
   id: string;
@@ -43,3 +45,8 @@ export interface ReviewFormType {
 }
 
 export type OfferSortType = keyof OfferSortList;
+
+export type FavoriteData = {
+  offerId: string;
+  status: number;
+};

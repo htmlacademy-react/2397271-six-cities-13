@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {AppDispatch, State} from '../types/root-state';
 import {APIRoute, AppRoute} from '../const';
-import {OfferPreviewType, OfferType, ReviewType} from '../types/offer';
+import {FavoriteData, OfferPreviewType, OfferType, ReviewType} from '../types/offer';
 import {redirectToRoute} from './action';
 import {dropToken, saveToken} from '../services/token';
 import {AuthData, UserData} from '../types/user';
@@ -55,15 +55,48 @@ export const fetchOffersNearbyAction = createAsyncThunk<void, undefined, {
   }
 );
 
+export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavorites',
+  async (_arg, { extra: api}) => {
+    try {
+      const {data} = await api.get<OfferPreviewType[]>(APIRoute.Favorite);
+      return data;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+);
+
+export const changeFavoritesAction = createAsyncThunk<void, FavoriteData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/changeFavorites',
+  async ({offerId, status}, {extra: api}) => {
+    try {
+      const {data} = await api.post<OfferPreviewType[]>(`${APIRoute.Favorite}/${offerId}/${status}`);
+      return data;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+);
+
 export const checkAuthAction = createAsyncThunk<void, UserData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_arg, { extra: api }) => {
+  async (_arg, { extra: api, dispatch }) => {
     try {
       const {data} = await api.get<UserData>(APIRoute.Login);
+      dispatch(fetchFavoritesAction());
       return data;
     } catch (error) {
       throw new Error(error);

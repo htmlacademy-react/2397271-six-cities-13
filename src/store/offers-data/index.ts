@@ -1,7 +1,8 @@
 import {OfferPreviewType, OfferType} from '../../types/offer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction} from '../api-action';
+import {changeFavoritesAction, fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction} from '../api-action';
 import {FetchStatus, NameSpace} from '../../const';
+import {changeFavoriteOffers} from '../../helpers/change-favorite-offers';
 
 interface OffersState {
   offers: OfferPreviewType[];
@@ -56,6 +57,9 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchOffersNearbyAction.rejected, (state) => {
         state.fetchOffersNearbyStatus = FetchStatus.Error;
+      })
+      .addCase(changeFavoritesAction.fulfilled, (state, action: PayloadAction<OfferPreviewType>) => {
+        changeFavoriteOffers([...state.offers, ...state.offersNearby], state.offer, action.payload);
       });
   }
 });

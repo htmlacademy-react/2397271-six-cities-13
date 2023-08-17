@@ -93,6 +93,7 @@ export enum NameSpace {
   User = 'USER',
   Offers = 'OFFERS',
   Reviews = 'REVIEWS',
+  Favorites = 'FAVORITES'
 }
 
 export enum ValidateErrors {
