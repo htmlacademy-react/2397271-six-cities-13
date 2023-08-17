@@ -1,18 +1,9 @@
-import React, {ReactNode, useCallback, useState} from 'react';
-import OfferFilter from '../components/offer-filter/offer-filter';
-import OfferList from '../components/offer-list/offer-list';
-import Map from '../components/map/map';
-import {OfferPreviewType} from '../types/offer';
+import React, {ReactNode} from 'react';
 import Header from '../components/header/header';
 import CityFilter from '../components/city-filter/city-filter';
 import {useAppSelector} from '../hooks';
-import {CityNameType} from '../types/location';
 import Loader from '../components/loader/loader';
-import {
-  selectFetchOffersStatus,
-  selectOffersByCity,
-  selectOffersBySortAndCity
-} from '../store/offers-data/selectors';
+import {selectFetchOffersStatus} from '../store/offers-data/selectors';
 import {FetchStatus} from '../const';
 import Cities from '../components/cities/cities';
 
