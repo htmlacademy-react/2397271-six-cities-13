@@ -1,6 +1,6 @@
-import { NameSpace, AuthorizationStatus, FetchStatus } from "../../const";
-import { makeFakeUser } from "../../utils/mocks/user";
-import { selectAuthStatus, selectFetchAuthStatus, selectFetchLoginStatus, selectUserData } from "./selectors";
+import { NameSpace, AuthorizationStatus, FetchStatus } from '../../const';
+import { makeFakeUser } from '../../utils/mocks/user';
+import { selectAuthStatus, selectFetchAuthStatus, selectFetchLoginStatus, selectUserData } from './selectors';
 
 
 describe('User selectors', () => {

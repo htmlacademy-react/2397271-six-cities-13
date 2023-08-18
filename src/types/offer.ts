@@ -30,10 +30,10 @@ export interface UserType {
 }
 
 export interface UserData {
-  email: string,
-  isPro: boolean,
-  name: string,
-  avatarUrl: string,
+  email: string;
+  isPro: boolean;
+  name: string;
+  avatarUrl: string;
 }
 
 export interface ReviewType {

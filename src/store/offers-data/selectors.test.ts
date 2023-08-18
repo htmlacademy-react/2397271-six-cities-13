@@ -1,7 +1,7 @@
-import { FetchStatus, NameSpace } from "../../const";
-import { makeFakeOffer } from "../../utils/mocks/offer";
-import { makeFakeOffers } from "../../utils/mocks/offers";
-import { selectFetchOfferStatus, selectFetchOffersNearbyStatus, selectOfferData, selectOffersData, selectOffersNearbyData } from "./selectors";
+import { FetchStatus, NameSpace } from '../../const';
+import { makeFakeOffer } from '../../utils/mocks/offer';
+import { makeFakeOffers } from '../../utils/mocks/offers';
+import { selectFetchOfferStatus, selectFetchOffersNearbyStatus, selectOfferData, selectOffersData, selectOffersNearbyData } from './selectors';
 
 describe('Offers selectors', () => {
   const state = {

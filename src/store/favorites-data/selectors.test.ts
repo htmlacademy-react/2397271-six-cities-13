@@ -1,6 +1,6 @@
-import { FetchStatus, NameSpace } from "../../const";
-import { makeFakeOffers } from "../../utils/mocks/offers";
-import { selectChangeFavoritesStatus, selectFavoritesData, selectFetchFavoritesStatus } from "./selectors";
+import { FetchStatus, NameSpace } from '../../const';
+import { makeFakeOffers } from '../../utils/mocks/offers';
+import { selectChangeFavoritesStatus, selectFavoritesData, selectFetchFavoritesStatus } from './selectors';
 
 describe('Offers selectors', () => {
   const state = {

@@ -1,5 +1,5 @@
-import { Cities, DEFAULT_CITY, DEFAULT_OFFER_SORT, OfferSortList } from "../../const";
-import { appSlice, changeCity, changeSort } from "./app-process";
+import { Cities, DEFAULT_CITY, DEFAULT_OFFER_SORT, OfferSortList } from '../../const';
+import { appSlice, changeCity, changeSort } from './app-process';
 
 describe('ReviewsProcess Slice', () => {
   it('should return initial state with empty action', () => {
@@ -35,7 +35,7 @@ describe('ReviewsProcess Slice', () => {
 
     const result = appSlice.reducer(initialState, changeSort({sort: expectedSort}));
 
-    expect(result['sort']).toEqual(expectedSort)
+    expect(result['sort']).toEqual(expectedSort);
   });
 
   it('should change city on "changeCity" action', () => {
@@ -47,6 +47,6 @@ describe('ReviewsProcess Slice', () => {
 
     const result = appSlice.reducer(initialState, changeCity({city: expectedCity}));
 
-    expect(result['city']).toBe(expectedCity)
+    expect(result['city']).toBe(expectedCity);
   });
-})
+});

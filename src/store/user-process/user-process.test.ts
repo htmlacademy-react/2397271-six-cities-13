@@ -1,5 +1,5 @@
-import { AuthorizationStatus, FetchStatus } from "../../const";
-import { userSlice } from "./user-process";
+import { AuthorizationStatus, FetchStatus } from '../../const';
+import { userSlice } from './user-process';
 
 
 describe('UserProcess Slice', () => {
