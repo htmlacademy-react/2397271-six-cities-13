@@ -1,11 +1,11 @@
 import React from 'react';
 import {CityNameType} from '../../types/location';
+import {selectCity} from '../../store/app-process/selectors';
+import {useAppSelector} from '../../hooks';
 
-interface CitiesEmptyProps {
-  currentCity: CityNameType;
-}
+function CitiesEmpty() {
+  const currentCity: CityNameType = useAppSelector(selectCity);
 
-function CitiesEmpty({currentCity}:CitiesEmptyProps) {
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">

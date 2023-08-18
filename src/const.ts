@@ -101,3 +101,13 @@ export enum ValidateErrors {
   ShortPassword = 'Password is too short',
   NoNumberPassword = 'Password must contains number',
 }
+
+export const ReviewState = {
+  rating: 0,
+  comment: '',
+};
+
+export enum FavoriteState {
+  IsFavorite = 1,
+  NotFavorite = 0,
+}

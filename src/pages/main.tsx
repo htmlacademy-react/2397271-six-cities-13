@@ -31,7 +31,7 @@ function Main():ReactNode {
         <div className="tabs">
           <CityFilter />
         </div>
-        <Cities selectedOffers={selectedAndSortedOffers}/>
+        <Cities />
       </main>
     </div>);
 }

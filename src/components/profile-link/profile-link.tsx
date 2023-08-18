@@ -14,7 +14,7 @@ function ProfileLink() {
     <li className='header__nav-item user'>
       <Link className="header__nav-link header__nav-link--profile" to={AppRoute.favorites}>
         <div className="header__avatar-wrapper user__avatar-wrapper">
-          <img src={user.avatarUrl} alt={user.name} />
+          <img src={user.avatarUrl} alt="" />
         </div>
         <span className="header__user-name user__name">{user.email}</span>
         <span className="header__favorite-count">{favorites.length}</span>

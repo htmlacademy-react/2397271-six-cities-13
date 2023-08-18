@@ -5,7 +5,7 @@ import {OfferPreviewType, OfferType, ReviewType} from '../types/offer';
 import Header from '../components/header/header';
 import ReviewList from '../components/review-list/review-list';
 import OfferList from '../components/offer-list/offer-list';
-import {AuthorizationStatus, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
+import {AuthorizationStatus, FavoriteState, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
 import Map from '../components/map/map';
 import {
   changeFavoritesAction,
@@ -45,6 +45,7 @@ function Offer():ReactNode {
   const reviews:ReviewType[] = useAppSelector(selectReviewsData);
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
   const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
+  const slicedOffersNearby = offersNearby.slice(0, NEARBY_OFFERS_COUNT);
 
   if (fetchOfferStatus === FetchStatus.Idle
   || fetchReviewsStatus === FetchStatus.Idle
@@ -60,7 +61,7 @@ function Offer():ReactNode {
 
   const handleFavoriteClick = () => {
     if (changeFavoritesStatus !== FetchStatus.Idle) {
-      dispatch(changeFavoritesAction({offerId: offer.id, status: offer.isFavorite ? 0 : 1}));
+      dispatch(changeFavoritesAction({offerId: offer.id, status: offer.isFavorite ? FavoriteState.NotFavorite : FavoriteState.IsFavorite}));
     }
   };
 
@@ -149,7 +150,7 @@ function Offer():ReactNode {
           <section className="offer__map map">
             <Map
               city={offer.city}
-              offerList={[...offersNearby.slice(0, NEARBY_OFFERS_COUNT), offer]}
+              offerList={[...slicedOffersNearby, offer]}
               activeOffer={offer}
             >
             </Map>
@@ -160,7 +161,7 @@ function Offer():ReactNode {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <OfferList
-                offerList={offersNearby.slice(0, NEARBY_OFFERS_COUNT)}
+                offerList={slicedOffersNearby}
                 className={'near-places'}
               />
             </div>

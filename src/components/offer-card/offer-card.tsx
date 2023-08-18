@@ -1,7 +1,7 @@
 import React, {memo, ReactNode} from 'react';
 import * as classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {AppRoute, FetchStatus, RATING_MULTIPLIER} from '../../const';
+import {AppRoute, FavoriteState, FetchStatus, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeFavoritesAction} from '../../store/api-action';
@@ -20,7 +20,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):Rea
 
   const handleFavoriteClick = () => {
     if (changeFavoritesStatus !== FetchStatus.Idle) {
-      dispatch(changeFavoritesAction({offerId: card.id, status: card.isFavorite ? 0 : 1}));
+      dispatch(changeFavoritesAction({offerId: card.id, status: card.isFavorite ? FavoriteState.NotFavorite : FavoriteState.IsFavorite}));
     }
   };
 
@@ -65,7 +65,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):Rea
               'place-card__bookmark-button--active': card.isFavorite
             })}
             type="button"
-            onClick={() => handleFavoriteClick()}
+            onClick={handleFavoriteClick}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>

@@ -3,7 +3,7 @@ import * as classNames from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {OfferSortList} from '../../const';
 import {selectSort} from '../../store/app-process/selectors';
-import {changeSort} from '../../store/app-process';
+import {changeSort} from '../../store/app-process/app-process';
 
 function OfferFilter():ReactNode {
   const [isOpened, setIsOpened] = useState(false);

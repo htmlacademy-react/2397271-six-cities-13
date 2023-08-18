@@ -1,10 +1,10 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import {userSlice} from './user-process';
+import {userSlice} from './user-process/user-process';
 import {NameSpace} from '../const';
-import {offersSlice} from './offers-data';
-import {appSlice} from './app-process';
-import {reviewsSlice} from './reviews-data';
-import {favoritesSlice} from './favorites-data';
+import {offersSlice} from './offers-data/offers-data';
+import {appSlice} from './app-process/app-process';
+import {reviewsSlice} from './reviews-data/reviews-data';
+import {favoritesSlice} from './favorites-data/favorites-data';
 
 export const rootReducer = combineReducers({
   [NameSpace.App]: appSlice.reducer,

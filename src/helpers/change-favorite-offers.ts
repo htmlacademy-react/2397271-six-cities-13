@@ -9,9 +9,9 @@ export const changeFavoriteOffers = (
     if (offer.id === favoriteOffer.id) {
       offer.isFavorite = favoriteOffer.isFavorite;
     }
-
-    if (activeOffer && activeOffer.id === favoriteOffer.id) {
-      activeOffer.isFavorite = favoriteOffer.isFavorite;
-    }
   });
+
+  if (activeOffer && activeOffer.id === favoriteOffer.id) {
+    activeOffer.isFavorite = favoriteOffer.isFavorite;
+  }
 };

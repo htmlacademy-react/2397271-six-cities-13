@@ -132,8 +132,8 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     try {
       await api.delete(APIRoute.Logout);
       dropToken();
-    } catch (e) {
-      throw new Error (e);
+    } catch (error) {
+      throw new Error (error);
     }
   },
 );

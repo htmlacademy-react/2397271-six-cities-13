@@ -7,14 +7,12 @@ import {OfferPreviewType} from '../../types/offer';
 import {CityNameType} from '../../types/location';
 import {selectCity} from '../../store/app-process/selectors';
 import CitiesEmpty from '../cities-empty/cities-empty';
+import {selectOffersBySortAndCity} from '../../store/offers-data/selectors';
 
-interface CitiesProps {
-  selectedOffers: OfferPreviewType[];
-}
-
-function Cities({selectedOffers}:CitiesProps) {
+function Cities() {
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);
   const currentCity: CityNameType = useAppSelector(selectCity);
+  const selectedAndSortedOffers: OfferPreviewType[] = useAppSelector(selectOffersBySortAndCity);
 
   const handleActiveOffer = useCallback((offer:OfferPreviewType) => {
     setActiveOffer(offer);
@@ -23,18 +21,18 @@ function Cities({selectedOffers}:CitiesProps) {
   return (
     <div className="cities">
       {
-        !selectedOffers.length
+        !selectedAndSortedOffers.length
           ?
-          <CitiesEmpty currentCity={currentCity}/>
+          <CitiesEmpty />
           :
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{selectedOffers.length} places to stay in {currentCity}</b>
+              <b className="places__found">{selectedAndSortedOffers.length} places to stay in {currentCity}</b>
               <OfferFilter />
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
-                  offerList={selectedOffers}
+                  offerList={selectedAndSortedOffers}
                   className='cities'
                   handleMouseEnter={handleActiveOffer}
                 />
@@ -43,8 +41,8 @@ function Cities({selectedOffers}:CitiesProps) {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  city={selectedOffers[0].city}
-                  offerList={selectedOffers}
+                  city={selectedAndSortedOffers[0].city}
+                  offerList={selectedAndSortedOffers}
                   activeOffer={activeOffer}
                 />
               </section>
