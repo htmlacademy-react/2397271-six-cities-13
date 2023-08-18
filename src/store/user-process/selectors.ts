@@ -3,4 +3,5 @@ import {NameSpace} from '../../const';
 
 export const selectAuthStatus = (state: Pick<State, typeof NameSpace.User>) => state[NameSpace.User].authorizationStatus;
 export const selectFetchAuthStatus = (state: Pick<State, typeof NameSpace.User>) => state[NameSpace.User].fetchAuthStatus;
+export const selectFetchLoginStatus = (state: Pick<State, typeof NameSpace.User>) => state[NameSpace.User].fetchLoginStatus;
 export const selectUserData = (state: Pick<State, typeof NameSpace.User>) => state[NameSpace.User].userData;
