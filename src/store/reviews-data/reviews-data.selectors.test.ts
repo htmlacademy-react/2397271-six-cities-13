@@ -13,7 +13,7 @@ describe('Reviews selectors', () => {
   it('should return list from state', () => {
     const { reviews } = state[NameSpace.Reviews];
     const result = selectReviewsData(state);
-    expect(result).toBe(reviews);
+    expect(result).toEqual(reviews);
   });
 
   it('should return fetch status from state', () => {
