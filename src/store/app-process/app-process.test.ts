@@ -1,7 +1,7 @@
 import { Cities, DEFAULT_CITY, DEFAULT_OFFER_SORT, OfferSortList } from '../../const';
 import { appSlice, changeCity, changeSort } from './app-process';
 
-describe('ReviewsProcess Slice', () => {
+describe('AppProcess Slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
     const expectedState = {

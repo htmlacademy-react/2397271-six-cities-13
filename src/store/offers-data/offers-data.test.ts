@@ -7,7 +7,7 @@ import {makeFakeOffer} from '../../utils/mocks/offer';
 
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
-describe('ReviewsProcess Slice', () => {
+describe('OffersProcess Slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = {type: ''};
     const expectedState = {

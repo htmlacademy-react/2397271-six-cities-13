@@ -2,8 +2,7 @@ import {FetchStatus} from '../../const';
 import {favoritesSlice} from './favorites-data';
 import {expect} from 'vitest';
 import {makeFakeOffers} from '../../utils/mocks/offers';
-import {offersSlice} from '../offers-data/offers-data';
-import {changeFavoritesAction, fetchFavoritesAction, fetchOffersAction} from '../api-action';
+import {changeFavoritesAction, fetchFavoritesAction} from '../api-action';
 
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
