@@ -1,8 +1,7 @@
-import { AuthorizationStatus, FetchStatus } from '../../const';
-import { userSlice } from './user-process';
+import {AuthorizationStatus, FetchStatus} from '../../const';
+import {userSlice} from './user-process';
 import {makeFakeUser} from '../../utils/mocks/user';
-import {checkAuthAction, fetchOffersAction, loginAction, logoutAction} from '../api-action';
-import {offersSlice} from '../offers-data/offers-data';
+import {checkAuthAction, loginAction, logoutAction} from '../api-action';
 
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
