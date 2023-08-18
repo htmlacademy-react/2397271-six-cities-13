@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {CityNameType} from '../../types/location';
 import {selectCity} from '../../store/app-process/selectors';
-import {changeCity} from '../../store/app-process';
+import {changeCity} from '../../store/app-process/app-process';
 
 function CityFilter() {
   const dispatch = useAppDispatch();

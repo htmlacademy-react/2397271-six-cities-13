@@ -5,9 +5,14 @@ import {OfferPreviewType, OfferType, ReviewType} from '../types/offer';
 import Header from '../components/header/header';
 import ReviewList from '../components/review-list/review-list';
 import OfferList from '../components/offer-list/offer-list';
-import {AuthorizationStatus, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
+import {AuthorizationStatus, FavoriteState, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
 import Map from '../components/map/map';
-import {fetchOfferAction, fetchOffersNearbyAction, fetchReviewsAction} from '../store/api-action';
+import {
+  changeFavoritesAction,
+  fetchOfferAction,
+  fetchOffersNearbyAction,
+  fetchReviewsAction
+} from '../store/api-action';
 import {useAppDispatch, useAppSelector} from '../hooks';
 import {
   selectFetchOffersNearbyStatus,
@@ -19,6 +24,8 @@ import Loader from '../components/loader/loader';
 import NotFound from './not-found';
 import {selectFetchReviewsStatus, selectReviewsData} from '../store/reviews-data/selectors';
 import {selectAuthStatus} from '../store/user-process/selectors';
+import * as classNames from 'classnames';
+import {selectChangeFavoritesStatus} from '../store/favorites-data/selectors';
 
 function Offer():ReactNode {
   const { id } = useParams();
@@ -37,10 +44,13 @@ function Offer():ReactNode {
   const fetchReviewsStatus:FetchStatus = useAppSelector(selectFetchReviewsStatus);
   const reviews:ReviewType[] = useAppSelector(selectReviewsData);
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
+  const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
+  const slicedOffersNearby = offersNearby.slice(0, NEARBY_OFFERS_COUNT);
 
   if (fetchOfferStatus === FetchStatus.Idle
   || fetchReviewsStatus === FetchStatus.Idle
-  || fetchOffersNearbyStatus === FetchStatus.Idle) {
+  || fetchOffersNearbyStatus === FetchStatus.Idle
+  ) {
     return <Loader />;
   }
 
@@ -48,6 +58,12 @@ function Offer():ReactNode {
     return <NotFound />;
   }
 
+
+  const handleFavoriteClick = () => {
+    if (changeFavoritesStatus !== FetchStatus.Idle) {
+      dispatch(changeFavoritesAction({offerId: offer.id, status: offer.isFavorite ? FavoriteState.NotFavorite : FavoriteState.IsFavorite}));
+    }
+  };
 
   return (
     <div className='page'>
@@ -70,7 +86,13 @@ function Offer():ReactNode {
               </div>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{offer.title}</h1>
-                <button className="offer__bookmark-button button" type="button">
+                <button
+                  className={classNames('offer__bookmark-button button', {
+                    'offer__bookmark-button--active': offer.isFavorite
+                  })}
+                  type="button"
+                  onClick={() => handleFavoriteClick()}
+                >
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -128,7 +150,7 @@ function Offer():ReactNode {
           <section className="offer__map map">
             <Map
               city={offer.city}
-              offerList={[...offersNearby.slice(0, NEARBY_OFFERS_COUNT), offer]}
+              offerList={[...slicedOffersNearby, offer]}
               activeOffer={offer}
             >
             </Map>
@@ -138,7 +160,10 @@ function Offer():ReactNode {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offerList={offersNearby.slice(0, NEARBY_OFFERS_COUNT)} className={'near-places'} />
+              <OfferList
+                offerList={slicedOffersNearby}
+                className={'near-places'}
+              />
             </div>
           </section>
         </div>

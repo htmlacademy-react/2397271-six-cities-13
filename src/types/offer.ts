@@ -43,3 +43,8 @@ export interface ReviewFormType {
 }
 
 export type OfferSortType = keyof OfferSortList;
+
+export type FavoriteData = {
+  offerId: string;
+  status: number;
+};

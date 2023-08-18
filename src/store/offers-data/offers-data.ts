@@ -1,8 +1,8 @@
-import {OfferPreviewType, OfferSortType, OfferType} from '../../types/offer';
+import {OfferPreviewType, OfferType} from '../../types/offer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction} from '../api-action';
-import {DEFAULT_CITY, DEFAULT_OFFER_SORT, FetchStatus, NameSpace} from '../../const';
-import {CityNameType} from '../../types/location';
+import {changeFavoritesAction, fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction} from '../api-action';
+import {FetchStatus, NameSpace} from '../../const';
+import {changeFavoriteOffers} from '../../helpers/change-favorite-offers';
 
 interface OffersState {
   offers: OfferPreviewType[];
@@ -11,8 +11,6 @@ interface OffersState {
   fetchOfferStatus: FetchStatus;
   offersNearby: OfferPreviewType[];
   fetchOffersNearbyStatus: FetchStatus;
-  sort: OfferSortType;
-  city: CityNameType;
 }
 
 const initialState = {
@@ -22,8 +20,6 @@ const initialState = {
   fetchOfferStatus: FetchStatus.Idle,
   offersNearby: [],
   fetchOffersNearbyStatus: FetchStatus.Idle,
-  sort: DEFAULT_OFFER_SORT,
-  city: DEFAULT_CITY,
 };
 
 export const offersSlice = createSlice({
@@ -61,6 +57,9 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchOffersNearbyAction.rejected, (state) => {
         state.fetchOffersNearbyStatus = FetchStatus.Error;
+      })
+      .addCase(changeFavoritesAction.fulfilled, (state, action: PayloadAction<OfferPreviewType>) => {
+        changeFavoriteOffers([...state.offers, ...state.offersNearby], state.offer, action.payload);
       });
   }
 });

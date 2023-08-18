@@ -7,16 +7,11 @@ import NotFound from '../../pages/not-found';
 import {AppRoute} from './../../const';
 import PrivateRoute from './../private-route/private-route';
 import Favorites from '../../pages/favorites';
-import {OfferPreviewType} from '../../types/offer';
 import 'react-toastify/dist/ReactToastify.css';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
-interface AppProps {
-  offerList: OfferPreviewType[];
-}
-
-function App({offerList}: AppProps): ReactNode {
+function App(): ReactNode {
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
@@ -24,7 +19,7 @@ function App({offerList}: AppProps): ReactNode {
         <Route path={AppRoute.offer} element={<Offer/>}/>
         <Route path={AppRoute.login} element={<Login/>}/>
         <Route element={<PrivateRoute/>}>
-          <Route path={AppRoute.favorites} element={<Favorites offerList={offerList}/>}/>
+          <Route path={AppRoute.favorites} element={<Favorites/>}/>
         </Route>
         <Route path='*' element={<NotFound/>}/>
       </Routes>

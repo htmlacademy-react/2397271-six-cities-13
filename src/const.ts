@@ -93,10 +93,21 @@ export enum NameSpace {
   User = 'USER',
   Offers = 'OFFERS',
   Reviews = 'REVIEWS',
+  Favorites = 'FAVORITES'
 }
 
 export enum ValidateErrors {
   IncorrectEmail = 'Incorrect email',
   ShortPassword = 'Password is too short',
   NoNumberPassword = 'Password must contains number',
+}
+
+export const ReviewState = {
+  rating: 0,
+  comment: '',
+};
+
+export enum FavoriteState {
+  IsFavorite = 1,
+  NotFavorite = 0,
 }
