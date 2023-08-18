@@ -1,7 +1,7 @@
 import { address, name, random, datatype, commerce, system } from 'faker';
 import { OfferPreviewType } from '../../types/offer';
 
-const makeFakeOffers = (): OfferPreviewType[] => {
+const makeFakeOffers = (favorites = false): OfferPreviewType[] => {
   return new Array(5).fill(null).map(
     () =>
       ({
@@ -22,7 +22,7 @@ const makeFakeOffers = (): OfferPreviewType[] => {
           longitude: +address.longitude(),
           zoom: datatype.number(20),
         },
-        isFavorite: datatype.boolean(),
+        isFavorite: favorites ? true : datatype.boolean(),
         isPremium: datatype.boolean(),
         rating: datatype.number(5),
         previewImage: system.filePath(),
