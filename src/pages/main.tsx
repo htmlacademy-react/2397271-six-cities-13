@@ -7,17 +7,23 @@ import Header from '../components/header/header';
 import CityFilter from '../components/city-filter/city-filter';
 import {useAppSelector} from '../hooks';
 import {CityNameType} from '../types/location';
-import {selectOffersByCity, selectOffersBySortAndCity} from '../store/selectors/offers';
 import Loader from '../components/loader/loader';
+import {
+  selectFetchOffersStatus,
+  selectOffersByCity,
+  selectOffersBySortAndCity
+} from '../store/offers-data/selectors';
+import {FetchStatus} from '../const';
+import {selectCity} from '../store/app-process/selectors';
 
 function Main():ReactNode {
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);
-  const currentCity: CityNameType = useAppSelector((state) => state.city);
-  const isOffersLoading: boolean = useAppSelector((state) => state.isOffersDataLoading);
+  const currentCity: CityNameType = useAppSelector(selectCity);
+  const fetchOffersStatus: FetchStatus = useAppSelector(selectFetchOffersStatus);
   const selectedOffers = useAppSelector(selectOffersByCity);
   const selectedAndSortedOffers = useAppSelector(selectOffersBySortAndCity);
 
-  if (isOffersLoading) {
+  if (fetchOffersStatus === FetchStatus.Idle) {
     return <Loader />;
   }
 

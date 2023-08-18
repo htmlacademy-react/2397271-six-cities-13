@@ -1,17 +1,17 @@
 import React, {ReactNode, useState} from 'react';
 import * as classNames from 'classnames';
-import {changeOffersSort} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {State} from '../../types/root-state';
 import {OfferSortList} from '../../const';
+import {selectSort} from '../../store/app-process/selectors';
+import {changeSort} from '../../store/app-process';
 
 function OfferFilter():ReactNode {
   const [isOpened, setIsOpened] = useState(false);
   const dispatch = useAppDispatch();
-  const currentSort = useAppSelector((state: State) => state.sort);
+  const currentSort = useAppSelector(selectSort);
 
   const handleChangeClick = (sort:OfferSortList) => {
-    dispatch(changeOffersSort({sort: sort}));
+    dispatch(changeSort({sort: sort}));
     setIsOpened(!isOpened);
   };
 

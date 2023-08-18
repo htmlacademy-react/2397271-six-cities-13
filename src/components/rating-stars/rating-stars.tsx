@@ -1,11 +1,16 @@
 import React, {ChangeEvent} from 'react';
-import {RatingTitles} from '../../const';
+import {FetchStatus, RatingTitles} from '../../const';
+import {selectSendReviewStatus} from '../../store/reviews-data/selectors';
+import {useAppSelector} from '../../hooks';
 
 interface RatingStarsProps {
   handleRatingChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  currentRating: number;
 }
 
-function RatingStars({handleRatingChange}:RatingStarsProps) {
+function RatingStars({handleRatingChange, currentRating}:RatingStarsProps) {
+  const fetchSendReviewStatus = useAppSelector(selectSendReviewStatus);
+
   return (
     RatingTitles.map((star, index) => (
       <React.Fragment key={star}>
@@ -14,7 +19,9 @@ function RatingStars({handleRatingChange}:RatingStarsProps) {
           id={`${index}-stars`}
           type="radio"
           value={RatingTitles.length - index}
+          checked={currentRating === RatingTitles.length - index}
           onChange={(event) => handleRatingChange(event)}
+          disabled={fetchSendReviewStatus === FetchStatus.Idle}
         >
         </input>
         <label htmlFor={`${index}-stars`} className="reviews__rating-label form__rating-label" title="perfect">

@@ -3,9 +3,10 @@ import {Navigate, Outlet} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
 import Loader from '../loader/loader';
+import {selectAuthStatus} from '../../store/user-process/selectors';
 
 function PrivateRoute():ReactNode {
-  const authorizationStatus: AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return <Loader />;

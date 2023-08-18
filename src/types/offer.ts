@@ -29,7 +29,7 @@ export interface UserType {
   isPro: boolean;
 }
 
-export interface CommentType {
+export interface ReviewType {
   id: string;
   comment: string;
   date: string;
@@ -37,5 +37,9 @@ export interface CommentType {
   user: UserType;
 }
 
+export interface ReviewFormType {
+  rating: number;
+  comment: string;
+}
 
 export type OfferSortType = keyof OfferSortList;

@@ -4,11 +4,11 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {logoutAction} from '../../store/api-action';
 import {store} from '../../store';
 import {useAppSelector} from '../../hooks';
-import {UserData} from '../../types/user';
+import {selectAuthStatus} from '../../store/user-process/selectors';
+import ProfileLink from '../profile-link/profile-link';
 
 function Header():ReactNode {
-  const authorizationStatus: AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const user: UserData = useAppSelector((state) => state.userData);
+  const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
 
   const handleLogoutClick = (event:React.MouseEvent<HTMLLinkElement>) => {
     event.preventDefault();
@@ -37,15 +37,7 @@ function Header():ReactNode {
                 </li>
                 :
                 <>
-                  <li className='header__nav-item user'>
-                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.favorites}>
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                        <img src={user.avatarUrl} alt={user.name} />
-                      </div>
-                      <span className="header__user-name user__name">{user.email}</span>
-                      <span className="header__favorite-count">3</span>
-                    </Link>
-                  </li>
+                  <ProfileLink />
                   <li className="header__nav-item">
                     <a
                       className="header__nav-link"

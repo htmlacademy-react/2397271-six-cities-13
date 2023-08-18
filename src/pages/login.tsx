@@ -2,15 +2,18 @@ import React, {FormEvent, useState} from 'react';
 import Header from '../components/header/header';
 import {regexEmail, regexPassword} from '../helpers/validator';
 import {toast} from 'react-toastify';
-import {AppRoute, AuthorizationStatus, ValidateErrors} from '../const';
+import {AppRoute, AuthorizationStatus, FetchStatus, ValidateErrors} from '../const';
 import {store} from '../store';
 import {loginAction} from '../store/api-action';
 import {useAppSelector} from '../hooks';
 import {Navigate} from 'react-router-dom';
+import {selectAuthStatus, selectFetchAuthStatus} from '../store/user-process/selectors';
+import Loader from '../components/loader/loader';
 
 function Login() {
   const [formState, setFormState] = useState({email: '', password: ''});
-  const authorizationStatus: AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
+  const fetchAuthStatus:FetchStatus = useAppSelector(selectFetchAuthStatus);
 
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,6 +33,10 @@ function Login() {
 
     store.dispatch(loginAction(formState));
   };
+
+  if (fetchAuthStatus === FetchStatus.Idle) {
+    return <Loader />;
+  }
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.root} />;

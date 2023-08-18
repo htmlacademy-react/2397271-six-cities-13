@@ -1,10 +1,10 @@
 import React from 'react';
-import {CommentType} from '../../types/offer';
+import {ReviewType} from '../../types/offer';
 import {RATING_MULTIPLIER, ReviewDateView} from '../../const';
 import * as dayjs from 'dayjs';
 
 interface ReviewItemProps {
-  comment: CommentType;
+  comment: ReviewType;
 }
 
 function ReviewItem({comment}:ReviewItemProps) {
@@ -19,7 +19,7 @@ function ReviewItem({comment}:ReviewItemProps) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${comment.rating * RATING_MULTIPLIER}%`}}></span>
+            <span style={{width: `${Math.round(comment.rating) * RATING_MULTIPLIER}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

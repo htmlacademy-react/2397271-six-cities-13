@@ -1,19 +1,54 @@
-import React, {ReactNode} from 'react';
-import CommentForm from '../components/comment-form/comment-form';
-import {CommentType, OfferPreviewType, OfferType} from '../types/offer';
+import React, {ReactNode, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
+import CommentForm from '../components/review-form/review-form';
+import {OfferPreviewType, OfferType, ReviewType} from '../types/offer';
 import Header from '../components/header/header';
 import ReviewList from '../components/review-list/review-list';
 import OfferList from '../components/offer-list/offer-list';
-import {NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
+import {AuthorizationStatus, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
 import Map from '../components/map/map';
+import {fetchOfferAction, fetchOffersNearbyAction, fetchReviewsAction} from '../store/api-action';
+import {useAppDispatch, useAppSelector} from '../hooks';
+import {
+  selectFetchOffersNearbyStatus,
+  selectFetchOfferStatus,
+  selectOfferData,
+  selectOffersNearbyData
+} from '../store/offers-data/selectors';
+import Loader from '../components/loader/loader';
+import NotFound from './not-found';
+import {selectFetchReviewsStatus, selectReviewsData} from '../store/reviews-data/selectors';
+import {selectAuthStatus} from '../store/user-process/selectors';
 
-interface OfferPageProps {
-  offer: OfferType;
-  comments: CommentType[];
-  nearbyOfferList: OfferPreviewType[];
-}
+function Offer():ReactNode {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
 
-function Offer({offer, comments, nearbyOfferList}:OfferPageProps):ReactNode {
+  useEffect(() => {
+    dispatch(fetchOfferAction(id));
+    dispatch(fetchReviewsAction(id));
+    dispatch(fetchOffersNearbyAction(id));
+  }, [id, dispatch]);
+
+  const offer:OfferType = useAppSelector(selectOfferData);
+  const fetchOfferStatus:FetchStatus = useAppSelector(selectFetchOfferStatus);
+  const offersNearby:OfferPreviewType[] = useAppSelector(selectOffersNearbyData);
+  const fetchOffersNearbyStatus:FetchStatus = useAppSelector(selectFetchOffersNearbyStatus);
+  const fetchReviewsStatus:FetchStatus = useAppSelector(selectFetchReviewsStatus);
+  const reviews:ReviewType[] = useAppSelector(selectReviewsData);
+  const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
+
+  if (fetchOfferStatus === FetchStatus.Idle
+  || fetchReviewsStatus === FetchStatus.Idle
+  || fetchOffersNearbyStatus === FetchStatus.Idle) {
+    return <Loader />;
+  }
+
+  if (fetchOfferStatus === FetchStatus.Error) {
+    return <NotFound />;
+  }
+
+
   return (
     <div className='page'>
       <Header />
@@ -44,10 +79,10 @@ function Offer({offer, comments, nearbyOfferList}:OfferPageProps):ReactNode {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: `${offer.rating * RATING_MULTIPLIER}%`}}></span>
+                  <span style={{width: `${Math.round(offer.rating) * RATING_MULTIPLIER}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">{offer.rating}</span>
+                <span className="offer__rating-value rating__value">{Math.round(offer.rating)}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">{offer.type}</li>
@@ -83,16 +118,17 @@ function Offer({offer, comments, nearbyOfferList}:OfferPageProps):ReactNode {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews · <span className="reviews__amount">1</span></h2>
-                <ReviewList comments={comments} />
-                <CommentForm />
+                <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewList reviews={reviews} />
+                {authorizationStatus === AuthorizationStatus.Auth &&
+                <CommentForm id={id}/>}
               </section>
             </div>
           </div>
           <section className="offer__map map">
             <Map
               city={offer.city}
-              offerList={[...nearbyOfferList.slice(0, NEARBY_OFFERS_COUNT), offer]}
+              offerList={[...offersNearby.slice(0, NEARBY_OFFERS_COUNT), offer]}
               activeOffer={offer}
             >
             </Map>
@@ -102,7 +138,7 @@ function Offer({offer, comments, nearbyOfferList}:OfferPageProps):ReactNode {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offerList={nearbyOfferList.slice(0, NEARBY_OFFERS_COUNT)} className={'near-places'} />
+              <OfferList offerList={offersNearby.slice(0, NEARBY_OFFERS_COUNT)} className={'near-places'} />
             </div>
           </section>
         </div>
