@@ -6,7 +6,7 @@ import Footer from '../components/footer/footer';
 import {useAppSelector} from '../hooks';
 import {selectFavoritesData, selectFetchFavoritesStatus} from '../store/favorites-data/selectors';
 import Loader from '../components/loader/loader';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import FavoritesList from '../components/favorites-list/favorites-list';
 import FavoritesEmpty from '../components/favorites-empty/favorites-empty';
 

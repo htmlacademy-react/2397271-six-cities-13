@@ -1,5 +1,5 @@
 import React, {memo, ReactNode} from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import {AppRoute, FavoriteState, FetchStatus, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
@@ -11,7 +11,7 @@ export interface OfferCardProps {
   card: OfferPreviewType;
   className?: string;
   onMouseEnter?: (card:OfferPreviewType) => void;
-  testId?: string;
+  testId?: string | undefined;
 }
 
 const OfferCard = memo(({card, className = '', onMouseEnter, testId}:OfferCardProps):ReactNode => {

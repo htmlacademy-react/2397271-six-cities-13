@@ -1,7 +1,7 @@
 import React from 'react';
 import {ReviewType} from '../../types/offer';
 import {RATING_MULTIPLIER, ReviewDateView} from '../../const';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 interface ReviewItemProps {
   comment: ReviewType;
@@ -9,7 +9,7 @@ interface ReviewItemProps {
 
 function ReviewItem({comment}:ReviewItemProps) {
   return (
-    <li className="reviews__item">
+    <li className="reviews__item" data-testid='review-item-container'>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={comment.user.avatarUrl} width="54" height="54" alt="Reviews avatar"/>

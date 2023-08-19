@@ -24,7 +24,7 @@ import Loader from '../components/loader/loader';
 import NotFound from './not-found';
 import {selectFetchReviewsStatus, selectReviewsData} from '../store/reviews-data/selectors';
 import {selectAuthStatus} from '../store/user-process/selectors';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import {selectChangeFavoritesStatus} from '../store/favorites-data/selectors';
 
 function Offer():ReactNode {

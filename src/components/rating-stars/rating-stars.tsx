@@ -22,6 +22,7 @@ function RatingStars({handleRatingChange, currentRating}:RatingStarsProps) {
           checked={currentRating === RatingTitles.length - index}
           onChange={(event) => handleRatingChange(event)}
           disabled={fetchSendReviewStatus === FetchStatus.Idle}
+          data-testid='rating-star'
         >
         </input>
         <label htmlFor={`${index}-stars`} className="reviews__rating-label form__rating-label" title="perfect">

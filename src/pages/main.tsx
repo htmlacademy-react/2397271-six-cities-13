@@ -7,7 +7,7 @@ import {selectFetchOffersStatus, selectOffersBySortAndCity} from '../store/offer
 import {FetchStatus} from '../const';
 import Cities from '../components/cities/cities';
 import {OfferPreviewType} from '../types/offer';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 
 function Main():ReactNode {
   const selectedAndSortedOffers: OfferPreviewType[] = useAppSelector(selectOffersBySortAndCity);

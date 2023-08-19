@@ -1,5 +1,5 @@
 import React, {ReactNode, useState} from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {OfferSortList} from '../../const';
 import {selectSort} from '../../store/app-process/selectors';
@@ -16,7 +16,12 @@ function OfferFilter():ReactNode {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form
+      className="places__sorting"
+      action="#"
+      method="get"
+      data-testid='offer-filter-container'
+    >
       <span className="places__sorting-caption">Sort by</span>
       <span
         className="places__sorting-type"
@@ -42,6 +47,7 @@ function OfferFilter():ReactNode {
               )}
               tabIndex="0"
               onClick={() => handleChangeClick(sort)}
+              data-testid='offer-filter-item'
             >
               {sort}
             </li>
