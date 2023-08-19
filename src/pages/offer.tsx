@@ -32,9 +32,17 @@ function Offer():ReactNode {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchOfferAction(id));
-    dispatch(fetchReviewsAction(id));
-    dispatch(fetchOffersNearbyAction(id));
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(fetchOfferAction(id));
+      dispatch(fetchReviewsAction(id));
+      dispatch(fetchOffersNearbyAction(id));
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [id, dispatch]);
 
   const offer:OfferType = useAppSelector(selectOfferData);

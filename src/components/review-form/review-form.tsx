@@ -17,9 +17,14 @@ function ReviewForm({id}: ReviewFormProps):ReactNode {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (fetchReviewStatus === FetchStatus.Success) {
+    let isMounted = true;
+
+    if (isMounted && fetchReviewStatus === FetchStatus.Success) {
       setReview(ReviewState);
     }
+    return () => {
+      isMounted = false;
+    };
   }, [fetchReviewStatus]);
 
   const handleRatingChange = (event:ChangeEvent<HTMLInputElement>):void => {
