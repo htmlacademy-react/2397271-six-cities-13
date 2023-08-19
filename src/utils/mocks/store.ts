@@ -4,9 +4,13 @@ import {makeFakeOffers} from './offers';
 import {makeFakeOffer} from './offer';
 import {makeFakeReviews} from './reviews';
 
-export const makeFakeStore = ():State => ({
+interface fakeStoreProps {
+  authorizationStatus?: AuthorizationStatus;
+}
+
+export const makeFakeStore = (props:fakeStoreProps):State => ({
   [NameSpace.User]: {
-    authorizationStatus: AuthorizationStatus.Unknown,
+    authorizationStatus: props && props.authorizationStatus ? props.authorizationStatus : AuthorizationStatus.Unknown,
     userData: {
       email: '',
       isPro: false,

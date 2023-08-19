@@ -48,6 +48,7 @@ function ReviewForm({id}: ReviewFormProps):ReactNode {
       action="#"
       method="post"
       onSubmit={handleFormSubmit}
+      data-testid='review-form-container'
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -64,6 +65,7 @@ function ReviewForm({id}: ReviewFormProps):ReactNode {
         onChange={handleReviewInput}
         value={review.comment}
         disabled={fetchReviewStatus === FetchStatus.Idle}
+        data-testid='review-form-textarea'
       >
       </textarea>
       <div className="reviews__button-wrapper">
