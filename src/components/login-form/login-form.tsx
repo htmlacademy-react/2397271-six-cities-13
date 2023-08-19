@@ -43,6 +43,7 @@ function LoginForm() {
             name="email"
             placeholder="Email"
             required=""
+            data-testid='login-email'
             onChange={
               (event) => setFormState(
                 (prevState) => ({...prevState, email: event.target.value})
@@ -58,6 +59,7 @@ function LoginForm() {
             name="password"
             placeholder="Password"
             required=""
+            data-testid='login-password'
             onChange={
               (event) => setFormState(
                 (prevState) => ({...prevState, password: event.target.value})

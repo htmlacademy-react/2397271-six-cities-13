@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from '../components/header/header';
-import {AppRoute, AuthorizationStatus, FetchStatus} from '../const';
-import {useAppSelector} from '../hooks';
+import Header from '../../components/header/header';
+import {AppRoute, AuthorizationStatus, FetchStatus} from '../../const';
+import {useAppSelector} from '../../hooks';
 import {Navigate} from 'react-router-dom';
-import {selectAuthStatus, selectFetchAuthStatus} from '../store/user-process/selectors';
-import Loader from '../components/loader/loader';
-import LoginForm from '../components/login-form/login-form';
+import {selectAuthStatus, selectFetchAuthStatus} from '../../store/user-process/selectors';
+import Loader from '../../components/loader/loader';
+import LoginForm from '../../components/login-form/login-form';
 
 function Login() {
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
@@ -28,7 +28,7 @@ function Login() {
           <LoginForm />
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <a className="locations__item-link" href="src/pages/login/login#">
                 <span>Amsterdam</span>
               </a>
             </div>
