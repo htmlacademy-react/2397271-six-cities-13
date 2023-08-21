@@ -12,7 +12,7 @@ function PrivateRoute():ReactNode {
     return <Loader />;
   }
 
-  return authorizationStatus === AuthorizationStatus.Auth ? <Outlet /> : <Navigate to={AppRoute.login} />;
+  return authorizationStatus === AuthorizationStatus.Auth ? <Outlet /> : <Navigate to={AppRoute.Login} />;
 }
 
 export default PrivateRoute;

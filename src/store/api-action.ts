@@ -114,7 +114,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
     try {
       const { data } = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(data.token);
-      dispatch(redirectToRoute(AppRoute.root));
+      dispatch(redirectToRoute(AppRoute.Root));
       return data;
     } catch (error) {
       throw new Error (error);

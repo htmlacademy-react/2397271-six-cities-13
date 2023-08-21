@@ -16,7 +16,7 @@ export interface OfferCardProps {
 
 const OfferCard = memo(({card, className = '', onMouseEnter, testId}:OfferCardProps):ReactNode => {
   const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
-  const getCardPath = () => AppRoute.offer.slice(0, AppRoute.offer.indexOf(':id')) + card.id;
+  const getCardPath = () => AppRoute.Offer.slice(0, AppRoute.Offer.indexOf(':id')) + card.id;
   const dispatch = useAppDispatch();
 
   const handleFavoriteClick = () => {

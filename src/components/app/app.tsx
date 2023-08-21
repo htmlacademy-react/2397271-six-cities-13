@@ -12,11 +12,11 @@ import 'react-toastify/dist/ReactToastify.css';
 function App(): ReactNode {
   return (
     <Routes>
-      <Route index path={AppRoute.root} element={<Main />}/>
-      <Route path={AppRoute.offer} element={<Offer/>}/>
-      <Route path={AppRoute.login} element={<Login/>}/>
+      <Route index path={AppRoute.Root} element={<Main />}/>
+      <Route path={AppRoute.Offer} element={<Offer/>}/>
+      <Route path={AppRoute.Login} element={<Login/>}/>
       <Route element={<PrivateRoute/>}>
-        <Route path={AppRoute.favorites} element={<Favorites/>}/>
+        <Route path={AppRoute.Favorites} element={<Favorites/>}/>
       </Route>
       <Route path='*' element={<NotFound/>}/>
     </Routes>

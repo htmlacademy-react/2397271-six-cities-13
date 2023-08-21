@@ -17,7 +17,7 @@ function Login() {
   }
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
-    return <Navigate to={AppRoute.root} />;
+    return <Navigate to={AppRoute.Root} />;
   }
 
   return (

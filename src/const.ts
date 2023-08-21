@@ -1,10 +1,10 @@
 import {CityNameType} from './types/location';
 
 export enum AppRoute {
-  root = '/',
-  offer = '/offer/:id',
-  login = '/login',
-  favorites = '/favorites',
+  Root = '/',
+  Offer = '/offer/:id',
+  Login = '/login',
+  Favorites = '/favorites',
 }
 
 export const Cities = [
@@ -27,10 +27,10 @@ export const RatingTitles = [
 ] as const;
 
 export enum OfferSortList {
-  default = 'Popular',
-  priceLowToHigh = 'Price: low to high',
-  priceHighToLow = 'Price: high to low',
-  ratingHighToLow = 'Top rated first'
+  Default = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  RatingHighToLow = 'Top rated first'
 }
 
 export const DEFAULT_OFFER_SORT = 'Popular';
@@ -48,21 +48,21 @@ export const NEARBY_OFFERS_COUNT = 3;
 export const MAP_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 
 export enum CommentTextLength {
-  min = 50,
-  max = 300,
+  Min = 50,
+  Max = 300,
 }
 
 export enum CommentErrors {
-  tooLongText = `Max comment length is ${CommentTextLength.max}`,
-  tooShortText = `Min comment length is ${CommentTextLength.min}`,
-  emptyRating = 'Please select the rating ',
+  TooLongText = `Max comment length is ${CommentTextLength.Max}`,
+  TooShortText = `Min comment length is ${CommentTextLength.Min}`,
+  EmptyRating = 'Please select the rating ',
 }
 
 export const LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 export const ReviewDateView = {
-  system: 'YYYY-MM-DD',
-  displayed: 'MMMM YYYY',
+  System: 'YYYY-MM-DD',
+  Displayed: 'MMMM YYYY',
 };
 
 export const MAX_REVIEW_AMOUNT = 10;

@@ -26,8 +26,8 @@ function ReviewItem({comment}:ReviewItemProps) {
         <p className="reviews__text">{comment.comment}</p>
         <time
           className="reviews__time"
-          dateTime={dayjs(comment.date).format(ReviewDateView.system)}
-        >{dayjs(comment.date).format(ReviewDateView.displayed)}
+          dateTime={dayjs(comment.date).format(ReviewDateView.System)}
+        >{dayjs(comment.date).format(ReviewDateView.Displayed)}
         </time>
 
       </div>

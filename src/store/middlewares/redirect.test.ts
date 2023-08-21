@@ -29,8 +29,8 @@ describe('Redirect middleware', () => {
   });
 
   it('should redirect to "/login" with redirectToRoute action', () => {
-    const redirectAction = redirectToRoute(AppRoute.login);
+    const redirectAction = redirectToRoute(AppRoute.Login);
     store.dispatch(redirectAction);
-    expect(browserHistory.location.pathname).toBe(AppRoute.login);
+    expect(browserHistory.location.pathname).toBe(AppRoute.Login);
   });
 });

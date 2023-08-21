@@ -16,7 +16,7 @@ describe('Application Routing', () => {
   it('should render "Main page" when user navigate to "/"', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent);
-    mockHistory.push(AppRoute.root);
+    mockHistory.push(AppRoute.Root);
 
     render(withStoreComponent);
 
@@ -65,7 +65,7 @@ describe('Application Routing', () => {
     };
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, initialState);
-    const offerRoute = `${AppRoute.offer}`;
+    const offerRoute = `${AppRoute.Offer}`;
     mockHistory.push(offerRoute);
 
     render(withStoreComponent);
@@ -84,7 +84,7 @@ describe('Application Routing', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, initialState);
     const favoritesContainerId = 'favorites-container';
-    const offerRoute = `${AppRoute.favorites}`;
+    const offerRoute = `${AppRoute.Favorites}`;
     mockHistory.push(offerRoute);
 
     render(withStoreComponent);

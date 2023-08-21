@@ -31,7 +31,7 @@ describe('AppProcess Slice', () => {
       sort: DEFAULT_OFFER_SORT,
       city: DEFAULT_CITY,
     };
-    const expectedSort = OfferSortList.priceHighToLow;
+    const expectedSort = OfferSortList.PriceHighToLow;
 
     const result = appSlice.reducer(initialState, changeSort({sort: expectedSort}));
 
