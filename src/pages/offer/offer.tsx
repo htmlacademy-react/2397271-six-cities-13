@@ -149,7 +149,7 @@ function Offer():ReactNode {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewList reviews={reviews} />
+                <ReviewList />
                 {authorizationStatus === AuthorizationStatus.Auth &&
                 <CommentForm id={id}/>}
               </section>

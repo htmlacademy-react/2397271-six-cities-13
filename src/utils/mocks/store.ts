@@ -4,13 +4,9 @@ import {makeFakeOffers} from './offers';
 import {makeFakeOffer} from './offer';
 import {makeFakeReviews} from './reviews';
 
-interface fakeStoreProps {
-  authorizationStatus?: AuthorizationStatus;
-}
-
-export const makeFakeStore = (props:fakeStoreProps):State => ({
+export const makeFakeStore = (initialState:Partial<State>):State => ({
   [NameSpace.User]: {
-    authorizationStatus: props && props.authorizationStatus ? props.authorizationStatus : AuthorizationStatus.Unknown,
+    authorizationStatus: AuthorizationStatus.Unknown,
     userData: {
       email: '',
       isPro: false,
@@ -39,7 +35,8 @@ export const makeFakeStore = (props:fakeStoreProps):State => ({
   },
   [NameSpace.Reviews]: {
     reviews: makeFakeReviews(),
-    fetchReviewsStatus: FetchStatus.Idle,
+    fetchReviewsStatus: FetchStatus.Success,
     sendReviewStatus: FetchStatus.Success,
-  }
+  },
+  ...initialState,
 });

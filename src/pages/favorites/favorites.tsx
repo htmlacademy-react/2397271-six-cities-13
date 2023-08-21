@@ -19,7 +19,7 @@ function Favorites() {
   }
 
   return (
-    <div className='page'>
+    <div className='page' data-testid='favorites-container'>
       <Header />
       <main className={classNames('page__main page__main--favorites', {
         'page__main--favorites-empty': !favoriteOffers.length

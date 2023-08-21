@@ -3,12 +3,12 @@ import ReviewItem from '../review-item/review-item';
 import {ReviewType} from '../../types/offer';
 import {MAX_REVIEW_AMOUNT} from '../../const';
 import dayjs from 'dayjs';
+import {selectReviewsData} from '../../store/reviews-data/selectors';
+import {useAppSelector} from '../../hooks';
 
-interface ReviewListProps {
-  reviews: ReviewType[];
-}
 
-function ReviewList({reviews}:ReviewListProps) {
+function ReviewList() {
+  const reviews:ReviewType[] = useAppSelector(selectReviewsData);
   const sortedReviews = [...reviews]
     .sort((a, b) => dayjs(b.date).diff(a.date))
     .slice(0, MAX_REVIEW_AMOUNT);

@@ -27,13 +27,13 @@ type ComponentWithMockStore = {
 
 export function withStore(
   component: JSX.Element,
-  initialState: Partial<State> = makeFakeStore(),
+  initialState: Partial<State> = {},
 ): ComponentWithMockStore {
   const axios = createAPI();
   const mockAxiosAdapter = new MockAdapter(axios);
   const middleware = [thunk.withExtraArgument(axios)];
   const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
-  const mockStore = mockStoreCreator(initialState);
+  const mockStore = mockStoreCreator(makeFakeStore(initialState));
 
   return ({
     withStoreComponent: <Provider store={mockStore}>{component}</Provider>,

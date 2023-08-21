@@ -1,10 +1,10 @@
 import {createMemoryHistory, MemoryHistory} from 'history';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, FetchStatus, NameSpace} from '../../const';
 import {Route, Routes} from 'react-router-dom';
 import PrivateRoute from './private-route';
 import {render, screen} from '@testing-library/react';
 import {withHistory, withStore} from '../../utils/mocks/mock-component';
-import {makeFakeStore} from '../../utils/mocks/store';
+import {makeFakeUser} from '../../utils/mocks/user';
 
 describe('Component: PrivateRoute', () => {
   let mockHistory: MemoryHistory;
@@ -18,6 +18,12 @@ describe('Component: PrivateRoute', () => {
   });
 
   it('should render component for public route, when user not authorized', () => {
+    const initialState = {
+      [NameSpace.User]: {
+        fetchAuthStatus: FetchStatus.Success,
+        authorizationStatus: AuthorizationStatus.NoAuth,
+      }
+    };
     const expectedText = 'public route';
     const notExpectedText = 'private route';
     const { withStoreComponent } = withStore(
@@ -30,7 +36,7 @@ describe('Component: PrivateRoute', () => {
         }
         />
       </Routes>,
-      makeFakeStore({authorizationStatus: AuthorizationStatus.NoAuth})
+      initialState
     );
     const preparedComponent = withHistory(withStoreComponent, mockHistory);
 
@@ -43,6 +49,13 @@ describe('Component: PrivateRoute', () => {
   it('should render component for private route, when user authorized', () => {
     const expectedText = 'private route';
     const notExpectedText = 'public route';
+    const initialState = {
+      [NameSpace.User]: {
+        fetchAuthStatus: FetchStatus.Success,
+        authorizationStatus: AuthorizationStatus.Auth,
+        userData: makeFakeUser()
+      }
+    };
     const { withStoreComponent } = withStore(
       <Routes>
         <Route path={AppRoute.login} element={<span>{notExpectedText}</span>} />
@@ -53,7 +66,7 @@ describe('Component: PrivateRoute', () => {
         }
         />
       </Routes>,
-      makeFakeStore({authorizationStatus: AuthorizationStatus.Auth})
+      initialState
     );
     const preparedComponent = withHistory(withStoreComponent, mockHistory);
 
