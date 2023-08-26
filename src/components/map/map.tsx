@@ -58,7 +58,7 @@ function Map({city, offerList, activeOffer}:MapProps):JSX.Element {
     }
   }, [map, offerList, activeOffer]);
 
-  return <div style={{height: '100%'}} ref={mapRef} ></div>;
+  return <div style={{height: '100%'}} ref={mapRef} data-testid='map-container'></div>;
 }
 
 export default Map;
