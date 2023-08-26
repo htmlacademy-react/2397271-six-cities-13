@@ -42,7 +42,7 @@ describe('ReviewsProcess Slice', () => {
         sendReviewStatus: FetchStatus.Success,
       };
 
-      const result = reviewsSlice.reducer(undefined, fetchReviewsAction.fulfilled(mockReviews));
+      const result = reviewsSlice.reducer(undefined, fetchReviewsAction.fulfilled(mockReviews, '', 'review comment'));
 
       expect(result).toEqual(expectedState);
     });
@@ -50,7 +50,7 @@ describe('ReviewsProcess Slice', () => {
     it('status of fetchReviewsStatus should be equal FetchStatus.Idle on fetchReviewsAction.pending', () => {
       const expectedStatus = FetchStatus.Idle;
 
-      const result = reviewsSlice.reducer(undefined, fetchReviewsAction.pending());
+      const result = reviewsSlice.reducer(undefined, fetchReviewsAction.pending);
 
       expect(result.fetchReviewsStatus).toBe(expectedStatus);
     });
@@ -58,7 +58,7 @@ describe('ReviewsProcess Slice', () => {
     it('status of fetchReviewsStatus should be equal FetchStatus.Error on fetchReviewsAction.rejected', () => {
       const expectedStatus = FetchStatus.Error;
 
-      const result = reviewsSlice.reducer(undefined, fetchReviewsAction.rejected());
+      const result = reviewsSlice.reducer(undefined, fetchReviewsAction.rejected);
 
       expect(result.fetchReviewsStatus).toBe(expectedStatus);
     });
@@ -68,7 +68,7 @@ describe('ReviewsProcess Slice', () => {
     it('status of sendReviewStatus should be equal FetchStatus.Success on sendReviewAction.fulfilled', () => {
       const expectedStatus = FetchStatus.Success;
 
-      const result = reviewsSlice.reducer(undefined, sendReviewAction.fulfilled());
+      const result = reviewsSlice.reducer(undefined, sendReviewAction.fulfilled);
 
       expect(result.sendReviewStatus).toEqual(expectedStatus);
     });
@@ -76,7 +76,7 @@ describe('ReviewsProcess Slice', () => {
     it('status of sendReviewStatus should be equal FetchStatus.Success on sendReviewAction.pending', () => {
       const expectedStatus = FetchStatus.Idle;
 
-      const result = reviewsSlice.reducer(undefined, sendReviewAction.pending());
+      const result = reviewsSlice.reducer(undefined, sendReviewAction.pending);
 
       expect(result.sendReviewStatus).toEqual(expectedStatus);
     });
@@ -84,7 +84,7 @@ describe('ReviewsProcess Slice', () => {
     it('status of sendReviewStatus should be equal FetchStatus.Error on sendReviewAction.rejected', () => {
       const expectedStatus = FetchStatus.Error;
 
-      const result = reviewsSlice.reducer(undefined, sendReviewAction.rejected());
+      const result = reviewsSlice.reducer(undefined, sendReviewAction.rejected);
 
       expect(result.sendReviewStatus).toEqual(expectedStatus);
     });

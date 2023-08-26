@@ -1,23 +1,18 @@
-import {AuthorizationStatus, FetchStatus, NameSpace} from '../../const';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {checkAuthAction, loginAction, logoutAction} from '../api-action';
-import { User } from '../../types/user';
+import { createSlice } from '@reduxjs/toolkit';
+import { AuthorizationStatus, FetchStatus, NameSpace } from '../../const';
+import { UserData } from '../../types/user';
+import { checkAuthAction, loginAction, logoutAction } from '../api-action';
 
 export interface UserState {
   authorizationStatus: AuthorizationStatus;
-  userData: User;
+  userData: UserData | null;
   fetchLoginStatus: FetchStatus;
   fetchAuthStatus: FetchStatus;
 }
 
 const initialState:UserState = {
   authorizationStatus: AuthorizationStatus.Unknown,
-  userData: {
-    email: '',
-    isPro: false,
-    name: '',
-    avatarUrl: '',
-  },
+  userData: null,
   fetchLoginStatus: FetchStatus.Idle,
   fetchAuthStatus: FetchStatus.Idle,
 };
@@ -54,12 +49,7 @@ export const userSlice = createSlice({
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
-        state.userData = {
-          email: '',
-          isPro: false,
-          name: '',
-          avatarUrl: '',
-        };
+        state.userData = null;
       });
   }
 });

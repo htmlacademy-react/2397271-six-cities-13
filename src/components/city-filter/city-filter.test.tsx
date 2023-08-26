@@ -6,14 +6,14 @@ import CityFilter from './city-filter';
 describe('Component: city-filter', () => {
   it('should render correct', () => {
     const expectedLength = Cities.length;
-    const cityFilterContainerTestId = 'city-filter-container';
-    const cityFilterItemTestId = 'city-filter-item';
+    const CITY_FILTER_CONTAINER_TEST_ID = 'city-filter-container';
+    const CITY_FILTER_ITEM_TEST_ID = 'city-filter-item';
     const { withStoreComponent } = withStore(<CityFilter />);
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
-    const cityFilterContainer = screen.getByTestId(cityFilterContainerTestId);
-    const cityItemsContainer = screen.getAllByTestId(cityFilterItemTestId);
+    const cityFilterContainer = screen.getByTestId(CITY_FILTER_CONTAINER_TEST_ID);
+    const cityItemsContainer = screen.getAllByTestId(CITY_FILTER_ITEM_TEST_ID);
 
     expect(cityFilterContainer).toBeInTheDocument();
     expect(cityItemsContainer.length).toBe(expectedLength);

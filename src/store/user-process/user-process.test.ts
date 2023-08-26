@@ -10,12 +10,7 @@ describe('UserProcess Slice', () => {
     const emptyAction = { type: '' };
     const expectedState = {
       authorizationStatus: AuthorizationStatus.Unknown,
-      userData: {
-        email: '',
-        isPro: false,
-        name: '',
-        avatarUrl: '',
-      },
+      userData: null,
       fetchLoginStatus: FetchStatus.Idle,
       fetchAuthStatus: FetchStatus.Idle,
     };
@@ -29,12 +24,7 @@ describe('UserProcess Slice', () => {
     const emptyAction = { type: '' };
     const expectedState = {
       authorizationStatus: AuthorizationStatus.Unknown,
-      userData: {
-        email: '',
-        isPro: false,
-        name: '',
-        avatarUrl: '',
-      },
+      userData: null,
       fetchLoginStatus: FetchStatus.Idle,
       fetchAuthStatus: FetchStatus.Idle,
     };
@@ -54,7 +44,7 @@ describe('UserProcess Slice', () => {
         fetchAuthStatus: FetchStatus.Success,
       };
 
-      const result = userSlice.reducer(undefined, checkAuthAction.fulfilled(mockUser));
+      const result = userSlice.reducer(undefined, checkAuthAction.fulfilled(mockUser, '', undefined));
 
       expect(result).toEqual(expectedState);
     });
@@ -62,7 +52,7 @@ describe('UserProcess Slice', () => {
     it('should set fetchAuthStatus to FetchStatus.Idle on checkAuthAction.pending', () => {
       const expectedStatus = FetchStatus.Idle;
 
-      const result = userSlice.reducer(undefined, checkAuthAction.pending());
+      const result = userSlice.reducer(undefined, checkAuthAction.pending);
 
       expect(result.fetchAuthStatus).toBe(expectedStatus);
     });
@@ -70,7 +60,7 @@ describe('UserProcess Slice', () => {
     it('should set fetchAuthStatus to FetchStatus.Error on checkAuthAction.rejected', () => {
       const expectedStatus = FetchStatus.Error;
 
-      const result = userSlice.reducer(undefined, checkAuthAction.rejected());
+      const result = userSlice.reducer(undefined, checkAuthAction.rejected);
 
       expect(result.fetchAuthStatus).toBe(expectedStatus);
     });
@@ -86,7 +76,10 @@ describe('UserProcess Slice', () => {
         fetchAuthStatus: FetchStatus.Idle,
       };
 
-      const result = userSlice.reducer(undefined, loginAction.fulfilled(mockUser));
+      const result = userSlice.reducer(undefined, loginAction.fulfilled(mockUser, '', {
+        email: 'user@email.ru',
+        password: 'par0l',
+      }));
 
       expect(result).toEqual(expectedState);
     });
@@ -94,7 +87,7 @@ describe('UserProcess Slice', () => {
     it('should set fetchAuthStatus to FetchStatus.Idle on loginAction.pending', () => {
       const expectedStatus = FetchStatus.Idle;
 
-      const result = userSlice.reducer(undefined, loginAction.pending());
+      const result = userSlice.reducer(undefined, loginAction.pending);
 
       expect(result.fetchLoginStatus).toBe(expectedStatus);
     });
@@ -102,7 +95,7 @@ describe('UserProcess Slice', () => {
     it('should set fetchAuthStatus to FetchStatus.Error on loginAction.rejected', () => {
       const expectedStatus = FetchStatus.Error;
 
-      const result = userSlice.reducer(undefined, loginAction.rejected());
+      const result = userSlice.reducer(undefined, loginAction.rejected);
 
       expect(result.fetchLoginStatus).toBe(expectedStatus);
     });
@@ -111,8 +104,8 @@ describe('UserProcess Slice', () => {
   it('should set fetchAuthStatus to FetchStatus.Error on logoutAction.fulfilled', () => {
     const expectedUserData = null;
 
-    const result = userSlice.reducer(undefined, logoutAction.fulfilled());
+    const result = userSlice.reducer(undefined, logoutAction.fulfilled);
 
-    expect(result.userData).toBe(expectedUserData);
+    expect(result.userData).toEqual(expectedUserData);
   });
 });

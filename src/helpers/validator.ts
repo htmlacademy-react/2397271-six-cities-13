@@ -2,8 +2,8 @@ import {ReviewFormType} from '../types/offer';
 import {CommentErrors, CommentTextLength} from '../const';
 import {toast} from 'react-toastify';
 
-export const regexEmail = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
-export const regexPassword = new RegExp('(([a-zA-Z].*\\d)|(\\d.*[a-zA-Z]))');
+export const REGEX_EMAIL = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+export const REGEX_PASSWORD = new RegExp('(([a-zA-Z].*\\d)|(\\d.*[a-zA-Z]))');
 
 
 export const validateReviewForm = ({comment, rating}:ReviewFormType) => {

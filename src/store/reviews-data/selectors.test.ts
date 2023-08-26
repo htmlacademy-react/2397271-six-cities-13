@@ -7,6 +7,7 @@ describe('Reviews selectors', () => {
     [NameSpace.Reviews]: {
       reviews: makeFakeReviews(),
       fetchReviewsStatus: FetchStatus.Idle,
+      sendReviewStatus: FetchStatus.Success,
     }
   };
 

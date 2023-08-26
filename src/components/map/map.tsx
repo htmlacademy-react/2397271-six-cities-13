@@ -1,4 +1,4 @@
-import {ReactNode, useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import useMap from '../../hooks/use-map';
 import {CityType} from '../../types/location';
 import {Icon, layerGroup, Marker} from 'leaflet';

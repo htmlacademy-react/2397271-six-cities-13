@@ -33,7 +33,7 @@ describe('AppProcess Slice', () => {
     };
     const expectedSort = OfferSortList.PriceHighToLow;
 
-    const result = appSlice.reducer(initialState, changeSort({sort: expectedSort}));
+    const result = appSlice.reducer(initialState, changeSort({sort: expectedSort, city: DEFAULT_CITY}));
 
     expect(result['sort']).toEqual(expectedSort);
   });
@@ -45,7 +45,7 @@ describe('AppProcess Slice', () => {
     };
     const expectedCity = Cities[3];
 
-    const result = appSlice.reducer(initialState, changeCity({city: expectedCity}));
+    const result = appSlice.reducer(initialState, changeCity({city: expectedCity, sort: DEFAULT_OFFER_SORT}));
 
     expect(result['city']).toBe(expectedCity);
   });

@@ -1,6 +1,6 @@
 import {ReviewType} from '../../types/offer';
 import {FetchStatus, NameSpace} from '../../const';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {fetchReviewsAction, sendReviewAction} from '../api-action';
 
 interface ReviewsState {
@@ -21,7 +21,7 @@ export const reviewsSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchReviewsAction.fulfilled, (state, action: PayloadAction<ReviewsState>) => {
+      .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.fetchReviewsStatus = FetchStatus.Success;
         state.reviews = action.payload;
       })

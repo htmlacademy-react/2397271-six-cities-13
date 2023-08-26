@@ -1,5 +1,5 @@
 import {FormEvent, useState} from 'react';
-import {regexEmail, regexPassword} from '../../helpers/validator';
+import {REGEX_EMAIL, REGEX_PASSWORD} from '../../helpers/validator';
 import {toast} from 'react-toastify';
 import {ValidateErrors} from '../../const';
 import {loginAction} from '../../store/api-action';
@@ -10,7 +10,7 @@ function LoginForm():JSX.Element {
 
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!regexEmail.test(formState.email)) {
+    if (!REGEX_EMAIL.test(formState.email)) {
       toast.error(ValidateErrors.IncorrectEmail);
       return;
     }
@@ -19,7 +19,7 @@ function LoginForm():JSX.Element {
       return;
     }
 
-    if (!regexPassword.test(formState.password)) {
+    if (!REGEX_PASSWORD.test(formState.password)) {
       toast.error(ValidateErrors.NoNumberPassword);
       return;
     }
@@ -42,7 +42,7 @@ function LoginForm():JSX.Element {
             type="email"
             name="email"
             placeholder="Email"
-            required=""
+            required
             data-testid='login-email'
             onChange={
               (event) => setFormState(
@@ -58,7 +58,7 @@ function LoginForm():JSX.Element {
             type="password"
             name="password"
             placeholder="Password"
-            required=""
+            required
             data-testid='login-password'
             onChange={
               (event) => setFormState(

@@ -7,18 +7,21 @@ interface OfferListProps {
   handleMouseEnter?: (value: OfferPreviewType) => void;
 }
 
-const OfferList = (props:OfferListProps) => {
+const OfferList = (props:OfferListProps):JSX.Element => {
   const {offerList, className, handleMouseEnter} = props;
 
-  return offerList.map((card) =>
-    (
-      <OfferCard
-        key={card.id}
-        card={card}
-        className={className ? className : ''}
-        onMouseEnter={() => handleMouseEnter && handleMouseEnter(card)}
-      />
-    )
+  return (
+    <>
+      {offerList.map((card) =>
+        (
+          <OfferCard
+            key={card.id}
+            card={card}
+            className={className ?? className}
+            onMouseEnter={() => handleMouseEnter && handleMouseEnter(card)}
+          />
+        ))}
+    </>
   );
 };
 

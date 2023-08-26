@@ -1,5 +1,5 @@
 import {OfferPreviewType} from '../../types/offer';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {changeFavoritesAction, fetchFavoritesAction} from '../api-action';
 import {FetchStatus, NameSpace} from '../../const';
 
@@ -21,7 +21,7 @@ export const favoritesSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchFavoritesAction.fulfilled, (state, action: PayloadAction<FavoritesState>) => {
+      .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
         state.favorites = action.payload;
         state.fetchFavoritesStatus = FetchStatus.Success;
       })
@@ -31,7 +31,7 @@ export const favoritesSlice = createSlice({
       .addCase(fetchFavoritesAction.rejected, (state) => {
         state.fetchFavoritesStatus = FetchStatus.Error;
       })
-      .addCase(changeFavoritesAction.fulfilled, (state, action: PayloadAction<FavoritesState>) => {
+      .addCase(changeFavoritesAction.fulfilled, (state, action) => {
         state.changeFavoritesStatus = FetchStatus.Success;
         const { id, isFavorite } = action.payload;
         if (isFavorite) {

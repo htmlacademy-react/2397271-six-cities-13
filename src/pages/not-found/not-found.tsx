@@ -1,10 +1,9 @@
-import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 
-function NotFound() {
+function NotFound():JSX.Element {
   return (
     <div className='page page--favorites-empty'>
       <Header />

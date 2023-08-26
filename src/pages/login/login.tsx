@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from '../../components/header/header';
 import {AppRoute, AuthorizationStatus, FetchStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
@@ -7,7 +6,7 @@ import {selectAuthStatus, selectFetchAuthStatus} from '../../store/user-process/
 import Loader from '../../components/loader/loader';
 import LoginForm from '../../components/login-form/login-form';
 
-function Login() {
+function Login():JSX.Element {
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
   const fetchAuthStatus:FetchStatus = useAppSelector(selectFetchAuthStatus);
 
