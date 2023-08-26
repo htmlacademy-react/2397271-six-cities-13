@@ -111,3 +111,5 @@ export enum FavoriteState {
   IsFavorite = 1,
   NotFavorite = 0,
 }
+
+export const OFFER_CARD_TEST_ID = 'offer-card-container';

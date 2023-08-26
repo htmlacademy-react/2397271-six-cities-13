@@ -7,13 +7,13 @@ import {changeFavoriteOffers} from '../../helpers/change-favorite-offers';
 interface OffersState {
   offers: OfferPreviewType[];
   fetchOffersStatus: FetchStatus;
-  offer: OfferType;
+  offer: OfferType | null;
   fetchOfferStatus: FetchStatus;
   offersNearby: OfferPreviewType[];
   fetchOffersNearbyStatus: FetchStatus;
 }
 
-const initialState = {
+const initialState:OffersState = {
   offers: [],
   fetchOffersStatus: FetchStatus.Idle,
   offer: null,

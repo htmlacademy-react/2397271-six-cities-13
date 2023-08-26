@@ -4,12 +4,12 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {fetchReviewsAction, sendReviewAction} from '../api-action';
 
 interface ReviewsState {
-  reviews: ReviewType[];
+  reviews: ReviewType[] | [];
   fetchReviewsStatus: FetchStatus;
   sendReviewStatus: FetchStatus;
 }
 
-const initialState = {
+const initialState:ReviewsState = {
   reviews: [],
   fetchReviewsStatus: FetchStatus.Idle,
   sendReviewStatus: FetchStatus.Success,

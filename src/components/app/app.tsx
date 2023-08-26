@@ -1,4 +1,3 @@
-import React, {ReactNode} from 'react';
 import Main from '../../pages/main/main';
 import {Route, Routes} from 'react-router-dom';
 import Offer from '../../pages/offer/offer';
@@ -9,7 +8,7 @@ import PrivateRoute from './../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
 import 'react-toastify/dist/ReactToastify.css';
 
-function App(): ReactNode {
+function App(): JSX.Element {
   return (
     <Routes>
       <Route index path={AppRoute.Root} element={<Main />}/>

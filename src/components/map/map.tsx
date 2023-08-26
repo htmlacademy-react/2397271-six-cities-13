@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useRef} from 'react';
+import {ReactNode, useEffect, useRef} from 'react';
 import useMap from '../../hooks/use-map';
 import {CityType} from '../../types/location';
 import {Icon, layerGroup, Marker} from 'leaflet';
@@ -24,7 +24,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({city, offerList, activeOffer}:MapProps):ReactNode {
+function Map({city, offerList, activeOffer}:MapProps):JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 

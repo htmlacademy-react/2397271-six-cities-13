@@ -1,13 +1,13 @@
-import React from 'react';
 import {Cities} from '../../const';
 import FavoriteItem from '../favorite-item/favorite-item';
 import {OfferPreviewType} from '../../types/offer';
 import {selectFavoritesData} from '../../store/favorites-data/selectors';
 import {useAppSelector} from '../../hooks';
+import { CityNameType } from '../../types/location';
 
-function FavoritesList() {
+function FavoritesList(): JSX.Element {
   const favoriteOffers: OfferPreviewType[] = useAppSelector(selectFavoritesData);
-  const filterOfferByCity = (city) => favoriteOffers.filter((item) => item.city.name === city);
+  const filterOfferByCity = (city: CityNameType) => favoriteOffers.filter((item) => item.city.name === city);
 
   return (
     <section className="favorites" data-testid='favorites-list'>

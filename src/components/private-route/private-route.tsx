@@ -1,11 +1,10 @@
-import React, {ReactNode} from 'react';
 import {Navigate, Outlet} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
 import Loader from '../loader/loader';
 import {selectAuthStatus} from '../../store/user-process/selectors';
 
-function PrivateRoute():ReactNode {
+function PrivateRoute():JSX.Element {
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown) {

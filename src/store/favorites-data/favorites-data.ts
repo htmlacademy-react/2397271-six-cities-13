@@ -9,7 +9,7 @@ interface FavoritesState {
   changeFavoritesStatus: FetchStatus;
 }
 
-const initialState = {
+const initialState:FavoritesState = {
   favorites: [],
   fetchFavoritesStatus: FetchStatus.Idle,
   changeFavoritesStatus: FetchStatus.Success,

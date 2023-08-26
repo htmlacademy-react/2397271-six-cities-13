@@ -3,7 +3,7 @@ import { MockStore, configureMockStore } from '@jedmao/redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
-import { AppThunkDispatch } from './mocks';
+import { AppThunkDispatch } from './thunk';
 import { Provider } from 'react-redux';
 import HistoryRouter from '../../components/history-route/history-route';
 import {createAPI} from '../../services/api';

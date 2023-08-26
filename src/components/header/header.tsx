@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {logoutAction} from '../../store/api-action';
@@ -7,10 +7,10 @@ import {useAppSelector} from '../../hooks';
 import {selectAuthStatus} from '../../store/user-process/selectors';
 import ProfileLink from '../profile-link/profile-link';
 
-function Header():ReactNode {
+function Header():JSX.Element {
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
 
-  const handleLogoutClick = (event:React.MouseEvent<HTMLLinkElement>) => {
+  const handleLogoutClick = (event:React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     store.dispatch(logoutAction());
   };

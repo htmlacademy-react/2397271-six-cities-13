@@ -1,10 +1,9 @@
-import {OfferSortType} from '../../types/offer';
 import {DEFAULT_CITY, DEFAULT_OFFER_SORT, NameSpace} from '../../const';
 import {CityNameType} from '../../types/location';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface AppState {
-  sort: OfferSortType;
+  sort: string;
   city: CityNameType;
 }
 

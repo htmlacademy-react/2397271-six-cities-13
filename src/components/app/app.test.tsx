@@ -5,6 +5,7 @@ import {AppRoute, AuthorizationStatus, FetchStatus, NameSpace} from '../../const
 import {render, screen} from '@testing-library/react';
 import {makeFakeReviews} from '../../utils/mocks/reviews';
 import {makeFakeUser} from '../../utils/mocks/user';
+import { State } from '../../types/root-state';
 
 describe('Application Routing', () => {
   let mockHistory: MemoryHistory;
@@ -53,7 +54,7 @@ describe('Application Routing', () => {
   });
 
   it('should render "Offer" when user navigate to "/offer"', () => {
-    const initialState = {
+    const initialState:Partial<State> = {
       [NameSpace.User]: {
         fetchAuthStatus: FetchStatus.Success,
         authorizationStatus: AuthorizationStatus.NoAuth,

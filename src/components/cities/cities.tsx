@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import {useCallback, useState} from 'react';
 import OfferFilter from '../offer-filter/offer-filter';
 import OfferList from '../offer-list/offer-list';
 import Map from '../map/map';
@@ -9,7 +9,7 @@ import {selectCity} from '../../store/app-process/selectors';
 import CitiesEmpty from '../cities-empty/cities-empty';
 import {selectOffersBySortAndCity} from '../../store/offers-data/selectors';
 
-function Cities() {
+function Cities(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);
   const currentCity: CityNameType = useAppSelector(selectCity);
   const selectedAndSortedOffers: OfferPreviewType[] = useAppSelector(selectOffersBySortAndCity);

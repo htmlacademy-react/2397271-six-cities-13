@@ -8,7 +8,7 @@ interface RatingStarsProps {
   currentRating: number;
 }
 
-function RatingStars({handleRatingChange, currentRating}:RatingStarsProps) {
+function RatingStars({handleRatingChange, currentRating}:RatingStarsProps):JSX.Element[] {
   const fetchSendReviewStatus = useAppSelector(selectSendReviewStatus);
 
   return (

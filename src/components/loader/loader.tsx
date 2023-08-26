@@ -1,7 +1,6 @@
-import React, {ReactNode} from 'react';
 import style from './loader.module.css';
 
-function Loader():ReactNode {
+function Loader():JSX.Element {
   return (
     <div className={style.loader} data-testid='loader-container'>
       <svg

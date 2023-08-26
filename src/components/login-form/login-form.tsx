@@ -1,11 +1,11 @@
-import React, {FormEvent, useState} from 'react';
+import {FormEvent, useState} from 'react';
 import {regexEmail, regexPassword} from '../../helpers/validator';
 import {toast} from 'react-toastify';
 import {ValidateErrors} from '../../const';
 import {loginAction} from '../../store/api-action';
 import {store} from '../../store';
 
-function LoginForm() {
+function LoginForm():JSX.Element {
   const [formState, setFormState] = useState({email: '', password: ''});
 
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>) => {

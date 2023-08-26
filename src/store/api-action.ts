@@ -1,11 +1,12 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AxiosInstance} from 'axios';
+import {AxiosError, AxiosInstance} from 'axios';
 import {AppDispatch, State} from '../types/root-state';
 import {APIRoute, AppRoute} from '../const';
 import {FavoriteData, OfferPreviewType, OfferType, ReviewType} from '../types/offer';
 import {redirectToRoute} from './action';
 import {dropToken, saveToken} from '../services/token';
-import {AuthData, UserData} from '../types/user';
+import {AuthData, User, UserData} from '../types/user';
+import { UserState } from './user-process/user-process';
 
 export const fetchOfferAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -23,7 +24,7 @@ export const fetchOfferAction = createAsyncThunk<void, undefined, {
   }
 );
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
+export const fetchOffersAction = createAsyncThunk<OfferPreviewType[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -39,7 +40,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   }
 );
 
-export const fetchOffersNearbyAction = createAsyncThunk<void, undefined, {
+export const fetchOffersNearbyAction = createAsyncThunk<OfferPreviewType[], string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -87,26 +88,36 @@ export const changeFavoritesAction = createAsyncThunk<void, FavoriteData, {
   }
 );
 
-export const checkAuthAction = createAsyncThunk<void, UserData, {
+export const checkAuthAction = createAsyncThunk<
+  User,
+  User, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
   async (_arg, { extra: api, dispatch }) => {
-    try {
-      const {data} = await api.get<UserData>(APIRoute.Login);
-      dispatch(fetchFavoritesAction());
-      return data;
-    } catch (error) {
-      throw new Error(error);
-    }
+    // try {
+    //   const {data} = await api.get<UserData>(APIRoute.Login);
+    //   dispatch(fetchFavoritesAction());
+    //   return data;
+    // } catch (error) {
+    //   throw new Error(error);
+    // }
+    await api.get<UserData>(APIRoute.Login)
+      .then(({data}) => {
+        dispatch(fetchFavoritesAction());
+        return data as User;
+      })
+      .catch((error: AxiosError) => {
+        throw new Error(error.message);
+      });
   },
 );
 
 export const loginAction = createAsyncThunk<UserData, AuthData, {
   dispatch: AppDispatch;
-  state: State;
+  state: UserState;
   extra: AxiosInstance;
 }>(
   'user/login',

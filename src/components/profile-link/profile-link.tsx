@@ -1,13 +1,12 @@
-import React from 'react';
 import {AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
-import {UserData} from '../../types/user';
+import {User} from '../../types/user';
 import {selectUserData} from '../../store/user-process/selectors';
 import {useAppSelector} from '../../hooks';
 import {selectFavoritesData} from '../../store/favorites-data/selectors';
 
-function ProfileLink() {
-  const user: UserData = useAppSelector(selectUserData);
+function ProfileLink():JSX.Element {
+  const user: User = useAppSelector(selectUserData);
   const favorites = useAppSelector(selectFavoritesData);
 
   return (

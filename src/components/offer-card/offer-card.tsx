@@ -1,7 +1,7 @@
-import React, {memo, ReactNode} from 'react';
+import {memo} from 'react';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {AppRoute, FavoriteState, FetchStatus, RATING_MULTIPLIER} from '../../const';
+import {AppRoute, FavoriteState, FetchStatus, OFFER_CARD_TEST_ID, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeFavoritesAction} from '../../store/api-action';
@@ -11,10 +11,9 @@ export interface OfferCardProps {
   card: OfferPreviewType;
   className?: string;
   onMouseEnter?: (card:OfferPreviewType) => void;
-  testId?: string | undefined;
 }
 
-const OfferCard = memo(({card, className = '', onMouseEnter, testId}:OfferCardProps):ReactNode => {
+const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):JSX.Element => {
   const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
   const getCardPath = () => AppRoute.Offer.slice(0, AppRoute.Offer.indexOf(':id')) + card.id;
   const dispatch = useAppDispatch();
@@ -33,7 +32,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter, testId}:OfferCardPr
       })
     }
     onMouseEnter={() => onMouseEnter && onMouseEnter(card)}
-    data-testid={testId}
+    data-testid={OFFER_CARD_TEST_ID}
     >
       {card.isPremium &&
         <div className="place-card__mark">

@@ -1,6 +1,5 @@
 import {OfferPreviewType} from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
-import React from 'react';
 import {CityNameType} from '../../types/location';
 
 interface FavoriteItemProps {
@@ -8,7 +7,7 @@ interface FavoriteItemProps {
   city: CityNameType;
 }
 
-function FavoriteItem({sortedCards, city}:FavoriteItemProps) {
+function FavoriteItem({sortedCards, city}:FavoriteItemProps): JSX.Element {
   return (
     <li className="favorites__locations-items" data-testid='favorite-item-container'>
       <div className="favorites__locations locations locations--current">
