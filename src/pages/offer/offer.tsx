@@ -1,40 +1,48 @@
 import React, {ReactNode, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import CommentForm from '../components/review-form/review-form';
-import {OfferPreviewType, OfferType, ReviewType} from '../types/offer';
-import Header from '../components/header/header';
-import ReviewList from '../components/review-list/review-list';
-import OfferList from '../components/offer-list/offer-list';
-import {AuthorizationStatus, FavoriteState, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../const';
-import Map from '../components/map/map';
+import CommentForm from '../../components/review-form/review-form';
+import {OfferPreviewType, OfferType, ReviewType} from '../../types/offer';
+import Header from '../../components/header/header';
+import ReviewList from '../../components/review-list/review-list';
+import OfferList from '../../components/offer-list/offer-list';
+import {AuthorizationStatus, FavoriteState, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../../const';
+import Map from '../../components/map/map';
 import {
   changeFavoritesAction,
   fetchOfferAction,
   fetchOffersNearbyAction,
   fetchReviewsAction
-} from '../store/api-action';
-import {useAppDispatch, useAppSelector} from '../hooks';
+} from '../../store/api-action';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {
   selectFetchOffersNearbyStatus,
   selectFetchOfferStatus,
   selectOfferData,
   selectOffersNearbyData
-} from '../store/offers-data/selectors';
-import Loader from '../components/loader/loader';
-import NotFound from './not-found';
-import {selectFetchReviewsStatus, selectReviewsData} from '../store/reviews-data/selectors';
-import {selectAuthStatus} from '../store/user-process/selectors';
-import * as classNames from 'classnames';
-import {selectChangeFavoritesStatus} from '../store/favorites-data/selectors';
+} from '../../store/offers-data/selectors';
+import Loader from '../../components/loader/loader';
+import NotFound from '../not-found/not-found';
+import {selectFetchReviewsStatus, selectReviewsData} from '../../store/reviews-data/selectors';
+import {selectAuthStatus} from '../../store/user-process/selectors';
+import classNames from 'classnames';
+import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
 
 function Offer():ReactNode {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchOfferAction(id));
-    dispatch(fetchReviewsAction(id));
-    dispatch(fetchOffersNearbyAction(id));
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(fetchOfferAction(id));
+      dispatch(fetchReviewsAction(id));
+      dispatch(fetchOffersNearbyAction(id));
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [id, dispatch]);
 
   const offer:OfferType = useAppSelector(selectOfferData);
@@ -141,7 +149,7 @@ function Offer():ReactNode {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewList reviews={reviews} />
+                <ReviewList />
                 {authorizationStatus === AuthorizationStatus.Auth &&
                 <CommentForm id={id}/>}
               </section>

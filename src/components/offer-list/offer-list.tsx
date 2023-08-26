@@ -6,10 +6,11 @@ interface OfferListProps {
   offerList: OfferPreviewType[];
   className?: string;
   handleMouseEnter?: (value: OfferPreviewType) => void;
+  testId?: string | undefined;
 }
 
 const OfferList = (props:OfferListProps):ReactNode => {
-  const {offerList, className, handleMouseEnter} = props;
+  const {offerList, className, handleMouseEnter, testId} = props;
 
   return offerList.map((card) =>
     (
@@ -18,6 +19,7 @@ const OfferList = (props:OfferListProps):ReactNode => {
         card={card}
         className={className ? className : ''}
         onMouseEnter={() => handleMouseEnter && handleMouseEnter(card)}
+        testId={testId}
       >
       </OfferCard>
     )

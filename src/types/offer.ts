@@ -29,6 +29,13 @@ export interface UserType {
   isPro: boolean;
 }
 
+export interface UserData {
+  email: string;
+  isPro: boolean;
+  name: string;
+  avatarUrl: string;
+}
+
 export interface ReviewType {
   id: string;
   comment: string;

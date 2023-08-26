@@ -17,9 +17,14 @@ function ReviewForm({id}: ReviewFormProps):ReactNode {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (fetchReviewStatus === FetchStatus.Success) {
+    let isMounted = true;
+
+    if (isMounted && fetchReviewStatus === FetchStatus.Success) {
       setReview(ReviewState);
     }
+    return () => {
+      isMounted = false;
+    };
   }, [fetchReviewStatus]);
 
   const handleRatingChange = (event:ChangeEvent<HTMLInputElement>):void => {
@@ -43,6 +48,7 @@ function ReviewForm({id}: ReviewFormProps):ReactNode {
       action="#"
       method="post"
       onSubmit={handleFormSubmit}
+      data-testid='review-form-container'
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -59,6 +65,7 @@ function ReviewForm({id}: ReviewFormProps):ReactNode {
         onChange={handleReviewInput}
         value={review.comment}
         disabled={fetchReviewStatus === FetchStatus.Idle}
+        data-testid='review-form-textarea'
       >
       </textarea>
       <div className="reviews__button-wrapper">

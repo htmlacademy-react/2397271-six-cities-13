@@ -1,5 +1,5 @@
 import React, {memo, ReactNode} from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import {AppRoute, FavoriteState, FetchStatus, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
@@ -11,9 +11,10 @@ export interface OfferCardProps {
   card: OfferPreviewType;
   className?: string;
   onMouseEnter?: (card:OfferPreviewType) => void;
+  testId?: string | undefined;
 }
 
-const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):ReactNode => {
+const OfferCard = memo(({card, className = '', onMouseEnter, testId}:OfferCardProps):ReactNode => {
   const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
   const getCardPath = () => AppRoute.offer.slice(0, AppRoute.offer.indexOf(':id')) + card.id;
   const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):Rea
       })
     }
     onMouseEnter={() => onMouseEnter && onMouseEnter(card)}
+    data-testid={testId}
     >
       {card.isPremium &&
         <div className="place-card__mark">

@@ -3,7 +3,7 @@ import style from './loader.module.css';
 
 function Loader():ReactNode {
   return (
-    <div className={style.loader}>
+    <div className={style.loader} data-testid='loader-container'>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={36}
