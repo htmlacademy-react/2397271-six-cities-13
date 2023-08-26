@@ -18,7 +18,7 @@ function Main():JSX.Element {
   }
 
   return (
-    <div className='page page--gray page--main'>
+    <div className='page page--gray page--main' data-testid='main-container'>
       <Header />
       <main className={
         classNames('page__main page__main--index', {

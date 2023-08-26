@@ -74,7 +74,7 @@ function Offer():JSX.Element {
   };
 
   return (
-    <div className='page'>
+    <div className='page' data-testid='offer-container'>
       <Header />
       <main className="page__main page__main--offer">
         <section className="offer">

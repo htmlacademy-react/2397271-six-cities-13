@@ -20,7 +20,7 @@ function Login():JSX.Element {
   }
 
   return (
-    <div className="page page--gray page--login">
+    <div className="page page--gray page--login" data-testid='login-container'>
       <Header />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
