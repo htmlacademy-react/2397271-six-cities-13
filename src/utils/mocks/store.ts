@@ -7,12 +7,7 @@ import {makeFakeReviews} from './reviews';
 export const makeFakeStore = (initialState:Partial<State>):State => ({
   [NameSpace.User]: {
     authorizationStatus: AuthorizationStatus.Unknown,
-    userData: {
-      email: '',
-      isPro: false,
-      name: '',
-      avatarUrl: '',
-    },
+    userData: null,
     fetchLoginStatus: FetchStatus.Idle,
     fetchAuthStatus: FetchStatus.Idle,
   },

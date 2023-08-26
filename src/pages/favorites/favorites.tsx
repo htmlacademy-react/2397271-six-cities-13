@@ -1,4 +1,3 @@
-import React from 'react';
 import {FetchStatus} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
 import Header from '../../components/header/header';
@@ -10,7 +9,7 @@ import classNames from 'classnames';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 
-function Favorites() {
+function Favorites():JSX.Element {
   const fetchFavoritesStatus = useAppSelector(selectFetchFavoritesStatus);
   const favoriteOffers: OfferPreviewType[] = useAppSelector(selectFavoritesData);
 

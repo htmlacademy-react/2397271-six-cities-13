@@ -1,8 +1,8 @@
 import {State} from '../../types/root-state';
-import {NameSpace, OfferSortList} from '../../const';
+import {NameSpace} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
 import {CityNameType} from '../../types/location';
-import {sortOffers} from '../../helpers/sort-offers';
+import {sortOffers} from '../../helpers/offers';
 import {createSelector} from 'reselect';
 import {selectCity, selectSort} from '../app-process/selectors';
 
@@ -25,5 +25,5 @@ export const selectOffersByCity = createSelector(
 export const selectOffersBySortAndCity = createSelector(
   selectOffersByCity,
   selectSort,
-  (offers: OfferPreviewType[], sort: OfferSortList) => sortOffers(offers, sort)
+  (offers: OfferPreviewType[], sort: string) => sortOffers(offers, sort)
 );

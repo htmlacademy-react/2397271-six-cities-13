@@ -1,7 +1,7 @@
-import React, {ReactNode, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import CommentForm from '../../components/review-form/review-form';
-import {OfferPreviewType, OfferType, ReviewType} from '../../types/offer';
+import {OfferPreviewType, ReviewType} from '../../types/offer';
 import Header from '../../components/header/header';
 import ReviewList from '../../components/review-list/review-list';
 import OfferList from '../../components/offer-list/offer-list';
@@ -27,8 +27,8 @@ import {selectAuthStatus} from '../../store/user-process/selectors';
 import classNames from 'classnames';
 import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
 
-function Offer():ReactNode {
-  const { id } = useParams();
+function Offer():JSX.Element {
+  const { id } = useParams() as {id : string};
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -45,7 +45,7 @@ function Offer():ReactNode {
     };
   }, [id, dispatch]);
 
-  const offer:OfferType = useAppSelector(selectOfferData);
+  const offer = useAppSelector(selectOfferData);
   const fetchOfferStatus:FetchStatus = useAppSelector(selectFetchOfferStatus);
   const offersNearby:OfferPreviewType[] = useAppSelector(selectOffersNearbyData);
   const fetchOffersNearbyStatus:FetchStatus = useAppSelector(selectFetchOffersNearbyStatus);
@@ -62,10 +62,10 @@ function Offer():ReactNode {
     return <Loader />;
   }
 
-  if (fetchOfferStatus === FetchStatus.Error) {
+  if (fetchOfferStatus === FetchStatus.Error
+  || !offer) {
     return <NotFound />;
   }
-
 
   const handleFavoriteClick = () => {
     if (changeFavoritesStatus !== FetchStatus.Idle) {
@@ -160,8 +160,7 @@ function Offer():ReactNode {
               city={offer.city}
               offerList={[...slicedOffersNearby, offer]}
               activeOffer={offer}
-            >
-            </Map>
+            />
           </section>
         </section>
         <div className="container">

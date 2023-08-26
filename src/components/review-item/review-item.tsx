@@ -1,4 +1,3 @@
-import React from 'react';
 import {ReviewType} from '../../types/offer';
 import {RATING_MULTIPLIER, ReviewDateView} from '../../const';
 import dayjs from 'dayjs';
@@ -7,7 +6,7 @@ interface ReviewItemProps {
   comment: ReviewType;
 }
 
-function ReviewItem({comment}:ReviewItemProps) {
+function ReviewItem({comment}:ReviewItemProps):JSX.Element {
   return (
     <li className="reviews__item" data-testid='review-item-container'>
       <div className="reviews__user user">
@@ -26,8 +25,8 @@ function ReviewItem({comment}:ReviewItemProps) {
         <p className="reviews__text">{comment.comment}</p>
         <time
           className="reviews__time"
-          dateTime={dayjs(comment.date).format(ReviewDateView.system)}
-        >{dayjs(comment.date).format(ReviewDateView.displayed)}
+          dateTime={dayjs(comment.date).format(ReviewDateView.System)}
+        >{dayjs(comment.date).format(ReviewDateView.Displayed)}
         </time>
 
       </div>

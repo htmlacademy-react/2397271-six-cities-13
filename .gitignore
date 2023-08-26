@@ -24,3 +24,5 @@ yarn-error.log*
 .idea
 *.sublime*
 .vscode
+
+vite.config.ts.timestamp-1692360010299-c5d6b6697a6fd.mjs

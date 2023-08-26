@@ -1,9 +1,8 @@
-import React from 'react';
 import {CityNameType} from '../../types/location';
 import {selectCity} from '../../store/app-process/selectors';
 import {useAppSelector} from '../../hooks';
 
-function CitiesEmpty() {
+function CitiesEmpty(): JSX.Element {
   const currentCity: CityNameType = useAppSelector(selectCity);
 
   return (

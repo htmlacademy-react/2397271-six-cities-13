@@ -20,18 +20,6 @@ describe('favoritesSlice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should return default initial state with empty action and undefined state', () => {
-    const expectedState = {
-      favorites: [],
-      fetchFavoritesStatus: FetchStatus.Idle,
-      changeFavoritesStatus: FetchStatus.Success,
-    };
-
-    const result = favoritesSlice.reducer(undefined, expectedState);
-
-    expect(result).toEqual(expectedState);
-  });
-
   describe('fetchFavoritesAction', () => {
     it('should load array of favoriteOffers and set fetchFavoritesStatus to FetchStatus.Success on fetchFavoritesAction.fulfilled', () => {
       const mockOffers = makeFakeOffers(true);
@@ -41,7 +29,7 @@ describe('favoritesSlice', () => {
         changeFavoritesStatus: FetchStatus.Success,
       };
 
-      const result = favoritesSlice.reducer(undefined, fetchFavoritesAction.fulfilled(mockOffers));
+      const result = favoritesSlice.reducer(undefined, fetchFavoritesAction.fulfilled(mockOffers, '', undefined));
 
       expect(result).toEqual(expectedState);
     });
@@ -49,7 +37,7 @@ describe('favoritesSlice', () => {
     it('should set fetchFavoritesStatus to FetchStatus.Idle on fetchFavoritesAction.pending', () => {
       const expectedStatus = FetchStatus.Idle;
 
-      const result = favoritesSlice.reducer(undefined, fetchFavoritesAction.pending());
+      const result = favoritesSlice.reducer(undefined, fetchFavoritesAction.pending);
 
       expect(result.fetchFavoritesStatus).toBe(expectedStatus);
     });
@@ -57,7 +45,7 @@ describe('favoritesSlice', () => {
     it('should set fetchFavoritesStatus to FetchStatus.Error on fetchOffersAction.rejected', () => {
       const expectedStatus = FetchStatus.Error;
 
-      const result = favoritesSlice.reducer(undefined, fetchFavoritesAction.rejected());
+      const result = favoritesSlice.reducer(undefined, fetchFavoritesAction.rejected);
 
       expect(result.fetchFavoritesStatus).toBe(expectedStatus);
     });
@@ -65,10 +53,10 @@ describe('favoritesSlice', () => {
 
   describe('changeFavoritesAction', () => {
     it('should set changeFavoritesStatus to FetchStatus.Success on changeFavoritesAction.fulfilled', () => {
-      const mockOffers = makeFakeOffers(true);
+      const mockOffers = makeFakeOffers(true)[0];
       const expectedState = FetchStatus.Success;
 
-      const result = favoritesSlice.reducer(undefined, changeFavoritesAction.fulfilled(mockOffers));
+      const result = favoritesSlice.reducer(undefined, changeFavoritesAction.fulfilled(mockOffers, '', {offerId: 'OFFER_ID', status: 1}));
 
       expect(result.changeFavoritesStatus).toEqual(expectedState);
     });
@@ -76,7 +64,7 @@ describe('favoritesSlice', () => {
     it('should set fetchFavoritesStatus to FetchStatus.Idle on changeFavoritesAction.pending', () => {
       const expectedStatus = FetchStatus.Idle;
 
-      const result = favoritesSlice.reducer(undefined, changeFavoritesAction.pending());
+      const result = favoritesSlice.reducer(undefined, changeFavoritesAction.pending);
 
       expect(result.changeFavoritesStatus).toBe(expectedStatus);
     });
@@ -84,7 +72,7 @@ describe('favoritesSlice', () => {
     it('should set fetchFavoritesStatus to FetchStatus.Error on changeFavoritesAction.rejected', () => {
       const expectedStatus = FetchStatus.Error;
 
-      const result = favoritesSlice.reducer(undefined, changeFavoritesAction.rejected());
+      const result = favoritesSlice.reducer(undefined, changeFavoritesAction.rejected);
 
       expect(result.changeFavoritesStatus).toBe(expectedStatus);
     });

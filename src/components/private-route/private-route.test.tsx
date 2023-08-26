@@ -14,25 +14,24 @@ describe('Component: PrivateRoute', () => {
   });
 
   beforeEach(() => {
-    mockHistory.push(AppRoute.favorites);
+    mockHistory.push(AppRoute.Favorites);
   });
 
   it('should render component for public route, when user not authorized', () => {
     const initialState = {
       [NameSpace.User]: {
+        fetchLoginStatus: FetchStatus.Idle,
         fetchAuthStatus: FetchStatus.Success,
         authorizationStatus: AuthorizationStatus.NoAuth,
+        userData: null,
       }
     };
-    const expectedText = 'public route';
-    const notExpectedText = 'private route';
+    const EXPECTED_TEXT = 'public route';
     const { withStoreComponent } = withStore(
       <Routes>
-        <Route path={AppRoute.login} element={<span>{expectedText}</span>} />
-        <Route path={AppRoute.favorites} element={
-          <PrivateRoute>
-            <span>{notExpectedText}</span>
-          </PrivateRoute>
+        <Route path={AppRoute.Login} element={<span>{EXPECTED_TEXT}</span>} />
+        <Route path={AppRoute.Favorites} element={
+          <PrivateRoute />
         }
         />
       </Routes>,
@@ -42,27 +41,24 @@ describe('Component: PrivateRoute', () => {
 
     render(preparedComponent);
 
-    expect(screen.getByText(expectedText)).toBeInTheDocument();
-    expect(screen.queryByText(notExpectedText)).not.toBeInTheDocument();
+    expect(screen.getByText(EXPECTED_TEXT)).toBeInTheDocument();
   });
 
   it('should render component for private route, when user authorized', () => {
-    const expectedText = 'private route';
-    const notExpectedText = 'public route';
+    const NOT_EXPECTED_TEXT = 'public route';
     const initialState = {
       [NameSpace.User]: {
+        fetchLoginStatus: FetchStatus.Idle,
         fetchAuthStatus: FetchStatus.Success,
         authorizationStatus: AuthorizationStatus.Auth,
-        userData: makeFakeUser()
+        userData: makeFakeUser(),
       }
     };
     const { withStoreComponent } = withStore(
       <Routes>
-        <Route path={AppRoute.login} element={<span>{notExpectedText}</span>} />
-        <Route path={AppRoute.favorites} element={
-          <PrivateRoute>
-            <span>{expectedText}</span>
-          </PrivateRoute>
+        <Route path={AppRoute.Login} element={<span>{NOT_EXPECTED_TEXT}</span>} />
+        <Route path={AppRoute.Favorites} element={
+          <PrivateRoute/>
         }
         />
       </Routes>,
@@ -72,6 +68,6 @@ describe('Component: PrivateRoute', () => {
 
     render(preparedComponent);
 
-    expect(screen.queryByText(notExpectedText)).not.toBeInTheDocument();
+    expect(screen.queryByText(NOT_EXPECTED_TEXT)).not.toBeInTheDocument();
   });
 });

@@ -1,4 +1,3 @@
-import React, {ReactNode} from 'react';
 import Header from '../../components/header/header';
 import CityFilter from '../../components/city-filter/city-filter';
 import {useAppSelector} from '../../hooks';
@@ -9,7 +8,7 @@ import Cities from '../../components/cities/cities';
 import {OfferPreviewType} from '../../types/offer';
 import classNames from 'classnames';
 
-function Main():ReactNode {
+function Main():JSX.Element {
   const selectedAndSortedOffers: OfferPreviewType[] = useAppSelector(selectOffersBySortAndCity);
   const fetchOffersStatus: FetchStatus = useAppSelector(selectFetchOffersStatus);
 

@@ -52,7 +52,7 @@ describe('OffersProcess Slice', () => {
         fetchOffersNearbyStatus: FetchStatus.Idle,
       };
 
-      const result = offersSlice.reducer(undefined, fetchOffersAction.fulfilled(mockOffers));
+      const result = offersSlice.reducer(undefined, fetchOffersAction.fulfilled(mockOffers, '', undefined));
 
       expect(result).toEqual(expectedState);
     });
@@ -60,7 +60,7 @@ describe('OffersProcess Slice', () => {
     it('should set fetchOffersStatus to FetchStatus.Idle on fetchOffersAction.pending', () => {
       const expectedStatus = FetchStatus.Idle;
 
-      const result = offersSlice.reducer(undefined, fetchOffersAction.pending());
+      const result = offersSlice.reducer(undefined, fetchOffersAction.pending);
 
       expect(result.fetchOffersStatus).toBe(expectedStatus);
     });
@@ -68,7 +68,7 @@ describe('OffersProcess Slice', () => {
     it('should set fetchOffersStatus to FetchStatus.Error on fetchOffersAction.rejected', () => {
       const expectedStatus = FetchStatus.Error;
 
-      const result = offersSlice.reducer(undefined, fetchOffersAction.rejected());
+      const result = offersSlice.reducer(undefined, fetchOffersAction.rejected);
 
       expect(result.fetchOffersStatus).toBe(expectedStatus);
     });
@@ -86,7 +86,7 @@ describe('OffersProcess Slice', () => {
         fetchOffersNearbyStatus: FetchStatus.Idle,
       };
 
-      const result = offersSlice.reducer(undefined, fetchOfferAction.fulfilled(mockOffers));
+      const result = offersSlice.reducer(undefined, fetchOfferAction.fulfilled(mockOffers, '', 'offer-id'));
 
       expect(result).toEqual(expectedState);
     });
@@ -94,7 +94,7 @@ describe('OffersProcess Slice', () => {
     it('should set fetchOfferStatus to FetchStatus.Idle on fetchOfferAction.pending', () => {
       const expectedStatus = FetchStatus.Idle;
 
-      const result = offersSlice.reducer(undefined, fetchOfferAction.pending());
+      const result = offersSlice.reducer(undefined, fetchOfferAction.pending);
 
       expect(result.fetchOfferStatus).toBe(expectedStatus);
     });
@@ -102,7 +102,7 @@ describe('OffersProcess Slice', () => {
     it('should set fetchOfferStatus to FetchStatus.Error on fetchOfferAction.rejected', () => {
       const expectedStatus = FetchStatus.Error;
 
-      const result = offersSlice.reducer(undefined, fetchOfferAction.rejected());
+      const result = offersSlice.reducer(undefined, fetchOfferAction.rejected);
 
       expect(result.fetchOfferStatus).toBe(expectedStatus);
     });
@@ -120,7 +120,7 @@ describe('OffersProcess Slice', () => {
         fetchOffersNearbyStatus: FetchStatus.Success,
       };
 
-      const result = offersSlice.reducer(undefined, fetchOffersNearbyAction.fulfilled(mockOffers));
+      const result = offersSlice.reducer(undefined, fetchOffersNearbyAction.fulfilled(mockOffers, '', 'offer-id'));
 
       expect(result).toEqual(expectedState);
     });
@@ -128,7 +128,7 @@ describe('OffersProcess Slice', () => {
     it('should set fetchOffersNearbyStatus to FetchStatus.Idle on fetchOffersNearbyAction.pending', () => {
       const expectedStatus = FetchStatus.Idle;
 
-      const result = offersSlice.reducer(undefined, fetchOffersNearbyAction.pending());
+      const result = offersSlice.reducer(undefined, fetchOffersNearbyAction.pending);
 
       expect(result.fetchOffersNearbyStatus).toBe(expectedStatus);
     });
@@ -136,7 +136,7 @@ describe('OffersProcess Slice', () => {
     it('should set fetchOffersNearbyStatus to FetchStatus.Error on fetchOffersNearbyAction.rejected', () => {
       const expectedStatus = FetchStatus.Error;
 
-      const result = offersSlice.reducer(undefined, fetchOffersNearbyAction.rejected());
+      const result = offersSlice.reducer(undefined, fetchOffersNearbyAction.rejected);
 
       expect(result.fetchOffersNearbyStatus).toBe(expectedStatus);
     });

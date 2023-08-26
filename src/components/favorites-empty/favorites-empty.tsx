@@ -1,6 +1,5 @@
-import React from 'react';
 
-function FavoritesEmpty() {
+function FavoritesEmpty(): JSX.Element {
   return (
     <section className="favorites favorites--empty">
       <h1 className="visually-hidden">Favorites (empty)</h1>

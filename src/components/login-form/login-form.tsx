@@ -1,16 +1,16 @@
-import React, {FormEvent, useState} from 'react';
-import {regexEmail, regexPassword} from '../../helpers/validator';
+import {FormEvent, useState} from 'react';
+import {REGEX_EMAIL, REGEX_PASSWORD} from '../../helpers/validator';
 import {toast} from 'react-toastify';
 import {ValidateErrors} from '../../const';
 import {loginAction} from '../../store/api-action';
 import {store} from '../../store';
 
-function LoginForm() {
+function LoginForm():JSX.Element {
   const [formState, setFormState] = useState({email: '', password: ''});
 
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!regexEmail.test(formState.email)) {
+    if (!REGEX_EMAIL.test(formState.email)) {
       toast.error(ValidateErrors.IncorrectEmail);
       return;
     }
@@ -19,7 +19,7 @@ function LoginForm() {
       return;
     }
 
-    if (!regexPassword.test(formState.password)) {
+    if (!REGEX_PASSWORD.test(formState.password)) {
       toast.error(ValidateErrors.NoNumberPassword);
       return;
     }
@@ -33,7 +33,7 @@ function LoginForm() {
       <form
         className="login__form form"
         method="post"
-        onSubmit={(event) => handleFormSubmit(event)}
+        onSubmit={handleFormSubmit}
       >
         <div className="login__input-wrapper form__input-wrapper">
           <label className="visually-hidden">E-mail</label>
@@ -42,7 +42,7 @@ function LoginForm() {
             type="email"
             name="email"
             placeholder="Email"
-            required=""
+            required
             data-testid='login-email'
             onChange={
               (event) => setFormState(
@@ -58,7 +58,7 @@ function LoginForm() {
             type="password"
             name="password"
             placeholder="Password"
-            required=""
+            required
             data-testid='login-password'
             onChange={
               (event) => setFormState(

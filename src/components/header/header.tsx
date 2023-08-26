@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {logoutAction} from '../../store/api-action';
@@ -7,10 +7,10 @@ import {useAppSelector} from '../../hooks';
 import {selectAuthStatus} from '../../store/user-process/selectors';
 import ProfileLink from '../profile-link/profile-link';
 
-function Header():ReactNode {
+function Header():JSX.Element {
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
 
-  const handleLogoutClick = (event:React.MouseEvent<HTMLLinkElement>) => {
+  const handleLogoutClick = (event:React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     store.dispatch(logoutAction());
   };
@@ -20,7 +20,7 @@ function Header():ReactNode {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link className="header__logo-link" to={AppRoute.root}>
+            <Link className="header__logo-link" to={AppRoute.Root}>
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </Link>
           </div>
@@ -29,7 +29,7 @@ function Header():ReactNode {
               {authorizationStatus === AuthorizationStatus.Unknown || authorizationStatus === AuthorizationStatus.NoAuth
                 ?
                 <li className='header__nav-item user'>
-                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.login}>
+                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__login">Sign in</span>

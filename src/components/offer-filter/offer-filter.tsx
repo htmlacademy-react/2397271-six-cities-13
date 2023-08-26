@@ -1,17 +1,18 @@
-import React, {ReactNode, useState} from 'react';
+import {useState} from 'react';
 import classNames from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {OfferSortList} from '../../const';
-import {selectSort} from '../../store/app-process/selectors';
+import {selectCity, selectSort} from '../../store/app-process/selectors';
 import {changeSort} from '../../store/app-process/app-process';
 
-function OfferFilter():ReactNode {
+function OfferFilter():JSX.Element {
   const [isOpened, setIsOpened] = useState(false);
   const dispatch = useAppDispatch();
   const currentSort = useAppSelector(selectSort);
+  const city = useAppSelector(selectCity);
 
-  const handleChangeClick = (sort:OfferSortList) => {
-    dispatch(changeSort({sort: sort}));
+  const handleChangeClick = (sort:string) => {
+    dispatch(changeSort({sort, city}));
     setIsOpened(!isOpened);
   };
 
@@ -25,7 +26,7 @@ function OfferFilter():ReactNode {
       <span className="places__sorting-caption">Sort by</span>
       <span
         className="places__sorting-type"
-        tabIndex="0"
+        tabIndex={0}
         onClick={() => setIsOpened(!isOpened)}
       >
         {currentSort}
@@ -45,7 +46,7 @@ function OfferFilter():ReactNode {
                 'places__option',
                 {'places__option--active': sort === currentSort}
               )}
-              tabIndex="0"
+              tabIndex={0}
               onClick={() => handleChangeClick(sort)}
               data-testid='offer-filter-item'
             >

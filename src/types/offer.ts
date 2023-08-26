@@ -12,6 +12,7 @@ export interface OfferPreviewType {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
+  description: string;
 }
 
 export interface OfferType extends Omit<OfferPreviewType, 'previewImage'> {
@@ -47,6 +48,7 @@ export interface ReviewType {
 export interface ReviewFormType {
   rating: number;
   comment: string;
+  id?: string;
 }
 
 export type OfferSortType = keyof OfferSortList;

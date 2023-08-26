@@ -1,4 +1,3 @@
-import React from 'react';
 import ReviewItem from '../review-item/review-item';
 import {ReviewType} from '../../types/offer';
 import {MAX_REVIEW_AMOUNT} from '../../const';
@@ -7,7 +6,7 @@ import {selectReviewsData} from '../../store/reviews-data/selectors';
 import {useAppSelector} from '../../hooks';
 
 
-function ReviewList() {
+function ReviewList():JSX.Element {
   const reviews:ReviewType[] = useAppSelector(selectReviewsData);
   const sortedReviews = [...reviews]
     .sort((a, b) => dayjs(b.date).diff(a.date))

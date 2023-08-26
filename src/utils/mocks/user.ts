@@ -1,5 +1,5 @@
-import { name, datatype, system, internet } from 'faker';
-import { UserData } from '../../types/offer';
+import { datatype, internet, name, system } from 'faker';
+import { UserData } from '../../types/user';
 
 const makeFakeUser = (): UserData =>
   ({
@@ -7,6 +7,8 @@ const makeFakeUser = (): UserData =>
     avatarUrl: system.filePath(),
     isPro: datatype.boolean(),
     email: internet.email(),
+    token: datatype.uuid(),
+    id: datatype.number(),
   } as UserData);
 
 export { makeFakeUser };

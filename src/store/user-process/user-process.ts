@@ -1,25 +1,18 @@
-import {AuthorizationStatus, FetchStatus, NameSpace} from '../../const';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {checkAuthAction, loginAction, logoutAction} from '../api-action';
+import { createSlice } from '@reduxjs/toolkit';
+import { AuthorizationStatus, FetchStatus, NameSpace } from '../../const';
+import { UserData } from '../../types/user';
+import { checkAuthAction, loginAction, logoutAction } from '../api-action';
 
-interface UserState {
+export interface UserState {
   authorizationStatus: AuthorizationStatus;
-  userData: {
-    email: string;
-    isPro: boolean;
-    name: string;
-    avatarUrl: string;
-  };
+  userData: UserData | null;
+  fetchLoginStatus: FetchStatus;
+  fetchAuthStatus: FetchStatus;
 }
 
-const initialState = {
+const initialState:UserState = {
   authorizationStatus: AuthorizationStatus.Unknown,
-  userData: {
-    email: '',
-    isPro: false,
-    name: '',
-    avatarUrl: '',
-  },
+  userData: null,
   fetchLoginStatus: FetchStatus.Idle,
   fetchAuthStatus: FetchStatus.Idle,
 };
@@ -30,7 +23,7 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(checkAuthAction.fulfilled, (state, action: PayloadAction<UserState>) => {
+      .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.fetchAuthStatus = FetchStatus.Success;
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.userData = action.payload;
@@ -42,7 +35,7 @@ export const userSlice = createSlice({
         state.fetchAuthStatus = FetchStatus.Error;
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
-      .addCase(loginAction.fulfilled, (state, action: PayloadAction<UserState>) => {
+      .addCase(loginAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.fetchLoginStatus = FetchStatus.Success;
         state.userData = action.payload;

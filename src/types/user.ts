@@ -3,11 +3,15 @@ export type AuthData = {
   password: string;
 };
 
-export type UserData = {
-  id: number;
-  token: string;
-  name: string;
+export type User = {
   email: string;
   isPro: boolean;
+  name: string;
   avatarUrl: string;
-};
+}
+
+export interface UserData extends User {
+  id: number;
+  token: string;
+}
+

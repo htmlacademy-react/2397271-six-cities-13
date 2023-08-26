@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, ReactNode, useEffect, useState} from 'react';
+import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import RatingStars from '../rating-stars/rating-stars';
 import {FetchStatus, ReviewState} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
@@ -11,7 +11,7 @@ interface ReviewFormProps {
   id: string;
 }
 
-function ReviewForm({id}: ReviewFormProps):ReactNode {
+function ReviewForm({id}: ReviewFormProps):JSX.Element {
   const [review, setReview] = useState(ReviewState);
   const fetchReviewStatus = useAppSelector(selectSendReviewStatus);
   const dispatch = useAppDispatch();

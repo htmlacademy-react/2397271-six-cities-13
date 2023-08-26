@@ -1,22 +1,21 @@
-import React, {memo, ReactNode} from 'react';
+import {memo} from 'react';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {AppRoute, FavoriteState, FetchStatus, RATING_MULTIPLIER} from '../../const';
+import {FavoriteState, FetchStatus, OFFER_CARD_TEST_ID, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeFavoritesAction} from '../../store/api-action';
 import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
+import { getCardPath } from '../../helpers/offers';
 
 export interface OfferCardProps {
   card: OfferPreviewType;
   className?: string;
   onMouseEnter?: (card:OfferPreviewType) => void;
-  testId?: string | undefined;
 }
 
-const OfferCard = memo(({card, className = '', onMouseEnter, testId}:OfferCardProps):ReactNode => {
+const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):JSX.Element => {
   const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
-  const getCardPath = () => AppRoute.offer.slice(0, AppRoute.offer.indexOf(':id')) + card.id;
   const dispatch = useAppDispatch();
 
   const handleFavoriteClick = () => {
@@ -33,7 +32,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter, testId}:OfferCardPr
       })
     }
     onMouseEnter={() => onMouseEnter && onMouseEnter(card)}
-    data-testid={testId}
+    data-testid={OFFER_CARD_TEST_ID}
     >
       {card.isPremium &&
         <div className="place-card__mark">
@@ -46,7 +45,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter, testId}:OfferCardPr
         })
       }
       >
-        <Link to={getCardPath()}>
+        <Link to={getCardPath(card.id)}>
           <img className="place-card__image" src={card.previewImage} width="260" height="200" alt="Place image"/>
         </Link>
       </div>
@@ -82,7 +81,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter, testId}:OfferCardPr
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={getCardPath()}>{card.title}</Link>
+          <Link to={getCardPath(card.id)}>{card.title}</Link>
         </h2>
         <p className="place-card__type">{card.type}</p>
       </div>

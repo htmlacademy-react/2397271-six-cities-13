@@ -4,12 +4,12 @@ import ProfileLink from './profile-link';
 
 describe('Component: ProfileLink', () => {
   it('should render correct', () => {
-    const profileLinkTestId = 'profile-link-container';
+    const PROFILE_LINK_TEST_ID = 'profile-link-container';
     const { withStoreComponent } = withStore(<ProfileLink />);
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
-    const profileLinkContainer = screen.getByTestId(profileLinkTestId);
+    const profileLinkContainer = screen.getByTestId(PROFILE_LINK_TEST_ID);
 
     expect(profileLinkContainer).toBeInTheDocument();
   });

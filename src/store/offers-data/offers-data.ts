@@ -1,19 +1,19 @@
 import {OfferPreviewType, OfferType} from '../../types/offer';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {changeFavoritesAction, fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction} from '../api-action';
 import {FetchStatus, NameSpace} from '../../const';
-import {changeFavoriteOffers} from '../../helpers/change-favorite-offers';
+import {changeFavoriteOffers} from '../../helpers/offers';
 
 interface OffersState {
   offers: OfferPreviewType[];
   fetchOffersStatus: FetchStatus;
-  offer: OfferType;
+  offer: OfferType | null;
   fetchOfferStatus: FetchStatus;
   offersNearby: OfferPreviewType[];
   fetchOffersNearbyStatus: FetchStatus;
 }
 
-const initialState = {
+const initialState:OffersState = {
   offers: [],
   fetchOffersStatus: FetchStatus.Idle,
   offer: null,
@@ -28,7 +28,7 @@ export const offersSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchOffersAction.fulfilled, (state, action: PayloadAction<OffersState>) => {
+      .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.fetchOffersStatus = FetchStatus.Success;
       })
@@ -38,7 +38,7 @@ export const offersSlice = createSlice({
       .addCase(fetchOffersAction.rejected, (state) => {
         state.fetchOffersStatus = FetchStatus.Error;
       })
-      .addCase(fetchOfferAction.fulfilled, (state, action: PayloadAction<OffersState>) => {
+      .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.offer = action.payload;
         state.fetchOfferStatus = FetchStatus.Success;
       })
@@ -48,7 +48,7 @@ export const offersSlice = createSlice({
       .addCase(fetchOfferAction.rejected, (state) => {
         state.fetchOfferStatus = FetchStatus.Error;
       })
-      .addCase(fetchOffersNearbyAction.fulfilled, (state, action: PayloadAction<OffersState>) => {
+      .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
         state.fetchOffersNearbyStatus = FetchStatus.Success;
       })
@@ -58,7 +58,7 @@ export const offersSlice = createSlice({
       .addCase(fetchOffersNearbyAction.rejected, (state) => {
         state.fetchOffersNearbyStatus = FetchStatus.Error;
       })
-      .addCase(changeFavoritesAction.fulfilled, (state, action: PayloadAction<OfferPreviewType>) => {
+      .addCase(changeFavoritesAction.fulfilled, (state, action) => {
         changeFavoriteOffers([...state.offers, ...state.offersNearby], state.offer, action.payload);
       });
   }

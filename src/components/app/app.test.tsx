@@ -5,6 +5,7 @@ import {AppRoute, AuthorizationStatus, FetchStatus, NameSpace} from '../../const
 import {render, screen} from '@testing-library/react';
 import {makeFakeReviews} from '../../utils/mocks/reviews';
 import {makeFakeUser} from '../../utils/mocks/user';
+import { State } from '../../types/root-state';
 
 describe('Application Routing', () => {
   let mockHistory: MemoryHistory;
@@ -16,7 +17,7 @@ describe('Application Routing', () => {
   it('should render "Main page" when user navigate to "/"', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent);
-    mockHistory.push(AppRoute.root);
+    mockHistory.push(AppRoute.Root);
 
     render(withStoreComponent);
 
@@ -26,8 +27,8 @@ describe('Application Routing', () => {
   it('should render "Not found" when user navigate to "/undefined"', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent);
-    const unknownRoute = '/unknown-route';
-    mockHistory.push(unknownRoute);
+    const UNKNOWN_ROUTE = '/unknown-route';
+    mockHistory.push(UNKNOWN_ROUTE);
 
     render(withStoreComponent);
 
@@ -41,11 +42,12 @@ describe('Application Routing', () => {
       [NameSpace.User]: {
         fetchAuthStatus: FetchStatus.Success,
         authorizationStatus: AuthorizationStatus.NoAuth,
+        fetchLoginStatus: FetchStatus.Success,
+        userData: null,
       }
     };
     const { withStoreComponent } = withStore(withHistoryComponent, initialState);
-    const unknownRoute = '/login';
-    mockHistory.push(unknownRoute);
+    mockHistory.push(AppRoute.Login);
 
     render(withStoreComponent);
 
@@ -53,29 +55,32 @@ describe('Application Routing', () => {
   });
 
   it('should render "Offer" when user navigate to "/offer"', () => {
-    const initialState = {
+    const initialState:Partial<State> = {
       [NameSpace.User]: {
         fetchAuthStatus: FetchStatus.Success,
+        fetchLoginStatus: FetchStatus.Success,
         authorizationStatus: AuthorizationStatus.NoAuth,
+        userData: makeFakeUser(),
       },
       [NameSpace.Reviews]: {
+        sendReviewStatus: FetchStatus.Success,
         fetchReviewsStatus: FetchStatus.Success,
         reviews: makeFakeReviews(),
       }
     };
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, initialState);
-    const offerRoute = `${AppRoute.offer}`;
-    mockHistory.push(offerRoute);
+    mockHistory.push(AppRoute.Offer);
 
     render(withStoreComponent);
 
     expect(screen.getByText(/Other places in the neighbourhood/i)).toBeInTheDocument();
   });
 
-  it('should render "Favorites" when user navigate to "/vaforites"', () => {
+  it('should render "Favorites" when user navigate to "/favorites"', () => {
     const initialState = {
       [NameSpace.User]: {
+        fetchLoginStatus: FetchStatus.Success,
         fetchAuthStatus: FetchStatus.Success,
         authorizationStatus: AuthorizationStatus.Auth,
         userData: makeFakeUser()
@@ -83,12 +88,11 @@ describe('Application Routing', () => {
     };
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, initialState);
-    const favoritesContainerId = 'favorites-container';
-    const offerRoute = `${AppRoute.favorites}`;
-    mockHistory.push(offerRoute);
+    const FAVORITES_CONTAINER_ID = 'favorites-container';
+    mockHistory.push(AppRoute.Favorites);
 
     render(withStoreComponent);
-    const favoritesContainer = screen.getByTestId(favoritesContainerId);
+    const favoritesContainer = screen.getByTestId(FAVORITES_CONTAINER_ID);
 
     expect(favoritesContainer).toBeInTheDocument();
   });

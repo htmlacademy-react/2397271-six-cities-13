@@ -176,7 +176,7 @@ describe('Async actions', () => {
       const mockId = datatype.uuid();
       mockAxiosAdapter.onGet(`${APIRoute.Offers}/${mockId}`).reply(400);
 
-      await store.dispatch(fetchOfferAction());
+      await store.dispatch(fetchOfferAction('mockId'));
       const emittedActions = store.getActions();
       const extractedActionsTypes = extractActionsTypes(emittedActions);
 
@@ -212,7 +212,7 @@ describe('Async actions', () => {
       const mockId = datatype.uuid();
       mockAxiosAdapter.onGet(`${APIRoute.Offers}/${mockId}${APIRoute.Nearby}`).reply(400);
 
-      await store.dispatch(fetchOffersNearbyAction());
+      await store.dispatch(fetchOffersNearbyAction(mockId));
       const emittedActions = store.getActions();
       const extractedActionsTypes = extractActionsTypes(emittedActions);
 

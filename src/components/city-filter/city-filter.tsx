@@ -3,16 +3,17 @@ import {Cities} from '../../const';
 import classNames from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {CityNameType} from '../../types/location';
-import {selectCity} from '../../store/app-process/selectors';
+import {selectCity, selectSort} from '../../store/app-process/selectors';
 import {changeCity} from '../../store/app-process/app-process';
 
-function CityFilter() {
+function CityFilter(): JSX.Element {
   const dispatch = useAppDispatch();
   const currentCity: CityNameType = useAppSelector(selectCity);
+  const sort: string = useAppSelector(selectSort);
 
-  const handleCityClick = (event:React.MouseEvent<HTMLLinkElement>, city: CityNameType) => {
+  const handleCityClick = (event:React.MouseEvent<HTMLElement>, city: CityNameType) => {
     event.preventDefault();
-    dispatch(changeCity({city}));
+    dispatch(changeCity({city, sort}));
   };
 
   return (

@@ -8,14 +8,14 @@ describe('Component: ReviewItem', () => {
   it('should render correctly', () => {
     const mockReview = makeFakeReviews();
     const expectedLength = mockReview.length;
-    const reviewListContainerId = 'review-list-container';
-    const reviewItemId = 'review-item-container';
+    const REVIEW_LIST_CONTAINER_ID = 'review-list-container';
+    const REVIEW_ITEM_ID = 'review-item-container';
     const { withStoreComponent } = withStore(<ReviewList />);
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
-    const reviewListContainer = screen.getByTestId(reviewListContainerId);
-    const reviewItems = screen.getAllByTestId(reviewItemId);
+    const reviewListContainer = screen.getByTestId(REVIEW_LIST_CONTAINER_ID);
+    const reviewItems = screen.getAllByTestId(REVIEW_ITEM_ID);
 
     expect(reviewListContainer).toBeInTheDocument();
     expect(reviewItems.length).toBe(expectedLength);

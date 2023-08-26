@@ -1,6 +1,4 @@
-import React from 'react';
-
-function Footer() {
+function Footer():JSX.Element {
   return (
     <footer className="footer container" data-testid='footer-container'>
       <a className="footer__logo-link" href="main.html">
