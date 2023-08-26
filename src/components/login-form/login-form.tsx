@@ -33,7 +33,7 @@ function LoginForm():JSX.Element {
       <form
         className="login__form form"
         method="post"
-        onSubmit={(event) => handleFormSubmit(event)}
+        onSubmit={handleFormSubmit}
       >
         <div className="login__input-wrapper form__input-wrapper">
           <label className="visually-hidden">E-mail</label>
