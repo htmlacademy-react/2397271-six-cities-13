@@ -1,11 +1,11 @@
 import {useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import CommentForm from '../../components/review-form/review-form';
 import {OfferPreviewType, ReviewType} from '../../types/offer';
 import Header from '../../components/header/header';
 import ReviewList from '../../components/review-list/review-list';
 import OfferList from '../../components/offer-list/offer-list';
-import {AuthorizationStatus, FavoriteState, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../../const';
+import {AppRoute, AuthorizationStatus, FavoriteState, FetchStatus, NEARBY_OFFERS_COUNT, RATING_MULTIPLIER} from '../../const';
 import Map from '../../components/map/map';
 import {
   changeFavoritesAction,
@@ -26,6 +26,7 @@ import {selectFetchReviewsStatus, selectReviewsData} from '../../store/reviews-d
 import {selectAuthStatus} from '../../store/user-process/selectors';
 import classNames from 'classnames';
 import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
+import { pluralize } from '../../helpers/pluralize';
 
 function Offer():JSX.Element {
   const { id } = useParams() as {id : string};
@@ -54,6 +55,7 @@ function Offer():JSX.Element {
   const authorizationStatus: AuthorizationStatus = useAppSelector(selectAuthStatus);
   const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
   const slicedOffersNearby = offersNearby.slice(0, NEARBY_OFFERS_COUNT);
+  const navigate = useNavigate();
 
   if (fetchOfferStatus === FetchStatus.Idle
   || fetchReviewsStatus === FetchStatus.Idle
@@ -68,6 +70,9 @@ function Offer():JSX.Element {
   }
 
   const handleFavoriteClick = () => {
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.Login);
+    }
     if (changeFavoritesStatus !== FetchStatus.Idle) {
       dispatch(changeFavoritesAction({offerId: offer.id, status: offer.isFavorite ? FavoriteState.NotFavorite : FavoriteState.IsFavorite}));
     }
@@ -112,12 +117,12 @@ function Offer():JSX.Element {
                   <span style={{width: `${Math.round(offer.rating) * RATING_MULTIPLIER}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">{Math.round(offer.rating)}</span>
+                <span className="offer__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">{offer.type}</li>
-                <li className="offer__feature offer__feature--bedrooms">{offer.bedrooms} bedrooms</li>
-                <li className="offer__feature offer__feature--adults"> Max {offer.maxAdults} adults </li>
+                <li className="offer__feature offer__feature--entire">{offer.type[0].toUpperCase() + offer.type.slice(1)}</li>
+                <li className="offer__feature offer__feature--bedrooms">{offer.bedrooms} {pluralize('Bedroom', offer.bedrooms)}</li>
+                <li className="offer__feature offer__feature--adults">Max {offer.maxAdults} {pluralize('adult', offer.maxAdults)}</li>
               </ul>
               <div className="offer__price">
                 <b className="offer__price-value">€{offer.price}</b>
@@ -134,7 +139,9 @@ function Offer():JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={classNames("offer__avatar-wrapper user__avatar-wrapper", {
+                    'offer__avatar-wrapper--pro': offer.host.isPro
+                  })}>
                     <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="offer__user-name">{offer.host.name}</span>
