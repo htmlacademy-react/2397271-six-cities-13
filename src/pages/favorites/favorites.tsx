@@ -18,7 +18,10 @@ function Favorites():JSX.Element {
   }
 
   return (
-    <div className='page' data-testid='favorites-container'>
+    <div className={classNames('page', {
+      'page--favorites-empty': !favoriteOffers.length
+    })} data-testid='favorites-container'
+    >
       <Header />
       <main className={classNames('page__main page__main--favorites', {
         'page__main--favorites-empty': !favoriteOffers.length

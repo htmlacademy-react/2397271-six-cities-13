@@ -64,7 +64,8 @@ function LoginForm():JSX.Element {
           className="login__submit form__submit button"
           type="submit"
           disabled={!checkPassword}
-        >Sign in</button>
+        >Sign in
+        </button>
       </form>
     </section>
   );

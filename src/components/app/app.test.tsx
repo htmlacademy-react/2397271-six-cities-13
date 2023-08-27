@@ -48,10 +48,12 @@ describe('Application Routing', () => {
     };
     const { withStoreComponent } = withStore(withHistoryComponent, initialState);
     mockHistory.push(AppRoute.Login);
+    const LOGIN_CONTAINER_ID = 'login-container';
 
     render(withStoreComponent);
+    const loginContainer = screen.getByTestId(LOGIN_CONTAINER_ID);
 
-    expect(screen.getByText(/Amsterdam/i)).toBeInTheDocument();
+    expect(loginContainer).toBeInTheDocument();
   });
 
   it('should render "Offer" when user navigate to "/offer"', () => {

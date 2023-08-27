@@ -4,7 +4,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {fetchReviewsAction, sendReviewAction} from '../api-action';
 
 interface ReviewsState {
-  reviews: ReviewType[] | [];
+  reviews: ReviewType[];
   fetchReviewsStatus: FetchStatus;
   sendReviewStatus: FetchStatus;
 }
