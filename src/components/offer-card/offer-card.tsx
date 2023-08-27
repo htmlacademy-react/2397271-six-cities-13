@@ -1,12 +1,13 @@
 import {memo} from 'react';
 import classNames from 'classnames';
-import {Link} from 'react-router-dom';
-import {FavoriteState, FetchStatus, OFFER_CARD_TEST_ID, RATING_MULTIPLIER} from '../../const';
+import {Link, useNavigate} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus, FavoriteState, FetchStatus, OFFER_CARD_TEST_ID, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeFavoritesAction} from '../../store/api-action';
 import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
 import { getCardPath } from '../../helpers/offers';
+import { selectAuthStatus } from '../../store/user-process/selectors';
 
 export interface OfferCardProps {
   card: OfferPreviewType;
@@ -16,9 +17,14 @@ export interface OfferCardProps {
 
 const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):JSX.Element => {
   const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
+  const authStatus = useAppSelector(selectAuthStatus);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleFavoriteClick = () => {
+    if (authStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.Login);
+    }
     if (changeFavoritesStatus !== FetchStatus.Idle) {
       dispatch(changeFavoritesAction({offerId: card.id, status: card.isFavorite ? FavoriteState.NotFavorite : FavoriteState.IsFavorite}));
     }
