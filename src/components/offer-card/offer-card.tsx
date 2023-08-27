@@ -89,7 +89,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):JSX
         <h2 className="place-card__name">
           <Link to={getCardPath(card.id)}>{card.title}</Link>
         </h2>
-        <p className="place-card__type">{card.type}</p>
+        <p className="place-card__type">{card.type[0].toUpperCase() + card.type.slice(1)}</p>
       </div>
     </article>
   );
