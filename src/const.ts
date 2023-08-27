@@ -50,12 +50,6 @@ export enum CommentTextLength {
   Max = 300,
 }
 
-export enum CommentErrors {
-  TooLongText = `Max comment length is ${CommentTextLength.Max}`,
-  TooShortText = `Min comment length is ${CommentTextLength.Min}`,
-  EmptyRating = 'Please select the rating ',
-}
-
 export const LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 export const ReviewDateView = {

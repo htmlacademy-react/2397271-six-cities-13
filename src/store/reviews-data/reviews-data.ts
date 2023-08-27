@@ -31,7 +31,8 @@ export const reviewsSlice = createSlice({
       .addCase(fetchReviewsAction.rejected, (state) => {
         state.fetchReviewsStatus = FetchStatus.Error;
       })
-      .addCase(sendReviewAction.fulfilled, (state) => {
+      .addCase(sendReviewAction.fulfilled, (state, action) => {
+        state.reviews.push(action.payload);
         state.sendReviewStatus = FetchStatus.Success;
       })
       .addCase(sendReviewAction.pending, (state) => {

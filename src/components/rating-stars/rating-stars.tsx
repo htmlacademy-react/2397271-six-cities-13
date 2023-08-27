@@ -17,7 +17,7 @@ function RatingStars({handleRatingChange, currentRating}:RatingStarsProps):JSX.E
         <React.Fragment key={star}>
           <input className="form__rating-input visually-hidden"
             name="rating"
-            id={`${index}-stars`}
+            id={`${RatingTitles.length - index}-stars`}
             type="radio"
             value={RatingTitles.length - index}
             checked={currentRating === RatingTitles.length - index}
@@ -26,7 +26,11 @@ function RatingStars({handleRatingChange, currentRating}:RatingStarsProps):JSX.E
             data-testid='rating-star'
           >
           </input>
-          <label htmlFor={`${index}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
+          <label
+            htmlFor={`${RatingTitles.length - index}-stars`}
+            className="reviews__rating-label form__rating-label"
+            title={RatingTitles[index]}
+          >
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star"></use>
             </svg>

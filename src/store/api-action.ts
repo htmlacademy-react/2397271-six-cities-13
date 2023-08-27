@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
-import { FavoriteData, OfferPreviewType, OfferType, ReviewFormType, ReviewType } from '../types/offer';
+import { FavoriteData, OfferPreviewType, OfferType, ReviewType } from '../types/offer';
 import { ThunkConfig } from '../types/root-state';
 import { AuthData, UserData } from '../types/user';
 import { redirectToRoute } from './action';
@@ -147,7 +147,7 @@ export const fetchReviewsAction = createAsyncThunk<
 );
 
 export const sendReviewAction = createAsyncThunk<
-  ReviewFormType,
+  ReviewType,
   {
     rating: number;
     comment: string;
@@ -157,7 +157,7 @@ export const sendReviewAction = createAsyncThunk<
 >(
   'reviews/post',
   async ({offerId, comment, rating}, {extra: api}) => {
-    const {data} = await api.post<{ comment: string; rating: number }>(`${APIRoute.Comments}/${offerId}`, {comment, rating})
+    const {data} = await api.post<ReviewType>(`${APIRoute.Comments}/${offerId}`, {comment, rating})
       .catch((error: AxiosError) => {
         throw new Error(error.message);
       });
