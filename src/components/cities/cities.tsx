@@ -15,8 +15,12 @@ function Cities(): JSX.Element {
   const currentCity: CityNameType = useAppSelector(selectCity);
   const selectedAndSortedOffers: OfferPreviewType[] = useAppSelector(selectOffersBySortAndCity);
 
-  const handleActiveOffer = useCallback((offer:OfferPreviewType) => {
+  const handleActiveOfferMouseEnter = useCallback((offer:OfferPreviewType) => {
     setActiveOffer(offer);
+  }, []);
+
+  const handleActiveOfferMouseLeave = useCallback(() => {
+    setActiveOffer(null);
   }, []);
 
   return (
@@ -35,7 +39,8 @@ function Cities(): JSX.Element {
                 <OfferList
                   offerList={selectedAndSortedOffers}
                   className='cities'
-                  handleMouseEnter={handleActiveOffer}
+                  handleMouseEnter={handleActiveOfferMouseEnter}
+                  handleMouseLeave={handleActiveOfferMouseLeave}
                 />
               </div>
             </section>

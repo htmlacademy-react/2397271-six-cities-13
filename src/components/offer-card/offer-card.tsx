@@ -13,9 +13,10 @@ export interface OfferCardProps {
   card: OfferPreviewType;
   className?: string;
   onMouseEnter?: (card:OfferPreviewType) => void;
+  onMouseLeave?: () => void;
 }
 
-const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):JSX.Element => {
+const OfferCard = memo(({card, className = '', onMouseEnter, onMouseLeave}:OfferCardProps):JSX.Element => {
   const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
   const authStatus = useAppSelector(selectAuthStatus);
   const dispatch = useAppDispatch();
@@ -38,6 +39,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):JSX
       })
     }
     onMouseEnter={() => onMouseEnter && onMouseEnter(card)}
+    onMouseLeave={() => onMouseLeave && onMouseLeave()}
     data-testid={OFFER_CARD_TEST_ID}
     >
       {card.isPremium &&
