@@ -8,6 +8,7 @@ import {CityNameType} from '../../types/location';
 import {selectCity} from '../../store/app-process/selectors';
 import CitiesEmpty from '../cities-empty/cities-empty';
 import {selectOffersBySortAndCity} from '../../store/offers-data/selectors';
+import { pluralize } from '../../helpers/pluralize';
 
 function Cities(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType | null>(null);
@@ -28,7 +29,7 @@ function Cities(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{selectedAndSortedOffers.length} places to stay in {currentCity}</b>
+              <b className="places__found">{selectedAndSortedOffers.length} {pluralize('place', selectedAndSortedOffers.length)} to stay in {currentCity}</b>
               <OfferFilter />
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
