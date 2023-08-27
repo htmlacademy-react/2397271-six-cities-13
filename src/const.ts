@@ -88,12 +88,6 @@ export enum NameSpace {
   Favorites = 'FAVORITES'
 }
 
-export enum ValidateErrors {
-  IncorrectEmail = 'Incorrect email',
-  ShortPassword = 'Password is too short',
-  NoNumberPassword = 'Password must contains number',
-}
-
 export const ReviewState = {
   rating: 0,
   comment: '',

@@ -1,30 +1,31 @@
-import {FormEvent, useState} from 'react';
-import {REGEX_EMAIL, REGEX_PASSWORD} from '../../helpers/validator';
-import {toast} from 'react-toastify';
-import {ValidateErrors} from '../../const';
+import {ChangeEvent, FormEvent, useState} from 'react';
+import {REGEX_PASSWORD} from '../../helpers/validator';
 import {loginAction} from '../../store/api-action';
 import {store} from '../../store';
 
 function LoginForm():JSX.Element {
   const [formState, setFormState] = useState({email: '', password: ''});
 
+  const handleEmailChange = (event:ChangeEvent<HTMLInputElement>) => {
+    setFormState(
+      (prevState) => ({...prevState, email: event.target.value})
+    );
+  };
+
+  const checkPassword = formState.password.length >= 2 && REGEX_PASSWORD.test(formState.password);
+
+  const handlePasswordChange = (event:ChangeEvent<HTMLInputElement>) => {
+    setFormState(
+      (prevState) => ({...prevState, password: event.target.value})
+    );
+  };
+
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!REGEX_EMAIL.test(formState.email)) {
-      toast.error(ValidateErrors.IncorrectEmail);
-      return;
-    }
-    if (formState.password.length < 6) {
-      toast.error(ValidateErrors.ShortPassword);
-      return;
-    }
 
-    if (!REGEX_PASSWORD.test(formState.password)) {
-      toast.error(ValidateErrors.NoNumberPassword);
-      return;
+    if (checkPassword) {
+      store.dispatch(loginAction(formState));
     }
-
-    store.dispatch(loginAction(formState));
   };
 
   return (
@@ -44,11 +45,7 @@ function LoginForm():JSX.Element {
             placeholder="Email"
             required
             data-testid='login-email'
-            onChange={
-              (event) => setFormState(
-                (prevState) => ({...prevState, email: event.target.value})
-              )
-            }
+            onChange={handleEmailChange}
           />
         </div>
         <div className="login__input-wrapper form__input-wrapper">
@@ -60,14 +57,14 @@ function LoginForm():JSX.Element {
             placeholder="Password"
             required
             data-testid='login-password'
-            onChange={
-              (event) => setFormState(
-                (prevState) => ({...prevState, password: event.target.value})
-              )
-            }
+            onChange={handlePasswordChange}
           />
         </div>
-        <button className="login__submit form__submit button" type="submit">Sign in</button>
+        <button
+          className="login__submit form__submit button"
+          type="submit"
+          disabled={!checkPassword}
+        >Sign in</button>
       </form>
     </section>
   );
