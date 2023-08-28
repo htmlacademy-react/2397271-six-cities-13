@@ -1,24 +1,32 @@
 import {memo} from 'react';
 import classNames from 'classnames';
-import {Link} from 'react-router-dom';
-import {FavoriteState, FetchStatus, OFFER_CARD_TEST_ID, RATING_MULTIPLIER} from '../../const';
+import {Link, useNavigate} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus, FavoriteState, FetchStatus, OFFER_CARD_TEST_ID, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeFavoritesAction} from '../../store/api-action';
 import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
 import { getCardPath } from '../../helpers/offers';
+import { selectAuthStatus } from '../../store/user-process/selectors';
+import { increaseFirstLetter } from '../../helpers/increase-first-letter';
 
 export interface OfferCardProps {
   card: OfferPreviewType;
   className?: string;
   onMouseEnter?: (card:OfferPreviewType) => void;
+  onMouseLeave?: () => void;
 }
 
-const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):JSX.Element => {
+const OfferCard = memo(({card, className = '', onMouseEnter, onMouseLeave}:OfferCardProps):JSX.Element => {
   const changeFavoritesStatus = useAppSelector(selectChangeFavoritesStatus);
+  const authStatus = useAppSelector(selectAuthStatus);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleFavoriteClick = () => {
+    if (authStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.Login);
+    }
     if (changeFavoritesStatus !== FetchStatus.Idle) {
       dispatch(changeFavoritesAction({offerId: card.id, status: card.isFavorite ? FavoriteState.NotFavorite : FavoriteState.IsFavorite}));
     }
@@ -32,6 +40,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):JSX
       })
     }
     onMouseEnter={() => onMouseEnter && onMouseEnter(card)}
+    onMouseLeave={() => onMouseLeave && onMouseLeave()}
     data-testid={OFFER_CARD_TEST_ID}
     >
       {card.isPremium &&
@@ -83,7 +92,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter}:OfferCardProps):JSX
         <h2 className="place-card__name">
           <Link to={getCardPath(card.id)}>{card.title}</Link>
         </h2>
-        <p className="place-card__type">{card.type}</p>
+        <p className="place-card__type">{increaseFirstLetter(card.type)}</p>
       </div>
     </article>
   );

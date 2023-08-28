@@ -1,5 +1,6 @@
 import {CityType, LocationType} from './location';
 import {OfferSortList} from '../const';
+import { UserType } from './user';
 
 export interface OfferPreviewType {
   id: string;
@@ -21,20 +22,6 @@ export interface OfferType extends Omit<OfferPreviewType, 'previewImage'> {
   host: UserType;
   bedrooms: number;
   maxAdults: number;
-}
-
-
-export interface UserType {
-  name: string;
-  avatarUrl: string;
-  isPro: boolean;
-}
-
-export interface UserData {
-  email: string;
-  isPro: boolean;
-  name: string;
-  avatarUrl: string;
 }
 
 export interface ReviewType {

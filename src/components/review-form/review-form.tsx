@@ -13,6 +13,7 @@ interface ReviewFormProps {
 
 function ReviewForm({id}: ReviewFormProps):JSX.Element {
   const [review, setReview] = useState(ReviewState);
+  const [isValid, setIsValid] = useState(false);
   const fetchReviewStatus = useAppSelector(selectSendReviewStatus);
   const dispatch = useAppDispatch();
 
@@ -21,6 +22,7 @@ function ReviewForm({id}: ReviewFormProps):JSX.Element {
 
     if (isMounted && fetchReviewStatus === FetchStatus.Success) {
       setReview(ReviewState);
+      setIsValid(false);
     }
     return () => {
       isMounted = false;
@@ -29,16 +31,18 @@ function ReviewForm({id}: ReviewFormProps):JSX.Element {
 
   const handleRatingChange = (event:ChangeEvent<HTMLInputElement>):void => {
     setReview((prevReview) => ({...prevReview, rating: Number(event.target.value)}));
+    setIsValid(validateReviewForm(review));
   };
 
   const handleReviewInput = (event:ChangeEvent<HTMLTextAreaElement>):void => {
     setReview((prevReview) => ({...prevReview, comment: event.target.value}));
+    setIsValid(validateReviewForm(review));
   };
 
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>):void => {
     event.preventDefault();
 
-    if (validateReviewForm(review)) {
+    if (isValid) {
       dispatch(sendReviewAction({offerId: id, comment: review.comment, rating: review.rating}));
     }
   };
@@ -76,7 +80,7 @@ function ReviewForm({id}: ReviewFormProps):JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={fetchReviewStatus === FetchStatus.Idle}
+          disabled={fetchReviewStatus === FetchStatus.Idle || !isValid}
         >{fetchReviewStatus === FetchStatus.Idle ? 'Loading...' : 'Submit'}
         </button>
       </div>

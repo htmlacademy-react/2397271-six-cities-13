@@ -10,6 +10,12 @@ export type User = {
   avatarUrl: string;
 }
 
+export interface UserType {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
+
 export interface UserData extends User {
   id: number;
   token: string;

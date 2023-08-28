@@ -5,10 +5,11 @@ interface OfferListProps {
   offerList: OfferPreviewType[];
   className?: string;
   handleMouseEnter?: (value: OfferPreviewType) => void;
+  handleMouseLeave?: () => void;
 }
 
 const OfferList = (props:OfferListProps):JSX.Element => {
-  const {offerList, className, handleMouseEnter} = props;
+  const {offerList, className, handleMouseEnter, handleMouseLeave} = props;
 
   return (
     <>
@@ -19,6 +20,7 @@ const OfferList = (props:OfferListProps):JSX.Element => {
             card={card}
             className={className ?? className}
             onMouseEnter={() => handleMouseEnter && handleMouseEnter(card)}
+            onMouseLeave={() => handleMouseLeave && handleMouseLeave()}
           />
         ))}
     </>

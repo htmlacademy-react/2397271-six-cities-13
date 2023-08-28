@@ -37,11 +37,9 @@ export const DEFAULT_OFFER_SORT = 'Popular';
 
 export const RATING_MULTIPLIER = 20 as const;
 
-export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+export const URL_MARKER_DEFAULT = '/img/pin.svg';
 
-export const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+export const URL_MARKER_CURRENT = '/img/pin-active.svg';
 
 export const NEARBY_OFFERS_COUNT = 3;
 
@@ -50,12 +48,6 @@ export const MAP_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voya
 export enum CommentTextLength {
   Min = 50,
   Max = 300,
-}
-
-export enum CommentErrors {
-  TooLongText = `Max comment length is ${CommentTextLength.Max}`,
-  TooShortText = `Min comment length is ${CommentTextLength.Min}`,
-  EmptyRating = 'Please select the rating ',
 }
 
 export const LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
@@ -94,12 +86,6 @@ export enum NameSpace {
   Offers = 'OFFERS',
   Reviews = 'REVIEWS',
   Favorites = 'FAVORITES'
-}
-
-export enum ValidateErrors {
-  IncorrectEmail = 'Incorrect email',
-  ShortPassword = 'Password is too short',
-  NoNumberPassword = 'Password must contains number',
 }
 
 export const ReviewState = {
