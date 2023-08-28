@@ -10,9 +10,9 @@ describe('Hook: useMap', () => {
   };
   const mapRef = getMapRef();
   const city = makeFakeOffer().city;
-  const MapEl = () => <div ref={mapRef}></div>;
+  const MapElement = () => <div ref={mapRef}></div>;
 
-  render(<MapEl/>);
+  render(<MapElement/>);
 
   it('should return map instance', () => {
     const { result } = renderHook(() => useMap(mapRef, city));

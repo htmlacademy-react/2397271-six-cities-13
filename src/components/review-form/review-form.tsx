@@ -42,7 +42,7 @@ function ReviewForm({id}: ReviewFormProps):JSX.Element {
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>):void => {
     event.preventDefault();
 
-    if (validateReviewForm(review)) {
+    if (isValid) {
       dispatch(sendReviewAction({offerId: id, comment: review.comment, rating: review.rating}));
     }
   };

@@ -8,6 +8,7 @@ import {changeFavoritesAction} from '../../store/api-action';
 import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
 import { getCardPath } from '../../helpers/offers';
 import { selectAuthStatus } from '../../store/user-process/selectors';
+import { increaseFirstLetter } from '../../helpers/increase-first-letter';
 
 export interface OfferCardProps {
   card: OfferPreviewType;
@@ -91,7 +92,7 @@ const OfferCard = memo(({card, className = '', onMouseEnter, onMouseLeave}:Offer
         <h2 className="place-card__name">
           <Link to={getCardPath(card.id)}>{card.title}</Link>
         </h2>
-        <p className="place-card__type">{card.type[0].toUpperCase() + card.type.slice(1)}</p>
+        <p className="place-card__type">{increaseFirstLetter(card.type)}</p>
       </div>
     </article>
   );

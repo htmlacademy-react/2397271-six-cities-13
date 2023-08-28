@@ -12,7 +12,7 @@ function LoginForm():JSX.Element {
     );
   };
 
-  const checkPassword = formState.password.length >= 2 && REGEX_PASSWORD.test(formState.password);
+  const isPasswordValid = formState.password.length >= 2 && REGEX_PASSWORD.test(formState.password);
 
   const handlePasswordChange = (event:ChangeEvent<HTMLInputElement>) => {
     setFormState(
@@ -23,7 +23,7 @@ function LoginForm():JSX.Element {
   const handleFormSubmit = (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (checkPassword) {
+    if (isPasswordValid) {
       store.dispatch(loginAction(formState));
     }
   };
@@ -63,7 +63,7 @@ function LoginForm():JSX.Element {
         <button
           className="login__submit form__submit button"
           type="submit"
-          disabled={!checkPassword}
+          disabled={!isPasswordValid}
         >Sign in
         </button>
       </form>

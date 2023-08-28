@@ -27,6 +27,7 @@ import {selectAuthStatus} from '../../store/user-process/selectors';
 import classNames from 'classnames';
 import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
 import { pluralize } from '../../helpers/pluralize';
+import { increaseFirstLetter } from '../../helpers/increase-first-letter';
 
 function Offer():JSX.Element {
   const { id } = useParams() as {id : string};
@@ -120,7 +121,7 @@ function Offer():JSX.Element {
                 <span className="offer__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">{offer.type[0].toUpperCase() + offer.type.slice(1)}</li>
+                <li className="offer__feature offer__feature--entire">{increaseFirstLetter(offer.type)}</li>
                 <li className="offer__feature offer__feature--bedrooms">{offer.bedrooms} {pluralize('Bedroom', offer.bedrooms)}</li>
                 <li className="offer__feature offer__feature--adults">Max {offer.maxAdults} {pluralize('adult', offer.maxAdults)}</li>
               </ul>
