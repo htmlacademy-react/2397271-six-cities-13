@@ -2,7 +2,7 @@ import {useCallback, useState} from 'react';
 import OfferFilter from '../offer-filter/offer-filter';
 import OfferList from '../offer-list/offer-list';
 import Map from '../map/map';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 import {OfferPreviewType} from '../../types/offer';
 import {CityNameType} from '../../types/location';
 import {selectCity} from '../../store/app-process/selectors';
@@ -39,8 +39,8 @@ function Cities(): JSX.Element {
                 <OfferList
                   offerList={selectedAndSortedOffers}
                   className='cities'
-                  handleMouseEnter={handleActiveOfferMouseEnter}
-                  handleMouseLeave={handleActiveOfferMouseLeave}
+                  onMouseEnter={handleActiveOfferMouseEnter}
+                  onMouseLeave={handleActiveOfferMouseLeave}
                 />
               </div>
             </section>

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {Link, useNavigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, FavoriteState, FetchStatus, OFFER_CARD_TEST_ID, RATING_MULTIPLIER} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {changeFavoritesAction} from '../../store/api-action';
 import {selectChangeFavoritesStatus} from '../../store/favorites-data/selectors';
 import { getCardPath } from '../../helpers/offers';

@@ -2,7 +2,7 @@ import {FetchStatus} from '../../const';
 import {OfferPreviewType} from '../../types/offer';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 import {selectFavoritesData, selectFetchFavoritesStatus} from '../../store/favorites-data/selectors';
 import Loader from '../../components/loader/loader';
 import classNames from 'classnames';

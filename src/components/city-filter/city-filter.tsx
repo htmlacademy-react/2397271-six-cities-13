@@ -1,7 +1,7 @@
 import React from 'react';
 import {Cities} from '../../const';
 import classNames from 'classnames';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {CityNameType} from '../../types/location';
 import {selectCity, selectSort} from '../../store/app-process/selectors';
 import {changeCity} from '../../store/app-process/app-process';

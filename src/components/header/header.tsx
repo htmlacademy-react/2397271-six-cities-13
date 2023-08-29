@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {logoutAction} from '../../store/api-action';
 import {store} from '../../store';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 import {selectAuthStatus} from '../../store/user-process/selectors';
 import ProfileLink from '../profile-link/profile-link';
 

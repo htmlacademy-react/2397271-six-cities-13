@@ -2,7 +2,7 @@ import {Cities} from '../../const';
 import FavoriteItem from '../favorite-item/favorite-item';
 import {OfferPreviewType} from '../../types/offer';
 import {selectFavoritesData} from '../../store/favorites-data/selectors';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 import { CityNameType } from '../../types/location';
 
 function FavoritesList(): JSX.Element {

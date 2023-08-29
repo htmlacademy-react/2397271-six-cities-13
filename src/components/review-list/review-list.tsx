@@ -3,7 +3,7 @@ import {ReviewType} from '../../types/offer';
 import {MAX_REVIEW_AMOUNT} from '../../const';
 import dayjs from 'dayjs';
 import {selectReviewsData} from '../../store/reviews-data/selectors';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 
 
 function ReviewList():JSX.Element {

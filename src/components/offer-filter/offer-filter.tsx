@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import classNames from 'classnames';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {OfferSortList} from '../../const';
 import {selectCity, selectSort} from '../../store/app-process/selectors';
 import {changeSort} from '../../store/app-process/app-process';
