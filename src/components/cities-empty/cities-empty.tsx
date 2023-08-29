@@ -1,6 +1,6 @@
 import {CityNameType} from '../../types/location';
 import {selectCity} from '../../store/app-process/selectors';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 
 function CitiesEmpty(): JSX.Element {
   const currentCity: CityNameType = useAppSelector(selectCity);

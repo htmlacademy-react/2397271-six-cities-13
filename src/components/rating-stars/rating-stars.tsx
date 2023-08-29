@@ -1,14 +1,14 @@
 import React, {ChangeEvent} from 'react';
 import {FetchStatus, RatingTitles} from '../../const';
 import {selectSendReviewStatus} from '../../store/reviews-data/selectors';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 
 interface RatingStarsProps {
-  handleRatingChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onRatingChange: (event: ChangeEvent<HTMLInputElement>) => void;
   currentRating: number;
 }
 
-function RatingStars({handleRatingChange, currentRating}:RatingStarsProps):JSX.Element {
+function RatingStars({onRatingChange, currentRating}:RatingStarsProps):JSX.Element {
   const fetchSendReviewStatus = useAppSelector(selectSendReviewStatus);
 
   return (
@@ -23,7 +23,7 @@ function RatingStars({handleRatingChange, currentRating}:RatingStarsProps):JSX.E
               type="radio"
               value={realIndex}
               checked={currentRating === realIndex}
-              onChange={(event) => handleRatingChange(event)}
+              onChange={(event) => onRatingChange(event)}
               disabled={fetchSendReviewStatus === FetchStatus.Idle}
               data-testid='rating-star'
             >

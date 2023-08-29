@@ -1,7 +1,7 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import RatingStars from '../rating-stars/rating-stars';
 import {FetchStatus, ReviewState} from '../../const';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {sendReviewAction} from '../../store/api-action';
 import {selectSendReviewStatus} from '../../store/reviews-data/selectors';
 import {validateReviewForm} from '../../helpers/validator';
@@ -57,7 +57,7 @@ function ReviewForm({id}: ReviewFormProps):JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <RatingStars
-          handleRatingChange={handleRatingChange}
+          onRatingChange={handleRatingChange}
           currentRating={review.rating}
         />
       </div>

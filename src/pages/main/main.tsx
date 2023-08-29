@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 import CityFilter from '../../components/city-filter/city-filter';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 import Loader from '../../components/loader/loader';
 import {selectFetchOffersStatus, selectOffersBySortAndCity} from '../../store/offers-data/selectors';
 import {FetchStatus} from '../../const';

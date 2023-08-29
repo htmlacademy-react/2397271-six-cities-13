@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 import {AppRoute, AuthorizationStatus, Cities, DEFAULT_OFFER_SORT, FetchStatus} from '../../const';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {Link, Navigate} from 'react-router-dom';
 import {selectAuthStatus, selectFetchAuthStatus} from '../../store/user-process/selectors';
 import Loader from '../../components/loader/loader';

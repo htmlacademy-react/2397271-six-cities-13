@@ -13,7 +13,7 @@ import {
   fetchOffersNearbyAction,
   fetchReviewsAction
 } from '../../store/api-action';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {
   selectFetchOffersNearbyStatus,
   selectFetchOfferStatus,

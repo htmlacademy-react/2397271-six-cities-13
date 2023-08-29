@@ -4,12 +4,12 @@ import {OfferPreviewType} from '../../types/offer';
 interface OfferListProps {
   offerList: OfferPreviewType[];
   className?: string;
-  handleMouseEnter?: (value: OfferPreviewType) => void;
-  handleMouseLeave?: () => void;
+  onMouseEnter?: (value: OfferPreviewType) => void;
+  onMouseLeave?: () => void;
 }
 
 const OfferList = (props:OfferListProps):JSX.Element => {
-  const {offerList, className, handleMouseEnter, handleMouseLeave} = props;
+  const {offerList, className, onMouseEnter, onMouseLeave} = props;
 
   return (
     <>
@@ -19,8 +19,8 @@ const OfferList = (props:OfferListProps):JSX.Element => {
             key={card.id}
             card={card}
             className={className ?? className}
-            onMouseEnter={() => handleMouseEnter && handleMouseEnter(card)}
-            onMouseLeave={() => handleMouseLeave && handleMouseLeave()}
+            onMouseEnter={() => onMouseEnter && onMouseEnter(card)}
+            onMouseLeave={() => onMouseLeave && onMouseLeave()}
           />
         ))}
     </>

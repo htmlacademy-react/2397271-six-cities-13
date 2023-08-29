@@ -1,6 +1,6 @@
 import {Navigate, Outlet} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 import Loader from '../loader/loader';
 import {selectAuthStatus} from '../../store/user-process/selectors';
 

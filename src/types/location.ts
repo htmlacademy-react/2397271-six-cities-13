@@ -12,5 +12,3 @@ export interface CityType {
   name: CityNameType;
   location: LocationType;
 }
-
-export type MarkerProps = Omit<CityType, 'location:zoom'>;

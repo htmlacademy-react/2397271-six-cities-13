@@ -1,7 +1,7 @@
 import {AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 import {selectUserData} from '../../store/user-process/selectors';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/hooks';
 import {selectFavoritesData} from '../../store/favorites-data/selectors';
 
 function ProfileLink():JSX.Element {
